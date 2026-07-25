@@ -3,6 +3,47 @@
 A sophisticated MCP server for simulating expert collaboration with diverse perspectives to tackle complex problems
 through structured multi-persona reasoning.
 
+## 📦 Installation
+
+### NPM
+
+```bash
+npm install @wemake.cx/collaborative-reasoning
+```
+
+### Using with bunx (no installation required)
+
+```bash
+bunx @wemake.cx/collaborative-reasoning@latest
+```
+
+## 🚀 Usage
+
+### Local Mode (stdio)
+
+Use with MCP clients like Cursor or Claude Desktop:
+
+```json
+{
+  "mcpServers": {
+    "Collaborative Reasoning": {
+      "command": "bunx",
+      "args": ["@wemake.cx/collaborative-reasoning@latest"]
+    }
+  }
+}
+```
+
+### HTTP Mode (Cloudflare Workers)
+
+The server is also deployed as a Cloudflare Worker for HTTP access:
+
+```
+https://mcp-collaborative-reasoning.{account}.workers.dev
+```
+
+Configure your MCP client to use the HTTP endpoint for web-based access.
+
 ## Core Concepts
 
 ### Expert Personas

@@ -3,6 +3,47 @@
 A specialized MCP server for validating variable assignments against mathematical and logical constraints, enabling
 systematic constraint satisfaction checking.
 
+## 📦 Installation
+
+### NPM
+
+```bash
+npm install @wemake.cx/constraint-solver
+```
+
+### Using with bunx (no installation required)
+
+```bash
+bunx @wemake.cx/constraint-solver@latest
+```
+
+## 🚀 Usage
+
+### Local Mode (stdio)
+
+Use with MCP clients like Cursor or Claude Desktop:
+
+```json
+{
+  "mcpServers": {
+    "Constraint Solver": {
+      "command": "bunx",
+      "args": ["@wemake.cx/constraint-solver@latest"]
+    }
+  }
+}
+```
+
+### HTTP Mode (Cloudflare Workers)
+
+The server is also deployed as a Cloudflare Worker for HTTP access:
+
+```
+https://mcp-constraint-solver.{account}.workers.dev
+```
+
+Configure your MCP client to use the HTTP endpoint for web-based access.
+
 ## Architecture
 
 This server follows the **MCP Code Mode** architecture, separating concerns into three layers:

@@ -22,6 +22,6 @@ if (import.meta.main) {
 
   runServer().catch((err) => {
     console.error("Fatal error running server:", err);
-    process.exit(1);
+    throw err;
   });
 }

@@ -3,6 +3,47 @@
 A systematic framework for self-monitoring knowledge boundaries, claim certainty, and reasoning quality to enhance
 metacognitive awareness and calibrated confidence.
 
+## 📦 Installation
+
+### NPM
+
+```bash
+npm install @wemake.cx/metacognitive-monitoring
+```
+
+### Using with bunx (no installation required)
+
+```bash
+bunx @wemake.cx/metacognitive-monitoring@latest
+```
+
+## 🚀 Usage
+
+### Local Mode (stdio)
+
+Use with MCP clients like Cursor or Claude Desktop:
+
+```json
+{
+  "mcpServers": {
+    "Metacognitive Monitoring": {
+      "command": "bunx",
+      "args": ["@wemake.cx/metacognitive-monitoring@latest"]
+    }
+  }
+}
+```
+
+### HTTP Mode (Cloudflare Workers)
+
+The server is also deployed as a Cloudflare Worker for HTTP access:
+
+```
+https://mcp-metacognitive-monitoring.{account}.workers.dev
+```
+
+Configure your MCP client to use the HTTP endpoint for web-based access.
+
 ## Core Concepts
 
 ### Knowledge Assessment

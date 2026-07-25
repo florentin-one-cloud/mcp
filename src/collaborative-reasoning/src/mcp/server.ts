@@ -32,9 +32,7 @@ export default function createServer(): Server {
 
         // Generate visualization
         const visualization = collaborativeReasoning.visualize(result);
-        if (process.env.MCP_VISUALIZE !== "0") {
-          console.error(visualization);
-        }
+        console.error(visualization);
 
         return {
           content: [

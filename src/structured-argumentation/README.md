@@ -3,6 +3,47 @@
 A Model Context Protocol server that provides systematic dialectical reasoning and argument analysis capabilities,
 enabling rigorous evaluation of competing perspectives and claims.
 
+## 📦 Installation
+
+### NPM
+
+```bash
+npm install @wemake.cx/structured-argumentation
+```
+
+### Using with bunx (no installation required)
+
+```bash
+bunx @wemake.cx/structured-argumentation@latest
+```
+
+## 🚀 Usage
+
+### Local Mode (stdio)
+
+Use with MCP clients like Cursor or Claude Desktop:
+
+```json
+{
+  "mcpServers": {
+    "Structured Argumentation": {
+      "command": "bunx",
+      "args": ["@wemake.cx/structured-argumentation@latest"]
+    }
+  }
+}
+```
+
+### HTTP Mode (Cloudflare Workers)
+
+The server is also deployed as a Cloudflare Worker for HTTP access:
+
+```
+https://mcp-structured-argumentation.{account}.workers.dev
+```
+
+Configure your MCP client to use the HTTP endpoint for web-based access.
+
 ## Overview and Purpose
 
 The Structured Argumentation server addresses limitations in language models' ability to systematically evaluate

@@ -34,6 +34,158 @@ Our ecosystem includes specialized MCP servers organized into key cognitive and 
 Each server includes comprehensive documentation, usage examples, and enterprise-grade security features. Visit
 individual server directories for detailed setup and configuration instructions.
 
+## 📦 Installation
+
+All MCP servers are published to NPM under the `@wemake.cx` scope and can be installed individually:
+
+```bash
+# Install a specific server
+npm install @wemake.cx/metacognitive-monitoring
+npm install @wemake.cx/structured-argumentation
+npm install @wemake.cx/collaborative-reasoning
+npm install @wemake.cx/sequential-thinking
+npm install @wemake.cx/scientific-method
+npm install @wemake.cx/constraint-solver
+npm install @wemake.cx/narrative-planner
+```
+
+Or use with `bunx` for immediate execution without installation:
+
+```bash
+bunx @wemake.cx/metacognitive-monitoring@latest
+```
+
+### MCP Client Configuration
+
+#### Cursor
+
+Add to your `~/.cursor/mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "Metacognitive Monitoring": {
+      "command": "bunx",
+      "args": ["@wemake.cx/metacognitive-monitoring@latest"]
+    }
+  }
+}
+```
+
+#### Claude Desktop
+
+Add to your Claude Desktop configuration:
+
+```json
+{
+  "mcpServers": {
+    "metacognitive-monitoring": {
+      "command": "bunx",
+      "args": ["@wemake.cx/metacognitive-monitoring@latest"]
+    }
+  }
+}
+```
+
+## 🚀 Deployment
+
+### NPM Publishing
+
+All packages are automatically published to NPM when version tags are pushed:
+
+1. **Version Bump**: Update the version in `package.json` of the server you want to publish
+2. **Create Tag**: Push a version tag (e.g., `v0.4.7`)
+   ```bash
+   git tag v0.4.7
+   git push origin v0.4.7
+   ```
+3. **Automatic Publishing**: GitHub Actions will automatically build, test, and publish all packages to NPM
+
+**Published Packages**:
+
+- [@wemake.cx/metacognitive-monitoring](https://www.npmjs.com/package/@wemake.cx/metacognitive-monitoring)
+- [@wemake.cx/structured-argumentation](https://www.npmjs.com/package/@wemake.cx/structured-argumentation)
+- [@wemake.cx/collaborative-reasoning](https://www.npmjs.com/package/@wemake.cx/collaborative-reasoning)
+- [@wemake.cx/sequential-thinking](https://www.npmjs.com/package/@wemake.cx/sequential-thinking)
+- [@wemake.cx/scientific-method](https://www.npmjs.com/package/@wemake.cx/scientific-method)
+- [@wemake.cx/constraint-solver](https://www.npmjs.com/package/@wemake.cx/constraint-solver)
+- [@wemake.cx/narrative-planner](https://www.npmjs.com/package/@wemake.cx/narrative-planner)
+
+### Cloudflare Workers Deployment
+
+All MCP servers are deployed as HTTP endpoints on Cloudflare Workers for low-latency, global access:
+
+- **Automatic Deployment**: Pushes to `main` branch automatically deploy all servers
+- **Manual Deployment**: Trigger via GitHub Actions workflow dispatch
+- **Global Distribution**: Deployed across Cloudflare's edge network for sub-50ms response times
+- **HTTP Access**: Each server exposes MCP protocol over HTTP for web-based clients
+
+**Worker Endpoints**: `https://mcp-{server-name}.{account}.workers.dev`
+
+For detailed deployment instructions, troubleshooting, and environment configuration, see [DEPLOYMENT.md](DEPLOYMENT.md).
+
+## 🔧 Development
+
+### Prerequisites
+
+- [Bun](https://bun.sh) >= 1.3.0
+- Node.js compatible environment
+- Git for version control
+
+### Local Development Setup
+
+```bash
+# Clone the repository
+git clone https://github.com/WeMake-AI/mcp.git
+cd mcp
+
+# Install dependencies
+bun install
+
+# Build all packages
+bun run build-all
+
+# Run tests
+bun test
+bun run test:all
+
+# Test a specific server locally
+cd src/metacognitive-monitoring
+bun run start
+```
+
+### Testing Cloudflare Workers Locally
+
+```bash
+# Navigate to a server directory
+cd src/metacognitive-monitoring
+
+# Start local Workers development server
+bunx wrangler dev dist/worker.js
+
+# Access at http://localhost:8787
+```
+
+### Project Structure
+
+```
+mcp/
+├── src/
+│   ├── metacognitive-monitoring/   # Self-monitoring and reasoning quality
+│   ├── structured-argumentation/   # Dialectical reasoning framework
+│   ├── collaborative-reasoning/    # Multi-persona collaboration
+│   ├── sequential-thinking/        # Step-by-step reasoning
+│   ├── scientific-method/          # Scientific inquiry framework
+│   ├── constraint-solver/          # Constraint satisfaction validation
+│   └── narrative-planner/          # Story structure planning
+├── .github/workflows/              # CI/CD pipelines
+├── DEPLOYMENT.md                   # Detailed deployment guide
+└── CONTRIBUTING.md                 # Contribution guidelines
+
+```
+
+For contribution guidelines, see [CONTRIBUTING.md](CONTRIBUTING.md).
+
 ## 📜 License
 
 This project is licensed under MIT. See the [LICENSE](LICENSE) file for details.

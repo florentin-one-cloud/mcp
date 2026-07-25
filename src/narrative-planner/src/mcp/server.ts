@@ -1,6 +1,5 @@
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { ListToolsRequestSchema, CallToolRequestSchema, CallToolRequest } from "@modelcontextprotocol/sdk/types.js";
-import { readFileSync } from "node:fs";
 import { NarrativePlanner } from "../codemode/index.js";
 import { NARRATIVE_PLANNER_TOOL } from "./tools.js";
 import { NarrativeInput } from "../core/types.js";
@@ -29,9 +28,8 @@ export class NarrativePlannerServer {
 }
 
 export default function createServer(): Server {
-  const pkg = JSON.parse(readFileSync(new URL("../../package.json", import.meta.url), "utf-8"));
   const server = new Server(
-    { name: "narrative-planner-server", version: pkg.version },
+    { name: "narrative-planner-server", version: "0.4.6" },
     { capabilities: { tools: {} } }
   );
   const narrativeServer = new NarrativePlannerServer();
