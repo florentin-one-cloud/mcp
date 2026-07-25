@@ -1,5 +1,5 @@
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
-import { JSONRPCMessage, JSONRPCRequest, JSONRPCResponse } from "@modelcontextprotocol/sdk/types.js";
+import { JSONRPCRequest, JSONRPCResponse } from "@modelcontextprotocol/sdk/types.js";
 
 /**
  * HTTP-to-MCP adapter for Cloudflare Workers
@@ -8,7 +8,7 @@ import { JSONRPCMessage, JSONRPCRequest, JSONRPCResponse } from "@modelcontextpr
  * Supports the Model Context Protocol over HTTP transport.
  */
 
-interface WorkerEnv {
+export interface WorkerEnv {
   [key: string]: unknown;
 }
 
@@ -20,7 +20,8 @@ interface WorkerEnv {
  */
 export function createWorkerHandler(server: Server) {
   return {
-    async fetch(request: Request, env?: WorkerEnv): Promise<Response> {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    async fetch(request: Request, _env?: WorkerEnv): Promise<Response> {
       // Handle CORS preflight
       if (request.method === "OPTIONS") {
         return new Response(null, {
@@ -52,7 +53,7 @@ export function createWorkerHandler(server: Server) {
 
         try {
           rpcRequest = JSON.parse(body) as JSONRPCRequest;
-        } catch (parseError) {
+        } catch {
           return jsonResponse(
             {
               jsonrpc: "2.0",
@@ -99,7 +100,7 @@ export function createWorkerHandler(server: Server) {
         }
 
         // Handle MCP protocol methods
-        const response = await handleMcpRequest(server, rpcRequest, env);
+        const response = await handleMcpRequest(server, rpcRequest);
         return jsonResponse(response, 200, getCorsHeaders());
       } catch (error) {
         // Handle unexpected errors
@@ -124,11 +125,12 @@ export function createWorkerHandler(server: Server) {
 /**
  * Routes MCP JSON-RPC requests to the appropriate server handler
  */
-async function handleMcpRequest(server: Server, request: JSONRPCRequest, env?: WorkerEnv): Promise<JSONRPCResponse> {
+async function handleMcpRequest(server: Server, request: JSONRPCRequest): Promise<JSONRPCResponse> {
   try {
     // Create a mock transport for processing the request
     const responsePromise = new Promise<JSONRPCResponse>((resolve) => {
       // Access the internal request handler
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const handler = (server as any)._requestHandlers?.get?.(request.method);
 
       if (!handler) {
@@ -145,6 +147,7 @@ async function handleMcpRequest(server: Server, request: JSONRPCRequest, env?: W
 
       // Execute the handler
       handler(request)
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         .then((result: any) => {
           resolve({
             jsonrpc: "2.0",
@@ -193,6 +196,7 @@ function getCorsHeaders(): Record<string, string> {
 /**
  * Helper to create JSON responses
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function jsonResponse(data: any, status: number, headers: Record<string, string>): Response {
   return new Response(JSON.stringify(data), {
     status,
