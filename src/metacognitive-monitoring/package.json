@@ -27,7 +27,7 @@
     "directory": "src/metacognitive-monitoring"
   },
   "scripts": {
-    "build": "bun build ./src/index.ts --outdir='./dist' --target='bun' && bun build ./src/worker.ts --outfile='./dist/worker.js' --target='browser' --format='esm' && tsc",
+    "build": "bun build ./src/index.ts --outdir='./dist' --target='bun' && bun build ./src/worker.ts --outfile='./dist/worker.js' --target='node' --format='esm' && tsc",
     "start": "bun run ./dist/index.js",
     "test": "bun test"
   },
