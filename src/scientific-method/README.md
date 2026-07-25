@@ -3,6 +3,47 @@
 A comprehensive framework for systematic scientific inquiry, hypothesis testing, and experimental design following
 rigorous scientific methodology.
 
+## 📦 Installation
+
+### NPM
+
+```bash
+npm install @wemake.cx/scientific-method
+```
+
+### Using with bunx (no installation required)
+
+```bash
+bunx @wemake.cx/scientific-method@latest
+```
+
+## 🚀 Usage
+
+### Local Mode (stdio)
+
+Use with MCP clients like Cursor or Claude Desktop:
+
+```json
+{
+  "mcpServers": {
+    "Scientific Method": {
+      "command": "bunx",
+      "args": ["@wemake.cx/scientific-method@latest"]
+    }
+  }
+}
+```
+
+### HTTP Mode (Cloudflare Workers)
+
+The server is also deployed as a Cloudflare Worker for HTTP access:
+
+```
+https://mcp-scientific-method.{account}.workers.dev
+```
+
+Configure your MCP client to use the HTTP endpoint for web-based access.
+
 ## Core Concepts
 
 ### Scientific Inquiry Process

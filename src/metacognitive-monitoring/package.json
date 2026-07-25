@@ -1,6 +1,6 @@
 {
   "name": "@wemake.cx/metacognitive-monitoring",
-  "version": "0.4.6",
+  "version": "0.4.8",
   "description": "MCP server for diagrammatic thinking and spatial representation",
   "keywords": [
     "mcp",
@@ -27,7 +27,7 @@
     "directory": "src/metacognitive-monitoring"
   },
   "scripts": {
-    "build": "bun build ./src/index.ts --outdir='./dist' --target='bun' && tsc",
+    "build": "bun build ./src/index.ts --outdir='./dist' --target='bun' && bun build ./src/worker.ts --outfile='./dist/worker.js' --target='node' --format='esm' && tsc",
     "start": "bun run ./dist/index.js",
     "test": "bun test"
   },

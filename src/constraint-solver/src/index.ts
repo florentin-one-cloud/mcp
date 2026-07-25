@@ -13,7 +13,7 @@ export * from "./core/types.js";
  * Factory function that creates and configures a constraint solver MCP server instance.
  */
 export default function createServer(): Server {
-  const server = new Server({ name: "constraint-solver-server", version: "0.4.6" }, { capabilities: { tools: {} } });
+  const server = new Server({ name: "constraint-solver-server", version: "0.4.8" }, { capabilities: { tools: {} } });
   const constraintServer = new ConstraintMcpServer();
 
   server.setRequestHandler(ListToolsRequestSchema, async () => ({ tools: [CONSTRAINT_SOLVER_TOOL] }));
@@ -37,12 +37,12 @@ if (import.meta.main) {
       console.error("Constraint Solver MCP Server running on stdio");
     } catch (err) {
       console.error("Failed to connect constraint-solver:", err);
-      process.exit(1);
+      throw err;
     }
   }
 
   runServer().catch((err) => {
     console.error("Fatal error running server:", err);
-    process.exit(1);
+    throw err;
   });
 }

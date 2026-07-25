@@ -3,6 +3,47 @@
 A Model Context Protocol server that provides structured sequential thinking capabilities for complex reasoning tasks,
 enabling systematic problem breakdown and iterative refinement.
 
+## 📦 Installation
+
+### NPM
+
+```bash
+npm install @wemake.cx/sequential-thinking
+```
+
+### Using with bunx (no installation required)
+
+```bash
+bunx @wemake.cx/sequential-thinking@latest
+```
+
+## 🚀 Usage
+
+### Local Mode (stdio)
+
+Use with MCP clients like Cursor or Claude Desktop:
+
+```json
+{
+  "mcpServers": {
+    "Sequential Thinking": {
+      "command": "bunx",
+      "args": ["@wemake.cx/sequential-thinking@latest"]
+    }
+  }
+}
+```
+
+### HTTP Mode (Cloudflare Workers)
+
+The server is also deployed as a Cloudflare Worker for HTTP access:
+
+```
+https://mcp-sequential-thinking.{account}.workers.dev
+```
+
+Configure your MCP client to use the HTTP endpoint for web-based access.
+
 ## Overview and Purpose
 
 The Sequential Thinking server addresses limitations in language models' ability to maintain coherent reasoning chains

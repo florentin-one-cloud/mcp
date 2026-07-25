@@ -4,7 +4,7 @@
 
   "compilerOptions": {
     "outDir": "./dist",
-    "rootDir": ".",
+    "rootDir": "..",
     "strict": true,
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
@@ -15,6 +15,6 @@
     "noEmit": false
   },
 
-  "include": ["./**/*.ts", "./**/**/*.ts"],
+  "include": ["./**/*.ts", "./**/**/*.ts", "../shared/**/*.ts"],
   "exclude": ["node_modules", "dist"]
 }

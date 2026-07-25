@@ -10,7 +10,7 @@ export default function createServer(): Server {
   const server = new Server(
     {
       name: "collaborative-reasoning-server",
-      version: "0.4.6"
+      version: "0.4.8"
     },
     {
       capabilities: {
@@ -32,9 +32,7 @@ export default function createServer(): Server {
 
         // Generate visualization
         const visualization = collaborativeReasoning.visualize(result);
-        if (process.env.MCP_VISUALIZE !== "0") {
-          console.error(visualization);
-        }
+        console.error(visualization);
 
         return {
           content: [

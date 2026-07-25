@@ -3,6 +3,47 @@
 A structured framework for creating comprehensive three-act story outlines with detailed character development, plot
 progression, and thematic elements.
 
+## 📦 Installation
+
+### NPM
+
+```bash
+npm install @wemake.cx/narrative-planner
+```
+
+### Using with bunx (no installation required)
+
+```bash
+bunx @wemake.cx/narrative-planner@latest
+```
+
+## 🚀 Usage
+
+### Local Mode (stdio)
+
+Use with MCP clients like Cursor or Claude Desktop:
+
+```json
+{
+  "mcpServers": {
+    "Narrative Planner": {
+      "command": "bunx",
+      "args": ["@wemake.cx/narrative-planner@latest"]
+    }
+  }
+}
+```
+
+### HTTP Mode (Cloudflare Workers)
+
+The server is also deployed as a Cloudflare Worker for HTTP access:
+
+```
+https://mcp-narrative-planner.{account}.workers.dev
+```
+
+Configure your MCP client to use the HTTP endpoint for web-based access.
+
 ## Core Concepts
 
 ### Three-Act Structure

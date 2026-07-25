@@ -75,15 +75,19 @@ describe("Tool Registration", () => {
     const transport = new MockTransport();
     await server.connect(transport);
 
-    const response = (await transport.sendRequest({
+    const response = await transport.sendRequest({
       jsonrpc: "2.0",
       id: 1,
       method: "tools/list"
-    })) as { result: { tools: Array<{ name: string; description: string }> } };
+    });
 
-    expect(response.result.tools).toHaveLength(1);
-    expect(response.result.tools[0].name).toBe("constraintSolver");
-    expect(response.result.tools[0].description).toContain("Checks if a set of variables satisfies all constraints");
+    expect("result" in response).toBe(true);
+    if ("result" in response) {
+      const result = response.result as { tools: Array<{ name: string; description: string }> };
+      expect(result.tools).toHaveLength(1);
+      expect(result.tools[0].name).toBe("constraintSolver");
+      expect(result.tools[0].description).toContain("Checks if a set of variables satisfies all constraints");
+    }
   });
 });
 
@@ -269,7 +273,7 @@ describe("MCP Server Integration", () => {
     const transport = new MockTransport();
     await server.connect(transport);
 
-    const response = (await transport.sendRequest({
+    const response = await transport.sendRequest({
       jsonrpc: "2.0",
       id: 2,
       method: "tools/call",
@@ -280,12 +284,16 @@ describe("MCP Server Integration", () => {
           constraints: ["x < y"]
         }
       }
-    })) as { error?: unknown; result: { content: Array<{ text: string }> } };
+    });
 
-    expect(response.error).toBeUndefined();
-    expect(response.result.content[0].text).toBeDefined();
-    const parsed = JSON.parse(response.result.content[0].text);
-    expect(parsed.satisfied).toBe(true);
+    expect("error" in response ? response.error : undefined).toBeUndefined();
+    expect("result" in response).toBe(true);
+    if ("result" in response) {
+      const result = response.result as { content: Array<{ text: string }> };
+      expect(result.content[0].text).toBeDefined();
+      const parsed = JSON.parse(result.content[0].text);
+      expect(parsed.satisfied).toBe(true);
+    }
   });
 
   it("rejects unknown tool name", async () => {
