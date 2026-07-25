@@ -5,7 +5,7 @@ import globals from "globals";
 
 /** @type {import('eslint').Linter.Config[]} */
 const config = [
-  { ignores: ["**/dist/**", ".nx/cache/**"] },
+  { ignores: ["**/dist/**"] },
   js.configs.recommended,
   {
     files: ["**/*.js"],
