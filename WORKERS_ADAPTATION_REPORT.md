@@ -11,7 +11,7 @@ adapter and resolving Node.js API incompatibilities.
 
 **Location:** `/Users/florentin/Repositories/florentin-one/mcp/src/shared/workers-adapter/index.ts`
 
-### Key Features:
+### Key Features
 
 - **HTTP Transport Layer**: Converts HTTP POST requests to MCP JSON-RPC format
 - **JSON-RPC Compliance**: Full JSON-RPC 2.0 protocol support with proper error codes
@@ -24,7 +24,7 @@ adapter and resolving Node.js API incompatibilities.
 - **MCP Protocol Support**: Routes requests to MCP server handlers (initialize, tools/list, tools/call, prompts/list,
   prompts/get)
 
-### API:
+### API
 
 ```typescript
 export function createWorkerHandler(server: Server): {
@@ -46,7 +46,7 @@ All 7 MCP servers now use the shared adapter:
 6. **`/Users/florentin/Repositories/florentin-one/mcp/src/sequential-thinking/src/worker.ts`**
 7. **`/Users/florentin/Repositories/florentin-one/mcp/src/structured-argumentation/src/worker.ts`**
 
-### Standard Structure:
+### Standard Structure
 
 ```typescript
 import { createServer } from "./mcp/server.js"; // or './mcp/index.js' or './index.js'
@@ -60,7 +60,7 @@ export default createWorkerHandler(server);
 
 ## 3. Node.js API Issues Resolved
 
-### Issues Found and Fixed:
+### Issues Found and Fixed
 
 #### A. **process.env** Usage (3 occurrences)
 
@@ -83,7 +83,7 @@ export default createWorkerHandler(server);
   - **Issue:** `readFileSync` to read package.json for version
   - **Fix:** Hardcoded version "0.4.6" (consistent with other servers)
 
-### Verification:
+### Verification
 
 - ✅ No `process.env` references remain
 - ✅ No `process.exit()` calls remain
@@ -97,7 +97,7 @@ export default createWorkerHandler(server);
 **Test Method:** Direct JavaScript execution with Bun runtime  
 **Server Tested:** metacognitive-monitoring
 
-### Test Cases:
+### Test Cases
 
 #### Test 1: Initialize Request
 
@@ -139,7 +139,7 @@ export default createWorkerHandler(server);
 
 ## 5. Deployment Readiness
 
-### Build Process:
+### Build Process
 
 Each server can be built with:
 
@@ -148,7 +148,7 @@ cd src/<server-name>
 bun build ./src/worker.ts --outfile='./dist/worker.js' --target='browser' --format='esm'
 ```
 
-### Wrangler Configuration:
+### Wrangler Configuration
 
 All servers have `wrangler.toml` configured:
 
@@ -156,10 +156,10 @@ All servers have `wrangler.toml` configured:
 name = "mcp-<server-name>"
 main = "dist/worker.js"
 compatibility_date = "2024-01-01"
-node_compat = true
+nodejs_compat = true
 ```
 
-### Deployment Commands:
+### Deployment Commands
 
 - **Local Development:** `bunx wrangler dev`
 - **Production Deploy:** `bunx wrangler deploy`

@@ -65,7 +65,7 @@ The GitHub Actions workflow requires an `NPM_TOKEN` secret:
 #### Generating NPM Token
 
 1. Log in to [npmjs.com](https://www.npmjs.com)
-2. Navigate to **Access Tokens**: https://www.npmjs.com/settings/[username]/tokens
+2. Navigate to **Access Tokens**: <https://www.npmjs.com/settings/[username]/tokens>
 3. Click **Generate New Token** → **Automation**
 4. Copy the generated token
 
@@ -172,7 +172,7 @@ Each server has a `wrangler.toml` configuration file:
 name = "mcp-metacognitive-monitoring"
 main = "dist/worker.js"
 compatibility_date = "2024-01-01"
-node_compat = true
+nodejs_compat = true
 ```
 
 **Configuration Options**:
@@ -180,7 +180,7 @@ node_compat = true
 - `name`: Worker name (appears in Cloudflare dashboard)
 - `main`: Entry point (built worker file)
 - `compatibility_date`: Cloudflare runtime compatibility
-- `node_compat`: Enable Node.js compatibility
+- `nodejs_compat`: Enable Node.js compatibility
 
 ### Worker Endpoints
 
@@ -218,22 +218,22 @@ Workers expose MCP protocol over HTTP. Configure your MCP client to use the HTTP
 
 #### For NPM Publishing
 
-| Secret      | Description          | How to Obtain                                    |
-| ----------- | -------------------- | ------------------------------------------------ |
-| `NPM_TOKEN` | NPM automation token | https://www.npmjs.com/settings/[username]/tokens |
+| Secret      | Description          | How to Obtain                                      |
+| ----------- | -------------------- | -------------------------------------------------- |
+| `NPM_TOKEN` | NPM automation token | <https://www.npmjs.com/settings/[username]/tokens> |
 
 #### For Cloudflare Workers
 
-| Secret                  | Description                        | How to Obtain                                  |
-| ----------------------- | ---------------------------------- | ---------------------------------------------- |
-| `CLOUDFLARE_API_TOKEN`  | API token with Workers permissions | https://dash.cloudflare.com/profile/api-tokens |
-| `CLOUDFLARE_ACCOUNT_ID` | Your Cloudflare account ID         | Visible in Cloudflare dashboard sidebar        |
+| Secret                  | Description                        | How to Obtain                                    |
+| ----------------------- | ---------------------------------- | ------------------------------------------------ |
+| `CLOUDFLARE_API_TOKEN`  | API token with Workers permissions | <https://dash.cloudflare.com/profile/api-tokens> |
+| `CLOUDFLARE_ACCOUNT_ID` | Your Cloudflare account ID         | Visible in Cloudflare dashboard sidebar          |
 
 ### Setting Up Cloudflare Secrets
 
 #### 1. Create API Token
 
-1. Go to https://dash.cloudflare.com/profile/api-tokens
+1. Go to <https://dash.cloudflare.com/profile/api-tokens>
 2. Click **Create Token**
 3. Use **Edit Cloudflare Workers** template, or create custom token with:
    - Permission: `Account.Workers Scripts` → `Edit`
@@ -241,7 +241,7 @@ Workers expose MCP protocol over HTTP. Configure your MCP client to use the HTTP
 
 #### 2. Get Account ID
 
-1. Log in to https://dash.cloudflare.com
+1. Log in to <https://dash.cloudflare.com>
 2. Select any domain
 3. Account ID is visible in the right sidebar under **Account ID**
 4. Copy the ID
@@ -325,7 +325,7 @@ CLOUDFLARE_ACCOUNT_ID=your_account_id_here
 
 #### Via Cloudflare Dashboard
 
-1. Go to https://dash.cloudflare.com
+1. Go to <https://dash.cloudflare.com>
 2. Navigate to **Workers & Pages**
 3. View deployed workers and their status
 
@@ -470,10 +470,10 @@ return new Response(body, { headers });
 
 ### Getting Help
 
-- **GitHub Issues**: https://github.com/WeMake-AI/mcp/issues
-- **Cloudflare Docs**: https://developers.cloudflare.com/workers/
-- **NPM Support**: https://www.npmjs.com/support
-- **MCP Specification**: https://modelcontextprotocol.io/
+- **GitHub Issues**: <https://github.com/WeMake-AI/mcp/issues>
+- **Cloudflare Docs**: <https://developers.cloudflare.com/workers/>
+- **NPM Support**: <https://www.npmjs.com/support>
+- **MCP Specification**: <https://modelcontextprotocol.io/>
 
 ### Debug Checklist
 
