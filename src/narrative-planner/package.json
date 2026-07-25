@@ -8,7 +8,7 @@
   "exports": "./dist/index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/WeMake-Labs/mcp.git",
+    "url": "git+https://github.com/WeMake-AI/mcp.git",
     "directory": "src/narrative-planner"
   },
   "publishConfig": {
@@ -19,9 +19,9 @@
     "bun": ">=1.3.0"
   },
   "bugs": {
-    "url": "https://github.com/WeMake-Labs/mcp/issues"
+    "url": "https://github.com/WeMake-AI/mcp/issues"
   },
-  "homepage": "https://github.com/WeMake-Labs/mcp/tree/main/src/narrative-planner",
+  "homepage": "https://github.com/WeMake-AI/mcp/tree/main/src/narrative-planner",
   "author": "Phichayut 'Florentin' Sakwiset <florentin@wemake.cx> (https://github.com/heyFlorentin)",
   "keywords": [
     "mcp",
