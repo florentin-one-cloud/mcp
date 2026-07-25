@@ -1,6 +1,7 @@
 # Deployment Checklist
 
 ## NPM Publishing
+
 - [x] All package.json files contain correct NPM metadata (name, version, description, license, repository, homepage)
 - [x] All packages have proper `exports` field pointing to built artifacts
 - [x] All packages have `files` field that includes only necessary distribution files
@@ -11,6 +12,7 @@
 - [ ] Test installation of built packages works in isolated environment
 
 ## GitHub Actions NPM Workflow
+
 - [x] .github/workflows/publish-npm.yml file exists and is valid
 - [x] Workflow triggers on version tags (e.g., v0.5.0, v1.0.0)
 - [x] Workflow runs tests before publishing
@@ -20,6 +22,7 @@
 - [ ] Workflow completes successfully on test tag push
 
 ## Cloudflare Workers Configuration
+
 - [x] wrangler CLI is installed as devDependency
 - [x] Each MCP server has a wrangler.toml configuration file
 - [x] wrangler.toml specifies correct name, main entry point, and compatibility date
@@ -27,6 +30,7 @@
 - [x] Workers entry points expose HTTP fetch handlers
 
 ## Workers Runtime Compatibility
+
 - [x] HTTP-to-MCP adapter converts HTTP requests to MCP stdio format
 - [ ] All servers work in local wrangler dev mode
 - [x] No Node.js-specific APIs (process, fs, child_process) are used
@@ -35,6 +39,7 @@
 - [x] Error handling works correctly in serverless environment
 
 ## GitHub Actions Workers Deployment Workflow
+
 - [x] .github/workflows/deploy-workers.yml file exists and is valid
 - [x] Workflow triggers on push to main branch
 - [x] Workflow triggers on manual workflow_dispatch
@@ -45,6 +50,7 @@
 - [ ] Workers endpoints are accessible after deployment
 
 ## Documentation
+
 - [x] Root README.md includes NPM installation instructions with examples
 - [x] Root README.md includes Cloudflare Workers deployment guide
 - [x] Environment variable configuration is documented
@@ -53,6 +59,7 @@
 - [x] Examples show both local and Workers usage patterns
 
 ## Testing and Validation
+
 - [ ] NPM package installs correctly with `npm install @wemake.cx/<package>`
 - [ ] Installed package can be imported and used in Node.js project
 - [ ] Workers deployment succeeds to staging environment

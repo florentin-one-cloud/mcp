@@ -122,7 +122,8 @@ All MCP servers are deployed as HTTP endpoints on Cloudflare Workers for low-lat
 
 **Worker Endpoints**: `https://mcp-{server-name}.{account}.workers.dev`
 
-For detailed deployment instructions, troubleshooting, and environment configuration, see [DEPLOYMENT.md](DEPLOYMENT.md).
+For detailed deployment instructions, troubleshooting, and environment configuration, see
+[DEPLOYMENT.md](DEPLOYMENT.md).
 
 ## 🔧 Development
 

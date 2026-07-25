@@ -14,7 +14,8 @@ This guide covers deploying WeMake MCP servers to NPM and Cloudflare Workers.
 
 ### Overview
 
-All MCP servers in this monorepo are published as individual packages to NPM under the `@wemake.cx` scope. Publishing is automated via GitHub Actions and triggered by version tags.
+All MCP servers in this monorepo are published as individual packages to NPM under the `@wemake.cx` scope. Publishing is
+automated via GitHub Actions and triggered by version tags.
 
 ### Publishing Process
 
@@ -190,6 +191,7 @@ https://mcp-{server-name}.{account}.workers.dev
 ```
 
 Example:
+
 ```
 https://mcp-metacognitive-monitoring.wemake.workers.dev
 ```
@@ -216,16 +218,16 @@ Workers expose MCP protocol over HTTP. Configure your MCP client to use the HTTP
 
 #### For NPM Publishing
 
-| Secret | Description | How to Obtain |
-|--------|-------------|---------------|
+| Secret      | Description          | How to Obtain                                    |
+| ----------- | -------------------- | ------------------------------------------------ |
 | `NPM_TOKEN` | NPM automation token | https://www.npmjs.com/settings/[username]/tokens |
 
 #### For Cloudflare Workers
 
-| Secret | Description | How to Obtain |
-|--------|-------------|---------------|
-| `CLOUDFLARE_API_TOKEN` | API token with Workers permissions | https://dash.cloudflare.com/profile/api-tokens |
-| `CLOUDFLARE_ACCOUNT_ID` | Your Cloudflare account ID | Visible in Cloudflare dashboard sidebar |
+| Secret                  | Description                        | How to Obtain                                  |
+| ----------------------- | ---------------------------------- | ---------------------------------------------- |
+| `CLOUDFLARE_API_TOKEN`  | API token with Workers permissions | https://dash.cloudflare.com/profile/api-tokens |
+| `CLOUDFLARE_ACCOUNT_ID` | Your Cloudflare account ID         | Visible in Cloudflare dashboard sidebar        |
 
 ### Setting Up Cloudflare Secrets
 
@@ -273,6 +275,7 @@ CLOUDFLARE_ACCOUNT_ID=your_account_id_here
 **Trigger**: Version tags (`v*.*.*`)
 
 **Steps**:
+
 1. Checkout code
 2. Setup Bun (v1.3.0)
 3. Install dependencies
@@ -281,6 +284,7 @@ CLOUDFLARE_ACCOUNT_ID=your_account_id_here
 6. Publish to NPM (`bun run publish-packages`)
 
 **Permissions**:
+
 - `contents: read`
 - `packages: write`
 
@@ -289,14 +293,17 @@ CLOUDFLARE_ACCOUNT_ID=your_account_id_here
 **File**: `.github/workflows/deploy-workers.yml`
 
 **Triggers**:
+
 - Push to `main` (when `src/**`, `package.json`, or `bun.lock` changes)
 - Manual workflow dispatch
 
 **Strategy**:
+
 - **Matrix deployment**: All 7 servers deploy in parallel
 - **Fail-fast disabled**: One failure doesn't stop others
 
 **Steps** (per server):
+
 1. Checkout code
 2. Setup Bun (v1.3.0)
 3. Install dependencies
@@ -304,6 +311,7 @@ CLOUDFLARE_ACCOUNT_ID=your_account_id_here
 5. Deploy to Cloudflare Workers using `wrangler`
 
 **Permissions**:
+
 - `contents: read`
 - `deployments: write`
 
@@ -340,6 +348,7 @@ bunx wrangler tail mcp-metacognitive-monitoring
 **Symptom**: `npm ERR! 401 Unauthorized`
 
 **Solutions**:
+
 1. Verify `NPM_TOKEN` is correctly set in GitHub secrets
 2. Ensure token has **Automation** type (not Read-only)
 3. Check token hasn't expired
@@ -350,6 +359,7 @@ bunx wrangler tail mcp-metacognitive-monitoring
 **Symptom**: `npm ERR! 403 Forbidden - You cannot publish over the previously published versions`
 
 **Solutions**:
+
 1. Bump version in `package.json`
 2. Create new version tag
 3. Don't reuse version numbers
@@ -359,6 +369,7 @@ bunx wrangler tail mcp-metacognitive-monitoring
 **Symptom**: `npm ERR! 403 Forbidden - you must verify your email to publish packages under the @wemake.cx scope`
 
 **Solutions**:
+
 1. Verify NPM account email
 2. Ensure you're a member of the `@wemake.cx` NPM organization
 3. Contact organization admin for permissions
@@ -370,6 +381,7 @@ bunx wrangler tail mcp-metacognitive-monitoring
 **Symptom**: `Authentication error [code: 10000]`
 
 **Solutions**:
+
 1. Verify `CLOUDFLARE_API_TOKEN` in GitHub secrets
 2. Check token has correct permissions (`Account.Workers Scripts`)
 3. Regenerate token if expired
@@ -379,6 +391,7 @@ bunx wrangler tail mcp-metacognitive-monitoring
 **Symptom**: `Could not find account with ID`
 
 **Solutions**:
+
 1. Verify `CLOUDFLARE_ACCOUNT_ID` matches your actual account ID
 2. Check for extra spaces or characters in the secret
 3. Copy ID directly from Cloudflare dashboard
@@ -388,6 +401,7 @@ bunx wrangler tail mcp-metacognitive-monitoring
 **Symptom**: Build errors during deployment
 
 **Solutions**:
+
 1. Test build locally: `bun run build`
 2. Check TypeScript errors: `bun run check`
 3. Verify all dependencies are installed
@@ -398,6 +412,7 @@ bunx wrangler tail mcp-metacognitive-monitoring
 **Symptom**: `Your worker exceeded the size limit`
 
 **Solutions**:
+
 1. Review dependencies in `package.json`
 2. Remove unused imports
 3. Consider code splitting or external dependencies
@@ -412,9 +427,9 @@ If accessing workers from web clients:
 ```typescript
 // In worker.ts
 const headers = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-  'Access-Control-Allow-Headers': 'Content-Type',
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type"
 };
 
 // Return with headers
@@ -428,6 +443,7 @@ return new Response(body, { headers });
 **Symptom**: `error TS2304: Cannot find name...`
 
 **Solutions**:
+
 1. Run `bun install` to ensure all types are installed
 2. Check `tsconfig.json` configuration
 3. Verify `@types/*` packages are in `devDependencies`
@@ -437,6 +453,7 @@ return new Response(body, { headers });
 **Symptom**: `Cannot find module...`
 
 **Solutions**:
+
 1. Install missing dependency: `bun add <package>`
 2. Check `package.json` includes all imports
 3. Run `bun install` after pulling changes
@@ -446,6 +463,7 @@ return new Response(body, { headers });
 **Symptom**: `Unsupported feature for target...`
 
 **Solutions**:
+
 1. Check build script targets: `--target='browser'` for workers
 2. Update `compatibility_date` in `wrangler.toml`
 3. Avoid Node.js-specific APIs in worker code

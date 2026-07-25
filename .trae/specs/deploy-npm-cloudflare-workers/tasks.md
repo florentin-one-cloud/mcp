@@ -1,14 +1,15 @@
 # Tasks
 
 - [x] Task 1: Configure NPM Publishing Infrastructure
-  - [x] SubTask 1.1: Verify all package.json files have correct NPM metadata (name, version, description, exports, files, publishConfig)
+  - [x] SubTask 1.1: Verify all package.json files have correct NPM metadata (name, version, description, exports,
+        files, publishConfig)
   - [x] SubTask 1.2: Add .npmignore files to exclude unnecessary files from published packages
   - [x] SubTask 1.3: Update root package.json with publish scripts for workspace packages
   - [x] SubTask 1.4: Test local package builds to ensure they're NPM-ready
 
 - [x] Task 2: Create GitHub Actions NPM Publishing Workflow
   - [x] SubTask 2.1: Create .github/workflows/publish-npm.yml workflow file
-  - [x] SubTask 2.2: Configure workflow to trigger on version tags (v*.*.*)
+  - [x] SubTask 2.2: Configure workflow to trigger on version tags (v*.*.\*)
   - [x] SubTask 2.3: Add build, test, and publish steps for changed packages
   - [x] SubTask 2.4: Configure NPM_TOKEN secret for authentication
   - [x] SubTask 2.5: Add version detection logic to only publish updated packages
@@ -20,7 +21,8 @@
   - [x] SubTask 3.4: Update MCP server entry points to support Workers runtime (HTTP handler)
 
 - [x] Task 4: Adapt MCP Servers for Workers Runtime
-  - [x] SubTask 4.1: Create Workers-compatible HTTP adapter for MCP protocol (converts HTTP requests to MCP stdio format)
+  - [x] SubTask 4.1: Create Workers-compatible HTTP adapter for MCP protocol (converts HTTP requests to MCP stdio
+        format)
   - [x] SubTask 4.2: Test each server locally with Wrangler dev mode
   - [x] SubTask 4.3: Ensure no Node.js-specific APIs are used (process, fs, etc.)
   - [x] SubTask 4.4: Add environment variable configuration support for Workers

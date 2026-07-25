@@ -3,7 +3,7 @@ import { JSONRPCMessage, JSONRPCRequest, JSONRPCResponse } from "@modelcontextpr
 
 /**
  * HTTP-to-MCP adapter for Cloudflare Workers
- * 
+ *
  * Converts HTTP POST requests to MCP JSON-RPC format and routes them to the MCP server.
  * Supports the Model Context Protocol over HTTP transport.
  */
@@ -14,7 +14,7 @@ interface WorkerEnv {
 
 /**
  * Creates a Cloudflare Workers fetch handler from an MCP server instance.
- * 
+ *
  * @param server - The MCP server instance to wrap
  * @returns A fetch handler compatible with Cloudflare Workers
  */
@@ -101,7 +101,6 @@ export function createWorkerHandler(server: Server) {
         // Handle MCP protocol methods
         const response = await handleMcpRequest(server, rpcRequest, env);
         return jsonResponse(response, 200, getCorsHeaders());
-
       } catch (error) {
         // Handle unexpected errors
         const errorMessage = error instanceof Error ? error.message : "Internal server error";
@@ -125,17 +124,13 @@ export function createWorkerHandler(server: Server) {
 /**
  * Routes MCP JSON-RPC requests to the appropriate server handler
  */
-async function handleMcpRequest(
-  server: Server,
-  request: JSONRPCRequest,
-  env?: WorkerEnv
-): Promise<JSONRPCResponse> {
+async function handleMcpRequest(server: Server, request: JSONRPCRequest, env?: WorkerEnv): Promise<JSONRPCResponse> {
   try {
     // Create a mock transport for processing the request
     const responsePromise = new Promise<JSONRPCResponse>((resolve) => {
       // Access the internal request handler
       const handler = (server as any)._requestHandlers?.get?.(request.method);
-      
+
       if (!handler) {
         resolve({
           jsonrpc: "2.0",
@@ -198,11 +193,7 @@ function getCorsHeaders(): Record<string, string> {
 /**
  * Helper to create JSON responses
  */
-function jsonResponse(
-  data: any,
-  status: number,
-  headers: Record<string, string>
-): Response {
+function jsonResponse(data: any, status: number, headers: Record<string, string>): Response {
   return new Response(JSON.stringify(data), {
     status,
     headers

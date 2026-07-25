@@ -1,6 +1,7 @@
 # Contributing to WeMake MCP Servers
 
-Thank you for your interest in contributing to the WeMake MCP Server ecosystem! This guide will help you get started with development, testing, and deployment.
+Thank you for your interest in contributing to the WeMake MCP Server ecosystem! This guide will help you get started
+with development, testing, and deployment.
 
 ## Table of Contents
 
@@ -109,6 +110,7 @@ curl -X POST http://localhost:8787 \
 ### Creating a New Server
 
 1. **Copy an existing server** as a template:
+
    ```bash
    cp -r src/metacognitive-monitoring src/my-new-server
    ```
@@ -209,6 +211,7 @@ Examples:
 ```
 
 **Types**:
+
 - `feat`: New feature
 - `fix`: Bug fix
 - `docs`: Documentation only
@@ -233,6 +236,7 @@ cd src/metacognitive-monitoring
 ```
 
 Follow [Semantic Versioning](https://semver.org/):
+
 - **Major** (1.0.0): Breaking changes
 - **Minor** (0.5.0): New features (backward compatible)
 - **Patch** (0.4.7): Bug fixes
@@ -318,6 +322,7 @@ bun run check
 ```
 
 **Conventions**:
+
 - Use `const` over `let` when possible
 - Prefer arrow functions for callbacks
 - Use async/await over promises
@@ -342,6 +347,7 @@ src/
 ```
 
 **Benefits**:
+
 - Testable business logic independent of MCP
 - Reusable code across different deployment modes
 - Clear separation of concerns
@@ -351,6 +357,7 @@ src/
 ### Before Submitting
 
 1. **Test thoroughly**:
+
    ```bash
    bun run build-all
    bun run test:all
@@ -370,6 +377,7 @@ src/
 ### Submitting PR
 
 1. **Push your branch**:
+
    ```bash
    git push origin feature/my-feature
    ```
@@ -381,22 +389,27 @@ src/
    - Screenshots/examples if applicable
 
 3. **PR Template**:
+
    ```markdown
    ## Description
+
    Brief description of changes
-   
+
    ## Changes Made
+
    - Added feature X
    - Fixed bug Y
    - Updated documentation Z
-   
+
    ## Testing
+
    - [ ] All tests pass
    - [ ] New tests added for new functionality
    - [ ] Tested locally (stdio mode)
    - [ ] Tested worker mode (if applicable)
-   
+
    ## Checklist
+
    - [ ] Code follows style guidelines
    - [ ] Documentation updated
    - [ ] No breaking changes (or documented if necessary)
