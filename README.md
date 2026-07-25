@@ -31,31 +31,6 @@ Our ecosystem includes specialized MCP servers organized into key cognitive and 
 
 - **[Narrative Planner](src/narrative-planner/)** - Three-act story structure planning with character development
 
-### 🏗️ Architecture Features
-
-- **Bun-first Development**: Primary dev/runtime with Bun; Node/Workers-compatible builds that exclude Bun-only APIs
-- **Enterprise Security**: GDPR compliance, audit logging, and least-privilege access patterns
-- **TypeScript Native**: Full type safety backed by exhaustive JSDoc documentation
-- **Cloudflare Workers Compatible**: Deploy via Worker-compatible bundles free of Bun-only APIs
-- **Monorepo Architecture**: Unified workspace with automated testing and CI/CD
-
-### 🚀 Quick Start
-
-```sh
-# Install dependencies
-bun install
-
-# Run a specific server (example: decision-framework)
-cd src/decision-framework
-bun run start
-
-# Run tests
-bun test
-
-# Build all servers
-bun run build
-```
-
 Each server includes comprehensive documentation, usage examples, and enterprise-grade security features. Visit
 individual server directories for detailed setup and configuration instructions.
 
