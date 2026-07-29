@@ -10,11 +10,12 @@ import {
 import { MetacognitiveAnalyzer } from "../core/analyzer.js";
 import { MetacognitiveFormatter } from "../core/formatter.js";
 import { METACOGNITIVE_MONITORING_TOOL } from "./tools.js";
+import { getPostHogClient, POSTHOG_ANONYMOUS_ID } from "../../../shared/posthog/index.js";
 
 /**
  * Factory function that creates and configures a metacognitive monitoring MCP server instance.
  *
- * This function initializes a Server with the name "metacognitive-monitoring-server" and version "0.4.8",
+ * This function initializes a Server with the name "metacognitive-monitoring-server" and version "0.4.9",
  * registers the metacognitive monitoring tool, and sets up request handlers for listing available
  * tools and processing metacognitive monitoring requests. The server facilitates systematic
  * self-monitoring of knowledge and reasoning quality across various domains and reasoning tasks.
@@ -25,7 +26,7 @@ export function createServer(): Server {
   const server = new Server(
     {
       name: "metacognitive-monitoring-server",
-      version: "0.4.8"
+      version: "0.4.9"
     },
     {
       capabilities: {
@@ -190,12 +191,27 @@ export function createServer(): Server {
 
   server.setRequestHandler(CallToolRequestSchema, async (request) => {
     if (request.params.name === "metacognitiveMonitoring") {
+      const posthog = getPostHogClient();
       try {
         const { data, result } = analyzer.process(request.params.arguments);
 
         // Generate visualization for server logs
         const visualization = MetacognitiveFormatter.visualize(data);
         console.error(visualization);
+
+        if (posthog) {
+          posthog.capture({
+            distinctId: POSTHOG_ANONYMOUS_ID,
+            event: "metacognitive assessment completed",
+            properties: {
+              stage: data.stage,
+              monitoring_id: data.monitoringId,
+              iteration: data.iteration,
+              overall_confidence: data.overallConfidence
+            }
+          });
+          await posthog.flush();
+        }
 
         return {
           content: [
@@ -206,6 +222,12 @@ export function createServer(): Server {
           ]
         };
       } catch (error) {
+        if (posthog) {
+          posthog.captureException(error instanceof Error ? error : new Error(String(error)), POSTHOG_ANONYMOUS_ID, {
+            tool: "metacognitiveMonitoring"
+          });
+          await posthog.flush();
+        }
         return {
           content: [
             {

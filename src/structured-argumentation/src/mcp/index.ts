@@ -2,6 +2,7 @@ import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { CallToolRequestSchema, ListToolsRequestSchema } from "@modelcontextprotocol/sdk/types.js";
 import { StructuredArgumentation } from "../codemode/index.js";
 import { STRUCTURED_ARGUMENTATION_TOOL } from "./tools.js";
+import { getPostHogClient, POSTHOG_ANONYMOUS_ID } from "../../../shared/posthog/index.js";
 
 /**
  * Factory function that creates and configures a structured argumentation MCP server instance.
@@ -12,7 +13,7 @@ export function createServer(): Server {
   const server = new Server(
     {
       name: "structured-argumentation-server",
-      version: "0.4.8"
+      version: "0.4.9"
     },
     {
       capabilities: {
@@ -29,8 +30,21 @@ export function createServer(): Server {
 
   server.setRequestHandler(CallToolRequestSchema, async (request) => {
     if (request.params.name === "structuredArgumentation") {
+      const posthog = getPostHogClient();
       try {
         const result = await argumentation.processArgument(request.params.arguments);
+
+        if (posthog) {
+          posthog.capture({
+            distinctId: POSTHOG_ANONYMOUS_ID,
+            event: "structured argumentation processed",
+            properties: {
+              $process_person_profile: false
+            }
+          });
+          await posthog.flush();
+        }
+
         return {
           content: [
             {
@@ -40,6 +54,12 @@ export function createServer(): Server {
           ]
         };
       } catch (error) {
+        if (posthog) {
+          posthog.captureException(error instanceof Error ? error : new Error(String(error)), POSTHOG_ANONYMOUS_ID, {
+            tool: "structuredArgumentation"
+          });
+          await posthog.flush();
+        }
         return {
           content: [
             {

@@ -95,10 +95,12 @@ All packages are automatically published to NPM when version tags are pushed:
 
 1. **Version Bump**: Update the version in `package.json` of the server you want to publish
 2. **Create Tag**: Push a version tag (e.g., `v0.4.7`)
+
    ```bash
    git tag v0.4.7
    git push origin v0.4.7
    ```
+
 3. **Automatic Publishing**: GitHub Actions will automatically build, test, and publish all packages to NPM
 
 **Published Packages**:
@@ -137,7 +139,7 @@ For detailed deployment instructions, troubleshooting, and environment configura
 
 ```bash
 # Clone the repository
-git clone https://github.com/WeMake-AI/mcp.git
+git clone https://github.com/florentin-one/mcp/mcp.git
 cd mcp
 
 # Install dependencies

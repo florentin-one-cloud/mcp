@@ -56,7 +56,7 @@ The `.github/workflows/publish-npm.yml` workflow will:
 5. Build all packages
 6. Publish packages to NPM
 
-Track progress at: `https://github.com/WeMake-AI/mcp/actions`
+Track progress at: `https://github.com/florentin-one/mcp/mcp/actions`
 
 ### NPM Authentication
 
@@ -470,7 +470,7 @@ return new Response(body, { headers });
 
 ### Getting Help
 
-- **GitHub Issues**: <https://github.com/WeMake-AI/mcp/issues>
+- **GitHub Issues**: <https://github.com/florentin-one/mcp/mcp/issues>
 - **Cloudflare Docs**: <https://developers.cloudflare.com/workers/>
 - **NPM Support**: <https://www.npmjs.com/support>
 - **MCP Specification**: <https://modelcontextprotocol.io/>

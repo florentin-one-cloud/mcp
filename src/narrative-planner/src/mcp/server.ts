@@ -3,6 +3,7 @@ import { ListToolsRequestSchema, CallToolRequestSchema, CallToolRequest } from "
 import { NarrativePlanner } from "../codemode/index.js";
 import { NARRATIVE_PLANNER_TOOL } from "./tools.js";
 import { NarrativeInput } from "../core/types.js";
+import { getPostHogClient, POSTHOG_ANONYMOUS_ID } from "../../../shared/posthog/index.js";
 
 export class NarrativePlannerServer {
   private planner: NarrativePlanner;
@@ -28,13 +29,37 @@ export class NarrativePlannerServer {
 }
 
 export default function createServer(): Server {
-  const server = new Server({ name: "narrative-planner-server", version: "0.4.8" }, { capabilities: { tools: {} } });
+  const server = new Server({ name: "narrative-planner-server", version: "0.4.9" }, { capabilities: { tools: {} } });
   const narrativeServer = new NarrativePlannerServer();
 
   server.setRequestHandler(ListToolsRequestSchema, async () => ({ tools: [NARRATIVE_PLANNER_TOOL] }));
   server.setRequestHandler(CallToolRequestSchema, async (req: CallToolRequest) => {
     if (req.params.name === "narrativePlanner") {
-      return await narrativeServer.process(req.params.arguments ?? {});
+      const posthog = getPostHogClient();
+      const result = await narrativeServer.process(req.params.arguments ?? {});
+
+      if (posthog) {
+        if (result.isError) {
+          posthog.captureException(
+            new Error(String(result.content[0]?.text ?? "unknown error")),
+            POSTHOG_ANONYMOUS_ID,
+            {
+              tool: "narrativePlanner"
+            }
+          );
+        } else {
+          posthog.capture({
+            distinctId: POSTHOG_ANONYMOUS_ID,
+            event: "narrative planned",
+            properties: {
+              $process_person_profile: false
+            }
+          });
+        }
+        await posthog.flush();
+      }
+
+      return result;
     }
     return { content: [{ type: "text", text: `Unknown tool: ${req.params.name}` }], isError: true };
   });
