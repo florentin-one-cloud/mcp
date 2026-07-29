@@ -4,6 +4,9 @@
   "main": "dist/worker.js",
   "compatibility_flags": ["nodejs_compat"],
   "compatibility_date": "2026-07-29",
+  "cache": {
+    "enabled": true
+  },
   "workers_dev": true,
   "preview_urls": true,
   "observability": {
@@ -11,6 +14,9 @@
       "enabled": true,
       "invocation_logs": false
     }
+  },
+  "placement": {
+    "mode": "smart"
   },
   "services": [
     {
@@ -43,10 +49,6 @@
     }
   ],
   "routes": [
-    {
-      "pattern": "mcp.florentin-one.de",
-      "custom_domain": true
-    },
     {
       "pattern": "mcp.florentin-one.de/*",
       "zone_id": "1210933a9469f4f9b49295d48c763705"
