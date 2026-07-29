@@ -8,13 +8,13 @@ progression, and thematic elements.
 ### NPM
 
 ```bash
-npm install @wemake.cx/narrative-planner
+npm install @florentin-one/narrative-planner
 ```
 
 ### Using with bunx (no installation required)
 
 ```bash
-bunx @wemake.cx/narrative-planner@latest
+bunx @florentin-one/narrative-planner@latest
 ```
 
 ## 🚀 Usage
@@ -28,7 +28,7 @@ Use with MCP clients like Cursor or Claude Desktop:
   "mcpServers": {
     "Narrative Planner": {
       "command": "bunx",
-      "args": ["@wemake.cx/narrative-planner@latest"]
+      "args": ["@florentin-one/narrative-planner@latest"]
     }
   }
 }
@@ -133,7 +133,7 @@ The planner incorporates thematic considerations:
   "mcpServers": {
     "Narrative Planner": {
       "command": "bunx",
-      "args": ["@wemake.cx/narrative-planner@latest"]
+      "args": ["@florentin-one/narrative-planner@latest"]
     }
   }
 }
@@ -146,7 +146,7 @@ The planner incorporates thematic considerations:
   "mcpServers": {
     "Narrative Planner": {
       "command": "bunx",
-      "args": ["@wemake.cx/narrative-planner@latest"],
+      "args": ["@florentin-one/narrative-planner@latest"],
       "env": {
         "NARRATIVE_STYLE": "detailed",
         "DEFAULT_GENRE": "drama",

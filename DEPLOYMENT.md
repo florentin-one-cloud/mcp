@@ -14,8 +14,8 @@ This guide covers deploying WeMake MCP servers to NPM and Cloudflare Workers.
 
 ### Overview
 
-All MCP servers in this monorepo are published as individual packages to NPM under the `@wemake.cx` scope. Publishing is
-automated via GitHub Actions and triggered by version tags.
+All MCP servers in this monorepo are published as individual packages to NPM under the `@florentin-one` scope.
+Publishing is automated via GitHub Actions and triggered by version tags.
 
 ### Publishing Process
 
@@ -366,12 +366,12 @@ bunx wrangler tail mcp-metacognitive-monitoring
 
 #### Scope Permission Denied
 
-**Symptom**: `npm ERR! 403 Forbidden - you must verify your email to publish packages under the @wemake.cx scope`
+**Symptom**: `npm ERR! 403 Forbidden - you must verify your email to publish packages under the @florentin-one scope`
 
 **Solutions**:
 
 1. Verify NPM account email
-2. Ensure you're a member of the `@wemake.cx` NPM organization
+2. Ensure you're a member of the `@florentin-one` NPM organization
 3. Contact organization admin for permissions
 
 ### Cloudflare Workers Deployment Issues

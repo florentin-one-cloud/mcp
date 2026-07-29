@@ -24,8 +24,8 @@
       },
     },
     "src/collaborative-reasoning": {
-      "name": "@wemake.cx/collaborative-reasoning",
-      "version": "0.4.8",
+      "name": "@florentin-one/mcp-collaborative-reasoning",
+      "version": "0.4.12",
       "bin": {
         "mcp-server-collaborative-reasoning": "dist/index.js",
       },
@@ -39,8 +39,8 @@
       },
     },
     "src/constraint-solver": {
-      "name": "@wemake.cx/constraint-solver",
-      "version": "0.4.8",
+      "name": "@florentin-one/mcp-constraint-solver",
+      "version": "0.4.12",
       "bin": {
         "mcp-server-constraint-solver": "dist/index.js",
       },
@@ -54,8 +54,8 @@
       },
     },
     "src/metacognitive-monitoring": {
-      "name": "@wemake.cx/metacognitive-monitoring",
-      "version": "0.4.8",
+      "name": "@florentin-one/mcp-metacognitive-monitoring",
+      "version": "0.4.12",
       "bin": {
         "mcp-server-metacognitive-monitoring": "dist/index.js",
       },
@@ -69,8 +69,8 @@
       },
     },
     "src/narrative-planner": {
-      "name": "@wemake.cx/narrative-planner",
-      "version": "0.4.8",
+      "name": "@florentin-one/mcp-narrative-planner",
+      "version": "0.4.12",
       "bin": {
         "mcp-server-narrative-planner": "dist/index.js",
       },
@@ -83,8 +83,8 @@
       },
     },
     "src/scientific-method": {
-      "name": "@wemake.cx/scientific-method",
-      "version": "0.4.8",
+      "name": "@florentin-one/mcp-scientific-method",
+      "version": "0.4.12",
       "bin": {
         "mcp-server-scientific-method": "dist/index.js",
       },
@@ -98,8 +98,8 @@
       },
     },
     "src/sequential-thinking": {
-      "name": "@wemake.cx/sequential-thinking",
-      "version": "0.4.8",
+      "name": "@florentin-one/mcp-sequential-thinking",
+      "version": "0.4.12",
       "bin": {
         "mcp-server-sequential-thinking": "dist/index.js",
       },
@@ -113,8 +113,8 @@
       },
     },
     "src/structured-argumentation": {
-      "name": "@wemake.cx/structured-argumentation",
-      "version": "0.4.8",
+      "name": "@florentin-one/mcp-structured-argumentation",
+      "version": "0.4.12",
       "bin": {
         "mcp-server-structured-argumentation": "dist/index.js",
       },
@@ -216,6 +216,20 @@
     "@eslint/object-schema": ["@eslint/object-schema@2.1.7", "", {}, "sha512-VtAOaymWVfZcmZbp6E2mympDIHvyjXs/12LqWYjVw6qjrfF+VK+fyG33kChz3nnK+SU5/NeHOqrTEHS8sXO3OA=="],
 
     "@eslint/plugin-kit": ["@eslint/plugin-kit@0.4.1", "", { "dependencies": { "@eslint/core": "^0.17.0", "levn": "^0.4.1" } }, "sha512-43/qtrDUokr7LJqoF2c3+RInu/t4zfrpYdoSDfYyhg52rwLV6TnOvdG4fXm7IkSB3wErkcmJS9iEhjVtOSEjjA=="],
+
+    "@florentin-one/mcp-collaborative-reasoning": ["@florentin-one/mcp-collaborative-reasoning@workspace:src/collaborative-reasoning"],
+
+    "@florentin-one/mcp-constraint-solver": ["@florentin-one/mcp-constraint-solver@workspace:src/constraint-solver"],
+
+    "@florentin-one/mcp-metacognitive-monitoring": ["@florentin-one/mcp-metacognitive-monitoring@workspace:src/metacognitive-monitoring"],
+
+    "@florentin-one/mcp-narrative-planner": ["@florentin-one/mcp-narrative-planner@workspace:src/narrative-planner"],
+
+    "@florentin-one/mcp-scientific-method": ["@florentin-one/mcp-scientific-method@workspace:src/scientific-method"],
+
+    "@florentin-one/mcp-sequential-thinking": ["@florentin-one/mcp-sequential-thinking@workspace:src/sequential-thinking"],
+
+    "@florentin-one/mcp-structured-argumentation": ["@florentin-one/mcp-structured-argumentation@workspace:src/structured-argumentation"],
 
     "@hono/node-server": ["@hono/node-server@1.19.15", "", { "peerDependencies": { "hono": "^4" } }, "sha512-Za2ai6TLdKjUvnur+eenO6nuYYipVAEhyCAdaV8IRvmU9kK8crOZUSYvIXn72E4f8fJqyAbpcJuTsYYmZp9Deg=="],
 
@@ -350,20 +364,6 @@
     "@typescript-eslint/utils": ["@typescript-eslint/utils@8.46.0", "", { "dependencies": { "@eslint-community/eslint-utils": "^4.7.0", "@typescript-eslint/scope-manager": "8.46.0", "@typescript-eslint/types": "8.46.0", "@typescript-eslint/typescript-estree": "8.46.0" }, "peerDependencies": { "eslint": "^8.57.0 || ^9.0.0", "typescript": ">=4.8.4 <6.0.0" } }, "sha512-nD6yGWPj1xiOm4Gk0k6hLSZz2XkNXhuYmyIrOWcHoPuAhjT9i5bAG+xbWPgFeNR8HPHHtpNKdYUXJl/D3x7f5g=="],
 
     "@typescript-eslint/visitor-keys": ["@typescript-eslint/visitor-keys@8.46.0", "", { "dependencies": { "@typescript-eslint/types": "8.46.0", "eslint-visitor-keys": "^4.2.1" } }, "sha512-FrvMpAK+hTbFy7vH5j1+tMYHMSKLE6RzluFJlkFNKD0p9YsUT75JlBSmr5so3QRzvMwU5/bIEdeNrxm8du8l3Q=="],
-
-    "@wemake.cx/collaborative-reasoning": ["@wemake.cx/collaborative-reasoning@workspace:src/collaborative-reasoning"],
-
-    "@wemake.cx/constraint-solver": ["@wemake.cx/constraint-solver@workspace:src/constraint-solver"],
-
-    "@wemake.cx/metacognitive-monitoring": ["@wemake.cx/metacognitive-monitoring@workspace:src/metacognitive-monitoring"],
-
-    "@wemake.cx/narrative-planner": ["@wemake.cx/narrative-planner@workspace:src/narrative-planner"],
-
-    "@wemake.cx/scientific-method": ["@wemake.cx/scientific-method@workspace:src/scientific-method"],
-
-    "@wemake.cx/sequential-thinking": ["@wemake.cx/sequential-thinking@workspace:src/sequential-thinking"],
-
-    "@wemake.cx/structured-argumentation": ["@wemake.cx/structured-argumentation@workspace:src/structured-argumentation"],
 
     "accepts": ["accepts@2.0.0", "", { "dependencies": { "mime-types": "^3.0.0", "negotiator": "^1.0.0" } }, "sha512-5cvg6CtKwfgdmVqY1WIiXKc3Q1bkRqGLi+2W/6ao+6Y7gu/RCwRuAhGEzh5B4KlszSuTLgZYuqFqo5bImjNKng=="],
 

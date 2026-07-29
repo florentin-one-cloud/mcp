@@ -8,13 +8,13 @@ metacognitive awareness and calibrated confidence.
 ### NPM
 
 ```bash
-npm install @wemake.cx/metacognitive-monitoring
+npm install @florentin-one/metacognitive-monitoring
 ```
 
 ### Using with bunx (no installation required)
 
 ```bash
-bunx @wemake.cx/metacognitive-monitoring@latest
+bunx @florentin-one/metacognitive-monitoring@latest
 ```
 
 ## 🚀 Usage
@@ -28,7 +28,7 @@ Use with MCP clients like Cursor or Claude Desktop:
   "mcpServers": {
     "Metacognitive Monitoring": {
       "command": "bunx",
-      "args": ["@wemake.cx/metacognitive-monitoring@latest"]
+      "args": ["@florentin-one/metacognitive-monitoring@latest"]
     }
   }
 }
@@ -162,7 +162,7 @@ Example:
 This server supports **Code Mode**, allowing LLMs to import and use the functionality directly as a TypeScript API.
 
 ```typescript
-import { metacognitive } from "@wemake.cx/metacognitive-monitoring";
+import { metacognitive } from "@florentin-one/metacognitive-monitoring";
 
 // Direct API usage
 const result = await metacognitive.monitor({
@@ -190,7 +190,7 @@ Add the following to your `~/.cursor/mcp.json` file:
   "mcpServers": {
     "Metacognitive Monitoring": {
       "command": "bunx",
-      "args": ["@wemake.cx/metacognitive-monitoring@latest"]
+      "args": ["@florentin-one/metacognitive-monitoring@latest"]
     }
   }
 }
@@ -205,7 +205,7 @@ Use **Manage MCP Servers**, press CMD + N and paste the following:
   "mcpServers": {
     "Metacognitive Monitoring": {
       "command": "bunx",
-      "args": ["@wemake.cx/metacognitive-monitoring@latest"]
+      "args": ["@florentin-one/metacognitive-monitoring@latest"]
     }
   }
 }
