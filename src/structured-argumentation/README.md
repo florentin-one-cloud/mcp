@@ -8,13 +8,13 @@ enabling rigorous evaluation of competing perspectives and claims.
 ### NPM
 
 ```bash
-npm install @florentin-one/structured-argumentation
+npm install @florentin-one/mcp-structured-argumentation
 ```
 
 ### Using with bunx (no installation required)
 
 ```bash
-bunx @florentin-one/structured-argumentation@latest
+bunx @florentin-one/mcp-structured-argumentation@latest
 ```
 
 ## 🚀 Usage
@@ -28,7 +28,7 @@ Use with MCP clients like Cursor or Claude Desktop:
   "mcpServers": {
     "Structured Argumentation": {
       "command": "bunx",
-      "args": ["@florentin-one/structured-argumentation@latest"]
+      "args": ["@florentin-one/mcp-structured-argumentation@latest"]
     }
   }
 }
@@ -126,7 +126,7 @@ assessment, and recommendations for next argumentative steps.
 You can use the `StructuredArgumentation` class directly in your TypeScript/JavaScript applications.
 
 ```typescript
-import { StructuredArgumentation } from "@florentin-one/structured-argumentation";
+import { StructuredArgumentation } from "@florentin-one/mcp-structured-argumentation";
 
 const argumentation = new StructuredArgumentation();
 
@@ -151,7 +151,7 @@ console.log(result.argumentId);
   "mcpServers": {
     "Structured Argumentation": {
       "command": "bunx",
-      "args": ["@florentin-one/structured-argumentation@latest"]
+      "args": ["@florentin-one/mcp-structured-argumentation@latest"]
     }
   }
 }

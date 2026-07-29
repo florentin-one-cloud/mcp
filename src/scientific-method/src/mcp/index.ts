@@ -31,7 +31,7 @@ export function createServer(): Server {
   const server = new Server(
     {
       name: "scientific-method-server",
-      version: "0.4.18"
+      version: "0.4.13"
     },
     {
       capabilities: {
