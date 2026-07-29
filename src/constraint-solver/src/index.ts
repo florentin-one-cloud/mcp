@@ -4,7 +4,12 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import { ListToolsRequestSchema, CallToolRequestSchema, CallToolRequest } from "@modelcontextprotocol/sdk/types.js";
 import { ConstraintMcpServer } from "./mcp/server.js";
 import { CONSTRAINT_SOLVER_TOOL } from "./mcp/tools.js";
-import { getPostHogClient, POSTHOG_ANONYMOUS_ID } from "../../shared/posthog/index.js";
+import {
+  getPostHogClient,
+  POSTHOG_ANONYMOUS_ID,
+  instrumentMcpServer,
+  shutdownMcpAnalytics
+} from "../../shared/posthog/index.js";
 
 // Export the Code Mode API
 export { ConstraintSolver } from "./codemode/index.js";
@@ -14,7 +19,8 @@ export * from "./core/types.js";
  * Factory function that creates and configures a constraint solver MCP server instance.
  */
 export default function createServer(): Server {
-  const server = new Server({ name: "constraint-solver-server", version: "0.4.16" }, { capabilities: { tools: {} } });
+  const server = new Server({ name: "constraint-solver-server", version: "0.4.18" }, { capabilities: { tools: {} } });
+  instrumentMcpServer(server);
   const constraintServer = new ConstraintMcpServer();
 
   server.setRequestHandler(ListToolsRequestSchema, async () => ({ tools: [CONSTRAINT_SOLVER_TOOL] }));
@@ -52,6 +58,11 @@ export default function createServer(): Server {
 
 if (import.meta.main) {
   const server = createServer();
+
+  process.on("SIGTERM", async () => {
+    await shutdownMcpAnalytics();
+    process.exit(0);
+  });
 
   async function runServer() {
     const transport = new StdioServerTransport();

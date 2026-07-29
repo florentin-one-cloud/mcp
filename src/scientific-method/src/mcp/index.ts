@@ -2,7 +2,7 @@ import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { CallToolRequestSchema, ListToolsRequestSchema } from "@modelcontextprotocol/sdk/types.js";
 import { ScientificMethodCodeMode } from "../codemode/index.js";
 import { SCIENTIFIC_METHOD_TOOL } from "./tools.js";
-import { getPostHogClient, POSTHOG_ANONYMOUS_ID } from "../../../shared/posthog/index.js";
+import { getPostHogClient, POSTHOG_ANONYMOUS_ID, instrumentMcpServer } from "../../../shared/posthog/index.js";
 
 /**
  * Creates and configures the MCP server instance.
@@ -31,7 +31,7 @@ export function createServer(): Server {
   const server = new Server(
     {
       name: "scientific-method-server",
-      version: "0.4.16"
+      version: "0.4.18"
     },
     {
       capabilities: {
@@ -40,6 +40,7 @@ export function createServer(): Server {
     }
   );
 
+  instrumentMcpServer(server);
   const api = new ScientificMethodCodeMode();
 
   server.setRequestHandler(ListToolsRequestSchema, async () => ({

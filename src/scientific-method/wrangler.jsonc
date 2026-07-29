@@ -14,6 +14,13 @@
   "cache": {
     "enabled": true
   },
+  "secrets_store_secrets": [
+    {
+      "binding": "posthog-project-token_mcp",
+      "store_id": "a5c78b7b903940898c0880c4cced17d2",
+      "secret_name": "POSTHOG_PROJECT_TOKEN"
+    }
+  ],
   "name": "scientific-method",
   "routes": [
     {

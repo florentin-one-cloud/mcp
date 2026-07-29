@@ -2,7 +2,7 @@ import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { CallToolRequestSchema, ListToolsRequestSchema } from "@modelcontextprotocol/sdk/types.js";
 import { StructuredArgumentation } from "../codemode/index.js";
 import { STRUCTURED_ARGUMENTATION_TOOL } from "./tools.js";
-import { getPostHogClient, POSTHOG_ANONYMOUS_ID } from "../../../shared/posthog/index.js";
+import { getPostHogClient, POSTHOG_ANONYMOUS_ID, instrumentMcpServer } from "../../../shared/posthog/index.js";
 
 /**
  * Factory function that creates and configures a structured argumentation MCP server instance.
@@ -13,7 +13,7 @@ export function createServer(): Server {
   const server = new Server(
     {
       name: "structured-argumentation-server",
-      version: "0.4.16"
+      version: "0.4.18"
     },
     {
       capabilities: {
@@ -22,6 +22,7 @@ export function createServer(): Server {
     }
   );
 
+  instrumentMcpServer(server);
   const argumentation = new StructuredArgumentation();
 
   server.setRequestHandler(ListToolsRequestSchema, async () => ({
