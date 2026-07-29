@@ -50,8 +50,8 @@
   ],
   "routes": [
     {
-      "pattern": "mcp.florentin-one.de/*",
-      "zone_id": "1210933a9469f4f9b49295d48c763705"
+      "pattern": "mcp.florentin-one.de",
+      "custom_domain": true
     }
   ]
 }
