@@ -11,7 +11,7 @@ export default function createServer(): Server {
   const server = new Server(
     {
       name: "collaborative-reasoning-server",
-      version: "0.4.14"
+      version: "0.4.13"
     },
     {
       capabilities: {
