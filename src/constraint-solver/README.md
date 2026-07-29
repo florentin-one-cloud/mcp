@@ -39,7 +39,7 @@ Use with MCP clients like Cursor or Claude Desktop:
 The server is also deployed as a Cloudflare Worker for HTTP access:
 
 ```
-https://mcp-constraint-solver.{account}.workers.dev
+https://constraint-solver.{account}.workers.dev
 ```
 
 Configure your MCP client to use the HTTP endpoint for web-based access.

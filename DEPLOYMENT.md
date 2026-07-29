@@ -187,13 +187,13 @@ nodejs_compat = true
 After deployment, workers are accessible at:
 
 ```
-https://mcp-{server-name}.{account}.workers.dev
+https://{server-name}.{account}.workers.dev
 ```
 
 Example:
 
 ```
-https://mcp-metacognitive-monitoring.wemake.workers.dev
+https://metacognitive-monitoring.wemake.workers.dev
 ```
 
 ### Testing Workers Locally
