@@ -24,7 +24,7 @@
   "name": "sequential-thinking",
   "routes": [
     {
-      "pattern": "sequential-thinking.florentin.dev",
+      "pattern": "sequential-thinking.florentin-one.de",
       "custom_domain": true
     }
   ]

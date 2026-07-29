@@ -24,7 +24,7 @@
   "name": "collaborative-reasoning",
   "routes": [
     {
-      "pattern": "collaborative-reasoning.florentin.dev",
+      "pattern": "collaborative-reasoning.florentin-one.de",
       "custom_domain": true
     }
   ]

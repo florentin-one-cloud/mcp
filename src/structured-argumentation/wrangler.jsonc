@@ -24,7 +24,7 @@
   "name": "structured-argumentation",
   "routes": [
     {
-      "pattern": "structured-argumentation.florentin.dev",
+      "pattern": "structured-argumentation.florentin-one.de",
       "custom_domain": true
     }
   ]

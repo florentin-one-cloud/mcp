@@ -24,7 +24,7 @@
   "name": "constraint-solver",
   "routes": [
     {
-      "pattern": "constraint-solver.florentin.dev",
+      "pattern": "constraint-solver.florentin-one.de",
       "custom_domain": true
     }
   ]

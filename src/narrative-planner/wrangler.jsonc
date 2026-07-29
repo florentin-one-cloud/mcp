@@ -24,7 +24,7 @@
   "name": "narrative-planner",
   "routes": [
     {
-      "pattern": "narrative-planner.florentin.dev",
+      "pattern": "narrative-planner.florentin-one.de",
       "custom_domain": true
     }
   ]

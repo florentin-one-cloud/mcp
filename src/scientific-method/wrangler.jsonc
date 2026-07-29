@@ -24,7 +24,7 @@
   "name": "scientific-method",
   "routes": [
     {
-      "pattern": "scientific-method.florentin.dev",
+      "pattern": "scientific-method.florentin-one.de",
       "custom_domain": true
     }
   ]

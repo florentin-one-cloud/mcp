@@ -139,7 +139,7 @@ For detailed deployment instructions, troubleshooting, and environment configura
 
 ```bash
 # Clone the repository
-git clone https://github.com/florentin-one/mcp.git
+git clone https://github.com/florentin-one-cloud/mcp.git
 cd mcp
 
 # Install dependencies

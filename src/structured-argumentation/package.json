@@ -8,7 +8,7 @@
   "types": "./dist/types/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/florentin-one/mcp.git",
+    "url": "git+https://github.com/florentin-one-cloud/mcp.git",
     "directory": "src/structured-argumentation"
   },
   "publishConfig": {
@@ -19,9 +19,9 @@
     "bun": ">=1.3.0"
   },
   "bugs": {
-    "url": "https://github.com/florentin-one/mcp/issues"
+    "url": "https://github.com/florentin-one-cloud/mcp/issues"
   },
-  "homepage": "https://github.com/florentin-one/mcp/tree/main/src/structured-argumentation",
+  "homepage": "https://github.com/florentin-one-cloud/mcp/tree/main/src/structured-argumentation",
   "author": "Phichayut 'Florentin' Sakwiset (https://github.com/heyFlorentin)",
   "keywords": [
     "mcp",

@@ -24,7 +24,7 @@
   "name": "metacognitive-monitoring",
   "routes": [
     {
-      "pattern": "metacognitive-monitoring.florentin.dev",
+      "pattern": "metacognitive-monitoring.florentin-one.de",
       "custom_domain": true
     }
   ]
