@@ -1,17 +1,17 @@
 {
-  "name": "@wemake.cx/metacognitive-monitoring",
-  "version": "0.4.9",
+  "name": "mcp-metacognitive-monitoring",
+  "version": " 0.4.10",
   "description": "MCP server for diagrammatic thinking and spatial representation",
   "keywords": [
     "mcp",
     "metacognitive-monitoring"
   ],
-  "homepage": "https://github.com/florentin-one/mcp/mcp/tree/main/src/metacognitive-monitoring",
+  "homepage": "https://github.com/florentin-one/mcp/tree/main/src/metacognitive-monitoring",
   "bugs": {
-    "url": "https://github.com/florentin-one/mcp/mcp/issues"
+    "url": "https://github.com/florentin-one/mcp/issues"
   },
   "license": "MIT",
-  "author": "Phichayut 'Florentin' Sakwiset <florentin@wemake.cx> (https://github.com/heyFlorentin)",
+  "author": "Phichayut 'Florentin' Sakwiset (https://github.com/heyFlorentin)",
   "files": [
     "dist"
   ],

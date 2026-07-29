@@ -265,7 +265,7 @@ git push origin v0.4.7
 
 #### 4. Monitor Deployment
 
-- Check [GitHub Actions](https://github.com/florentin-one/mcp/mcp/actions) for build status
+- Check [GitHub Actions](https://github.com/florentin-one/mcp/actions) for build status
 - Verify package appears on [NPM](https://www.npmjs.com/org/wemake.cx)
 - Check [Cloudflare Dashboard](https://dash.cloudflare.com) for worker deployments
 
@@ -429,8 +429,8 @@ src/
 
 ## Getting Help
 
-- **Issues**: [GitHub Issues](https://github.com/florentin-one/mcp/mcp/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/florentin-one/mcp/mcp/discussions)
+- **Issues**: [GitHub Issues](https://github.com/florentin-one/mcp/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/florentin-one/mcp/discussions)
 - **Documentation**: [MCP Specification](https://modelcontextprotocol.io/)
 
 ## Code of Conduct
