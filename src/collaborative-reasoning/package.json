@@ -1,6 +1,6 @@
 {
   "name": "@florentin-one/mcp-collaborative-reasoning",
-  "version": "0.4.12",
+  "version": "0.4.13",
   "description": "MCP server for diagrammatic thinking and spatial representation",
   "license": "MIT",
   "main": "./dist/index.js",
