@@ -36,23 +36,23 @@ individual server directories for detailed setup and configuration instructions.
 
 ## 📦 Installation
 
-All MCP servers are published to NPM under the `@wemake.cx` scope and can be installed individually:
+All MCP servers are published to NPM under the `@florentin-one` scope and can be installed individually:
 
 ```bash
 # Install a specific server
-npm install @wemake.cx/metacognitive-monitoring
-npm install @wemake.cx/structured-argumentation
-npm install @wemake.cx/collaborative-reasoning
-npm install @wemake.cx/sequential-thinking
-npm install @wemake.cx/scientific-method
-npm install @wemake.cx/constraint-solver
-npm install @wemake.cx/narrative-planner
+npm install @florentin-one/metacognitive-monitoring
+npm install @florentin-one/structured-argumentation
+npm install @florentin-one/collaborative-reasoning
+npm install @florentin-one/sequential-thinking
+npm install @florentin-one/scientific-method
+npm install @florentin-one/constraint-solver
+npm install @florentin-one/narrative-planner
 ```
 
 Or use with `bunx` for immediate execution without installation:
 
 ```bash
-bunx @wemake.cx/metacognitive-monitoring@latest
+bunx @florentin-one/metacognitive-monitoring@latest
 ```
 
 ### MCP Client Configuration
@@ -66,7 +66,7 @@ Add to your `~/.cursor/mcp.json`:
   "mcpServers": {
     "Metacognitive Monitoring": {
       "command": "bunx",
-      "args": ["@wemake.cx/metacognitive-monitoring@latest"]
+      "args": ["@florentin-one/metacognitive-monitoring@latest"]
     }
   }
 }
@@ -81,7 +81,7 @@ Add to your Claude Desktop configuration:
   "mcpServers": {
     "metacognitive-monitoring": {
       "command": "bunx",
-      "args": ["@wemake.cx/metacognitive-monitoring@latest"]
+      "args": ["@florentin-one/metacognitive-monitoring@latest"]
     }
   }
 }
@@ -105,13 +105,13 @@ All packages are automatically published to NPM when version tags are pushed:
 
 **Published Packages**:
 
-- [@wemake.cx/metacognitive-monitoring](https://www.npmjs.com/package/@wemake.cx/metacognitive-monitoring)
-- [@wemake.cx/structured-argumentation](https://www.npmjs.com/package/@wemake.cx/structured-argumentation)
-- [@wemake.cx/collaborative-reasoning](https://www.npmjs.com/package/@wemake.cx/collaborative-reasoning)
-- [@wemake.cx/sequential-thinking](https://www.npmjs.com/package/@wemake.cx/sequential-thinking)
-- [@wemake.cx/scientific-method](https://www.npmjs.com/package/@wemake.cx/scientific-method)
-- [@wemake.cx/constraint-solver](https://www.npmjs.com/package/@wemake.cx/constraint-solver)
-- [@wemake.cx/narrative-planner](https://www.npmjs.com/package/@wemake.cx/narrative-planner)
+- [@florentin-one/metacognitive-monitoring](https://www.npmjs.com/package/@florentin-one/metacognitive-monitoring)
+- [@florentin-one/structured-argumentation](https://www.npmjs.com/package/@florentin-one/structured-argumentation)
+- [@florentin-one/collaborative-reasoning](https://www.npmjs.com/package/@florentin-one/collaborative-reasoning)
+- [@florentin-one/sequential-thinking](https://www.npmjs.com/package/@florentin-one/sequential-thinking)
+- [@florentin-one/scientific-method](https://www.npmjs.com/package/@florentin-one/scientific-method)
+- [@florentin-one/constraint-solver](https://www.npmjs.com/package/@florentin-one/constraint-solver)
+- [@florentin-one/narrative-planner](https://www.npmjs.com/package/@florentin-one/narrative-planner)
 
 ### Cloudflare Workers Deployment
 
@@ -122,7 +122,7 @@ All MCP servers are deployed as HTTP endpoints on Cloudflare Workers for low-lat
 - **Global Distribution**: Deployed across Cloudflare's edge network for sub-50ms response times
 - **HTTP Access**: Each server exposes MCP protocol over HTTP for web-based clients
 
-**Worker Endpoints**: `https://mcp-{server-name}.{account}.workers.dev`
+**Worker Endpoints**: `https://{server-name}.{account}.workers.dev`
 
 For detailed deployment instructions, troubleshooting, and environment configuration, see
 [DEPLOYMENT.md](DEPLOYMENT.md).
@@ -139,7 +139,7 @@ For detailed deployment instructions, troubleshooting, and environment configura
 
 ```bash
 # Clone the repository
-git clone https://github.com/florentin-one/mcp/mcp.git
+git clone https://github.com/florentin-one/mcp.git
 cd mcp
 
 # Install dependencies

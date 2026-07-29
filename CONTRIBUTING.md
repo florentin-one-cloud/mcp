@@ -26,7 +26,7 @@ with development, testing, and deployment.
 
 ```bash
 # Clone the repository
-git clone https://github.com/florentin-one/mcp/mcp.git
+git clone https://github.com/florentin-one/mcp.git
 cd mcp
 
 # Install dependencies
@@ -116,7 +116,7 @@ curl -X POST http://localhost:8787 \
    ```
 
 2. **Update `package.json`**:
-   - Change `name` to `@wemake.cx/my-new-server`
+   - Change `name` to `@florentin-one/my-new-server`
    - Update `description`, `keywords`, `homepage`
    - Update `bin` entry to `mcp-server-my-new-server`
 

@@ -42,7 +42,7 @@ jobs:
         # Using NPM Trusted Publishing (OIDC)
         # No NPM_TOKEN needed - authentication via GitHub OIDC token
         # Requires configuring trusted publisher at: https://www.npmjs.com/settings/[org]/publishing
-        # Add this repository as a trusted publisher for @wemake.cx scope
+        # Add this repository as a trusted publisher for @florentin-one scope
 
       - name: Report job status
         if: always()

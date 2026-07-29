@@ -1,6 +1,6 @@
 {
-  "name": "mcp-constraint-solver",
-  "version": " 0.4.10",
+  "name": "@florentin-one/mcp-constraint-solver",
+  "version": "0.4.13",
   "description": "MCP server for validating variable assignments against constraints",
   "license": "MIT",
   "main": "./dist/index.js",
@@ -8,7 +8,7 @@
   "types": "./dist/types/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/florentin-one/mcp/mcp.git",
+    "url": "git+https://github.com/florentin-one/mcp.git",
     "directory": "src/constraint-solver"
   },
   "publishConfig": {
@@ -37,7 +37,7 @@
     "build": "bun build ./src/index.ts --outdir='./dist' --target='bun' && bun build ./src/worker.ts --outfile='./dist/worker.js' --target='node' --format='esm' && tsc",
     "start": "bun run ./dist/index.js",
     "test": "bun test",
-    "publish": "bun publish"
+    "deploy": "bunx wrangler deploy"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.26.0",

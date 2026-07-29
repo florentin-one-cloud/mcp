@@ -1,6 +1,6 @@
 {
-  "name": "mcp-narrative-planner",
-  "version": " 0.4.10",
+  "name": "@florentin-one/mcp-narrative-planner",
+  "version": "0.4.13",
   "description": "MCP server that creates simple narrative outlines",
   "license": "MIT",
   "main": "./dist/index.js",
@@ -8,7 +8,7 @@
   "exports": "./dist/index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/florentin-one/mcp/mcp.git",
+    "url": "git+https://github.com/florentin-one/mcp.git",
     "directory": "src/narrative-planner"
   },
   "publishConfig": {
@@ -37,7 +37,7 @@
     "build": "bun build ./src/index.ts --outdir='./dist' --target='bun' && bun build ./src/worker.ts --outfile='./dist/worker.js' --target='node' --format='esm' && tsc",
     "start": "bun run ./dist/index.js",
     "test": "bun test",
-    "publish": "bun publish"
+    "deploy": "bunx wrangler deploy"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.26.0"

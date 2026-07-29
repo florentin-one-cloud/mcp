@@ -8,13 +8,13 @@ enabling rigorous evaluation of competing perspectives and claims.
 ### NPM
 
 ```bash
-npm install @wemake.cx/structured-argumentation
+npm install @florentin-one/structured-argumentation
 ```
 
 ### Using with bunx (no installation required)
 
 ```bash
-bunx @wemake.cx/structured-argumentation@latest
+bunx @florentin-one/structured-argumentation@latest
 ```
 
 ## 🚀 Usage
@@ -28,7 +28,7 @@ Use with MCP clients like Cursor or Claude Desktop:
   "mcpServers": {
     "Structured Argumentation": {
       "command": "bunx",
-      "args": ["@wemake.cx/structured-argumentation@latest"]
+      "args": ["@florentin-one/structured-argumentation@latest"]
     }
   }
 }
@@ -39,7 +39,7 @@ Use with MCP clients like Cursor or Claude Desktop:
 The server is also deployed as a Cloudflare Worker for HTTP access:
 
 ```
-https://mcp-structured-argumentation.{account}.workers.dev
+https://structured-argumentation.{account}.workers.dev
 ```
 
 Configure your MCP client to use the HTTP endpoint for web-based access.
@@ -126,7 +126,7 @@ assessment, and recommendations for next argumentative steps.
 You can use the `StructuredArgumentation` class directly in your TypeScript/JavaScript applications.
 
 ```typescript
-import { StructuredArgumentation } from "@wemake.cx/structured-argumentation";
+import { StructuredArgumentation } from "@florentin-one/structured-argumentation";
 
 const argumentation = new StructuredArgumentation();
 
@@ -151,7 +151,7 @@ console.log(result.argumentId);
   "mcpServers": {
     "Structured Argumentation": {
       "command": "bunx",
-      "args": ["@wemake.cx/structured-argumentation@latest"]
+      "args": ["@florentin-one/structured-argumentation@latest"]
     }
   }
 }

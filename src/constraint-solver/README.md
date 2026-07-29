@@ -8,13 +8,13 @@ systematic constraint satisfaction checking.
 ### NPM
 
 ```bash
-npm install @wemake.cx/constraint-solver
+npm install @florentin-one/constraint-solver
 ```
 
 ### Using with bunx (no installation required)
 
 ```bash
-bunx @wemake.cx/constraint-solver@latest
+bunx @florentin-one/constraint-solver@latest
 ```
 
 ## 🚀 Usage
@@ -28,7 +28,7 @@ Use with MCP clients like Cursor or Claude Desktop:
   "mcpServers": {
     "Constraint Solver": {
       "command": "bunx",
-      "args": ["@wemake.cx/constraint-solver@latest"]
+      "args": ["@florentin-one/constraint-solver@latest"]
     }
   }
 }
@@ -39,7 +39,7 @@ Use with MCP clients like Cursor or Claude Desktop:
 The server is also deployed as a Cloudflare Worker for HTTP access:
 
 ```
-https://mcp-constraint-solver.{account}.workers.dev
+https://constraint-solver.{account}.workers.dev
 ```
 
 Configure your MCP client to use the HTTP endpoint for web-based access.
@@ -48,16 +48,16 @@ Configure your MCP client to use the HTTP endpoint for web-based access.
 
 This server follows the **MCP Code Mode** architecture, separating concerns into three layers:
 
-1.  **Core (`src/core/`)**: Pure business logic and types (no MCP dependencies).
-2.  **Code Mode (`src/codemode/`)**: Programmable TypeScript API exported for use by other applications/agents.
-3.  **MCP Adapter (`src/mcp/`)**: Protocol adapter that exposes the Code Mode API as an MCP server.
+1. **Core (`src/core/`)**: Pure business logic and types (no MCP dependencies).
+2. **Code Mode (`src/codemode/`)**: Programmable TypeScript API exported for use by other applications/agents.
+3. **MCP Adapter (`src/mcp/`)**: Protocol adapter that exposes the Code Mode API as an MCP server.
 
 ## Code Mode API (Programmable Usage)
 
 You can use the Constraint Solver directly in your TypeScript applications:
 
 ```typescript
-import { ConstraintSolver } from "@wemake.cx/constraint-solver";
+import { ConstraintSolver } from "@florentin-one/constraint-solver";
 
 const solver = new ConstraintSolver();
 
@@ -158,7 +158,7 @@ Constraint evaluation uses safe JavaScript evaluation:
   "mcpServers": {
     "Constraint Solver": {
       "command": "bunx",
-      "args": ["@wemake.cx/constraint-solver@latest"]
+      "args": ["@florentin-one/constraint-solver@latest"]
     }
   }
 }
@@ -173,7 +173,7 @@ The server supports various configuration options:
   "mcpServers": {
     "Constraint Solver": {
       "command": "bunx",
-      "args": ["@wemake.cx/constraint-solver@latest"],
+      "args": ["@florentin-one/constraint-solver@latest"],
       "env": {
         "CONSTRAINT_MAX_VARIABLES": "100",
         "CONSTRAINT_MAX_EXPRESSIONS": "50",

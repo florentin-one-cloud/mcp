@@ -8,13 +8,13 @@ enabling systematic problem breakdown and iterative refinement.
 ### NPM
 
 ```bash
-npm install @wemake.cx/sequential-thinking
+npm install @florentin-one/sequential-thinking
 ```
 
 ### Using with bunx (no installation required)
 
 ```bash
-bunx @wemake.cx/sequential-thinking@latest
+bunx @florentin-one/sequential-thinking@latest
 ```
 
 ## 🚀 Usage
@@ -28,7 +28,7 @@ Use with MCP clients like Cursor or Claude Desktop:
   "mcpServers": {
     "Sequential Thinking": {
       "command": "bunx",
-      "args": ["@wemake.cx/sequential-thinking@latest"]
+      "args": ["@florentin-one/sequential-thinking@latest"]
     }
   }
 }
@@ -39,7 +39,7 @@ Use with MCP clients like Cursor or Claude Desktop:
 The server is also deployed as a Cloudflare Worker for HTTP access:
 
 ```
-https://mcp-sequential-thinking.{account}.workers.dev
+https://sequential-thinking.{account}.workers.dev
 ```
 
 Configure your MCP client to use the HTTP endpoint for web-based access.
@@ -96,7 +96,7 @@ interface ThoughtData {
   "mcpServers": {
     "Sequential Thinking": {
       "command": "bunx",
-      "args": ["@wemake.cx/sequential-thinking@latest"]
+      "args": ["@florentin-one/sequential-thinking@latest"]
     }
   }
 }
@@ -109,7 +109,7 @@ interface ThoughtData {
 LLMs can use the TypeScript API directly for better performance and type safety:
 
 ```typescript
-import { SequentialThinking } from "@wemake.cx/sequential-thinking";
+import { SequentialThinking } from "@florentin-one/sequential-thinking";
 
 const thinker = new SequentialThinking();
 

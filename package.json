@@ -28,9 +28,7 @@
     "test:coverage:all": "bun run --filter='./src/*' test --coverage",
     "link-all": "bun link --workspaces",
     "format": "prettier --write . && eslint . --ext .ts,.tsx --fix",
-    "check": "tsc --noEmit",
-    "publish-packages": "bun run --filter='./src/*' publish",
-    "publish-changed": "bun run --filter='./src/*' publish"
+    "check": "tsc --noEmit"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "1.26.0",
