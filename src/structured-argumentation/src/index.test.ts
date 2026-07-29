@@ -1,6 +1,7 @@
 import { describe, expect, it, beforeEach } from "bun:test";
 import { StructuredArgumentation } from "./codemode/index.js";
 import { createServer } from "./mcp/index.js";
+import { MockTransport, extractToolList, extractContentText, isErrorResponse } from "../../shared/testing/mock-transport.js";
 
 describe("Structured Argumentation (Code Mode)", () => {
   let argumentation: StructuredArgumentation;
@@ -162,6 +163,87 @@ describe("MCP Server Integration", () => {
     expect(server).toBeDefined();
   });
 
-  // Note: Full integration tests are skipped because createTestClient provides mocks
-  // instead of actual server execution. Code Mode tests cover the logic.
+  it("should advertise structuredArgumentation tool", async () => {
+    const server = createServer();
+    const transport = new MockTransport();
+    await server.connect(transport);
+
+    const response = await transport.sendRequest({
+      jsonrpc: "2.0",
+      id: 1,
+      method: "tools/list"
+    });
+
+    const tools = extractToolList(response);
+    expect(tools).toHaveLength(1);
+    expect(tools[0].name).toBe("structuredArgumentation");
+    expect(tools[0].description).toBeDefined();
+  });
+
+  it("handles valid argumentation request", async () => {
+    const server = createServer();
+    const transport = new MockTransport();
+    await server.connect(transport);
+
+    const response = await transport.sendRequest({
+      jsonrpc: "2.0",
+      id: 2,
+      method: "tools/call",
+      params: {
+        name: "structuredArgumentation",
+        arguments: {
+          claim: "Test claim",
+          premises: ["Premise 1"],
+          conclusion: "Conclusion",
+          argumentType: "thesis",
+          confidence: 0.8,
+          nextArgumentNeeded: false
+        }
+      }
+    });
+
+    expect(isErrorResponse(response)).toBe(false);
+    const text = extractContentText(response);
+    const parsed = JSON.parse(text);
+    expect(parsed.argumentId).toBeDefined();
+    expect(parsed.argumentType).toBe("thesis");
+  });
+
+  it("rejects unknown tool name", async () => {
+    const server = createServer();
+    const transport = new MockTransport();
+    await server.connect(transport);
+
+    const response = await transport.sendRequest({
+      jsonrpc: "2.0",
+      id: 3,
+      method: "tools/call",
+      params: {
+        name: "unknownTool",
+        arguments: {}
+      }
+    });
+
+    expect(isErrorResponse(response)).toBe(true);
+  });
+
+  it("returns error for invalid input via MCP", async () => {
+    const server = createServer();
+    const transport = new MockTransport();
+    await server.connect(transport);
+
+    const response = await transport.sendRequest({
+      jsonrpc: "2.0",
+      id: 4,
+      method: "tools/call",
+      params: {
+        name: "structuredArgumentation",
+        arguments: {
+          // Missing required fields
+        }
+      }
+    });
+
+    expect(isErrorResponse(response)).toBe(true);
+  });
 });

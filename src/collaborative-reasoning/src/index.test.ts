@@ -1,16 +1,8 @@
 import { describe, expect, it, beforeEach } from "bun:test";
 import createServer from "./mcp/server.js";
 import { CollaborativeReasoning } from "./codemode/index.js";
+import { MockTransport, extractToolList, extractContentText, isErrorResponse } from "../../shared/testing/mock-transport.js";
 
-/**
- * Test suite for Collaborative Reasoning MCP Server.
- *
- * Business Context: Ensures the collaborative-reasoning framework correctly validates
- * inputs and provides reliable functionality for enterprise applications.
- *
- * Decision Rationale: Tests focus on server initialization, schema validation,
- * and core functionality to ensure production-ready reliability.
- */
 describe("Collaborative Reasoning Server", () => {
   it("server initializes successfully", () => {
     const server = createServer();
@@ -22,36 +14,27 @@ describe("Collaborative Reasoning Server", () => {
     expect(typeof server.connect).toBe("function");
     expect(typeof server.close).toBe("function");
   });
-
-  // Note: Server name and version are validated via MCP protocol handshake,
-  // tested by MCP Inspector during development workflow.
 });
 
-/**
- * Tool Registration Tests.
- *
- * Business Context: Verifies that MCP tools are correctly advertised to clients.
- */
 describe("Tool Registration", () => {
-  it.skip("should register collaborativeReasoning tool correctly", () => {
+  it("should register collaborativeReasoning tool correctly", async () => {
     const server = createServer();
+    const transport = new MockTransport();
+    await server.connect(transport);
 
-    // Tool registration is validated via MCP protocol handshake and tested
-    // by MCP Inspector during development workflow. Direct handler testing
-    // requires transport layer which is not available in unit tests.
-    expect(server).toBeDefined();
+    const response = await transport.sendRequest({
+      jsonrpc: "2.0",
+      id: 1,
+      method: "tools/list"
+    });
+
+    const tools = extractToolList(response);
+    expect(tools).toHaveLength(1);
+    expect(tools[0].name).toBe("collaborativeReasoning");
+    expect(tools[0].description).toBeDefined();
   });
 });
 
-/**
- * Input Validation Tests.
- *
- * Business Context: Enterprise applications require robust input validation
- * to prevent data corruption and ensure GDPR compliance.
- *
- * Decision Rationale: Test validation logic directly without transport layer
- * to ensure clear error messages and proper input sanitization.
- */
 describe("Input Validation", () => {
   let collaborativeReasoning: CollaborativeReasoning;
 
@@ -60,9 +43,6 @@ describe("Input Validation", () => {
   });
 
   it("should reject null input", async () => {
-    // expect(collaborativeReasoning.collaborate(null)).rejects.toThrow();
-    // Bun test might not have rejects.toThrow shorthand or it might be different.
-    // Using try-catch block for safety.
     let error;
     try {
       await collaborativeReasoning.collaborate(null);
@@ -169,9 +149,6 @@ describe("Input Validation", () => {
   });
 });
 
-/**
- * Persona Management Tests.
- */
 describe("Persona Management", () => {
   let collaborativeReasoning: CollaborativeReasoning;
 
@@ -248,14 +225,6 @@ describe("Persona Management", () => {
   });
 });
 
-/**
- * MCP Server Integration Tests.
- *
- * Business Context: MCP protocol compliance is essential for AI agent integration.
- *
- * Decision Rationale: Test server initialization without requiring a connected transport.
- * Full integration testing is done via MCP Inspector during development workflow.
- */
 describe("MCP Server Integration", () => {
   it("server can be created without errors", () => {
     const server = createServer();
@@ -264,25 +233,65 @@ describe("MCP Server Integration", () => {
     expect(typeof server.close).toBe("function");
   });
 
-  it.skip("rejects unknown tool name", async () => {
+  it("handles valid collaborative reasoning request via MCP", async () => {
     const server = createServer();
+    const transport = new MockTransport();
+    await server.connect(transport);
 
-    // Unknown tool rejection is validated via MCP protocol handshake and tested
-    // by MCP Inspector during development workflow. Direct handler testing
-    // requires transport layer which is not available in unit tests.
-    expect(server).toBeDefined();
+    const response = await transport.sendRequest({
+      jsonrpc: "2.0",
+      id: 2,
+      method: "tools/call",
+      params: {
+        name: "collaborativeReasoning",
+        arguments: {
+          topic: "Test Topic",
+          personas: [
+            {
+              id: "p1",
+              name: "Person 1",
+              expertise: ["A"],
+              background: "BG",
+              perspective: "View",
+              biases: [],
+              communication: { style: "direct", tone: "formal" }
+            }
+          ],
+          contributions: [],
+          stage: "ideation",
+          activePersonaId: "p1",
+          sessionId: "s1",
+          iteration: 1,
+          nextContributionNeeded: false
+        }
+      }
+    });
+
+    expect(isErrorResponse(response)).toBe(false);
+    const text = extractContentText(response);
+    const parsed = JSON.parse(text);
+    expect(parsed.topic).toBe("Test Topic");
+  });
+
+  it("rejects unknown tool name", async () => {
+    const server = createServer();
+    const transport = new MockTransport();
+    await server.connect(transport);
+
+    const response = await transport.sendRequest({
+      jsonrpc: "2.0",
+      id: 3,
+      method: "tools/call",
+      params: {
+        name: "unknownTool",
+        arguments: {}
+      }
+    });
+
+    expect(isErrorResponse(response)).toBe(true);
   });
 });
 
-/**
- * Edge Cases and Performance Tests.
- *
- * Business Context: Enterprise applications must handle edge cases gracefully
- * and perform well under load.
- *
- * Decision Rationale: Test boundary conditions and performance to ensure
- * production reliability.
- */
 describe("Edge Cases and Performance", () => {
   let collaborativeReasoning: CollaborativeReasoning;
 
