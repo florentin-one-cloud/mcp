@@ -6,6 +6,7 @@
       "name": "mcp",
       "dependencies": {
         "@modelcontextprotocol/sdk": "1.26.0",
+        "posthog-node": "^5.46.1",
       },
       "devDependencies": {
         "@eslint/js": "9.37.0",
@@ -24,7 +25,7 @@
     },
     "src/collaborative-reasoning": {
       "name": "@wemake.cx/collaborative-reasoning",
-      "version": "0.4.6",
+      "version": "0.4.8",
       "bin": {
         "mcp-server-collaborative-reasoning": "dist/index.js",
       },
@@ -39,7 +40,7 @@
     },
     "src/constraint-solver": {
       "name": "@wemake.cx/constraint-solver",
-      "version": "0.4.6",
+      "version": "0.4.8",
       "bin": {
         "mcp-server-constraint-solver": "dist/index.js",
       },
@@ -54,7 +55,7 @@
     },
     "src/metacognitive-monitoring": {
       "name": "@wemake.cx/metacognitive-monitoring",
-      "version": "0.4.6",
+      "version": "0.4.8",
       "bin": {
         "mcp-server-metacognitive-monitoring": "dist/index.js",
       },
@@ -69,7 +70,7 @@
     },
     "src/narrative-planner": {
       "name": "@wemake.cx/narrative-planner",
-      "version": "0.4.6",
+      "version": "0.4.8",
       "bin": {
         "mcp-server-narrative-planner": "dist/index.js",
       },
@@ -83,7 +84,7 @@
     },
     "src/scientific-method": {
       "name": "@wemake.cx/scientific-method",
-      "version": "0.4.6",
+      "version": "0.4.8",
       "bin": {
         "mcp-server-scientific-method": "dist/index.js",
       },
@@ -98,7 +99,7 @@
     },
     "src/sequential-thinking": {
       "name": "@wemake.cx/sequential-thinking",
-      "version": "0.4.6",
+      "version": "0.4.8",
       "bin": {
         "mcp-server-sequential-thinking": "dist/index.js",
       },
@@ -113,7 +114,7 @@
     },
     "src/structured-argumentation": {
       "name": "@wemake.cx/structured-argumentation",
-      "version": "0.4.6",
+      "version": "0.4.8",
       "bin": {
         "mcp-server-structured-argumentation": "dist/index.js",
       },
@@ -301,6 +302,10 @@
     "@poppinss/dumper": ["@poppinss/dumper@0.6.5", "", { "dependencies": { "@poppinss/colors": "^4.1.5", "@sindresorhus/is": "^7.0.2", "supports-color": "^10.0.0" } }, "sha512-NBdYIb90J7LfOI32dOewKI1r7wnkiH6m920puQ3qHUeZkxNkQiFnXVWoE6YtFSv6QOiPPf7ys6i+HWWecDz7sw=="],
 
     "@poppinss/exception": ["@poppinss/exception@1.2.3", "", {}, "sha512-dCED+QRChTVatE9ibtoaxc+WkdzOSjYTKi/+uacHWIsfodVfpsueo3+DKpgU5Px8qXjgmXkSvhXvSCz3fnP9lw=="],
+
+    "@posthog/core": ["@posthog/core@1.45.1", "", { "dependencies": { "@posthog/types": "^1.398.0" } }, "sha512-tLtvzomavb2PPWdGYKsusyIzIeL2Px47v348Smibkay7sMy/83TyPk+Ptsp2NdeOgJsbuwSxWkR2+XA0aSCAaA=="],
+
+    "@posthog/types": ["@posthog/types@1.398.0", "", {}, "sha512-sJMkl4k+u8yS/0fjHsKqE9xTdsAh30a2WvgChiptellnVoE0e8QJKFgqOMD2sk8FaEArPdeFklAhXvmENAt3Sg=="],
 
     "@sindresorhus/is": ["@sindresorhus/is@7.2.0", "", {}, "sha512-P1Cz1dWaFfR4IR+U13mqqiGsLFf1KbayybWwdd2vfctdV6hDpUkgCY0nKOLLTMSoRd/jJNjtbqzf13K8DCCXQw=="],
 
@@ -705,6 +710,8 @@
     "picomatch": ["picomatch@2.3.2", "", {}, "sha512-V7+vQEJ06Z+c5tSye8S+nHUfI51xoXIXjHQ99cQtKUkQqqO1kO/KCJUfZXuB47h/YBlDhah2H3hdUGXn8ie0oA=="],
 
     "pkce-challenge": ["pkce-challenge@5.0.1", "", {}, "sha512-wQ0b/W4Fr01qtpHlqSqspcj3EhBvimsdh0KlHhH8HRZnMsEa0ea2fTULOXOS9ccQr3om+GcGRk4e+isrZWV8qQ=="],
+
+    "posthog-node": ["posthog-node@5.46.1", "", { "dependencies": { "@posthog/core": "^1.45.1" }, "peerDependencies": { "rxjs": "^7.0.0" }, "optionalPeers": ["rxjs"] }, "sha512-WjCqExq44pBdyg9MSsH6UAE0tNZ88p4aIuVFicgqhjf2Fbws6IhS4ioYUa4aBrbUPS9EDRXtBTtF5DpP1ml8Pw=="],
 
     "prelude-ls": ["prelude-ls@1.2.1", "", {}, "sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g=="],
 

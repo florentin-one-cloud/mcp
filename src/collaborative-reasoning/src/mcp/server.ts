@@ -2,6 +2,7 @@ import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { CallToolRequestSchema, ListToolsRequestSchema } from "@modelcontextprotocol/sdk/types.js";
 import { CollaborativeReasoning } from "../codemode/index.js";
 import { COLLABORATIVE_REASONING_TOOL } from "./tools.js";
+import { getPostHogClient, POSTHOG_ANONYMOUS_ID } from "../../../shared/posthog/index.js";
 
 /**
  * Factory function that creates and configures a collaborative reasoning MCP server instance.
@@ -10,7 +11,7 @@ export default function createServer(): Server {
   const server = new Server(
     {
       name: "collaborative-reasoning-server",
-      version: "0.4.8"
+      version: "0.4.9"
     },
     {
       capabilities: {
@@ -27,12 +28,30 @@ export default function createServer(): Server {
 
   server.setRequestHandler(CallToolRequestSchema, async (request) => {
     if (request.params.name === "collaborativeReasoning") {
+      const posthog = getPostHogClient();
       try {
         const result = await collaborativeReasoning.collaborate(request.params.arguments);
 
         // Generate visualization
         const visualization = collaborativeReasoning.visualize(result);
         console.error(visualization);
+
+        if (posthog) {
+          posthog.capture({
+            distinctId: POSTHOG_ANONYMOUS_ID,
+            event: "collaborative reasoning contribution processed",
+            properties: {
+              session_id: result.sessionId,
+              stage: result.stage,
+              iteration: result.iteration,
+              persona_count: result.personas.length,
+              contribution_count: result.contributions.length,
+              disagreement_count: result.disagreements?.length ?? 0,
+              next_contribution_needed: result.nextContributionNeeded
+            }
+          });
+          await posthog.flush();
+        }
 
         return {
           content: [
@@ -59,6 +78,12 @@ export default function createServer(): Server {
           ]
         };
       } catch (error) {
+        if (posthog) {
+          posthog.captureException(error instanceof Error ? error : new Error(String(error)), POSTHOG_ANONYMOUS_ID, {
+            tool: "collaborativeReasoning"
+          });
+          await posthog.flush();
+        }
         return {
           content: [
             {

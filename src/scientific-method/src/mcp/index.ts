@@ -2,6 +2,7 @@ import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { CallToolRequestSchema, ListToolsRequestSchema } from "@modelcontextprotocol/sdk/types.js";
 import { ScientificMethodCodeMode } from "../codemode/index.js";
 import { SCIENTIFIC_METHOD_TOOL } from "./tools.js";
+import { getPostHogClient, POSTHOG_ANONYMOUS_ID } from "../../../shared/posthog/index.js";
 
 /**
  * Creates and configures the MCP server instance.
@@ -30,7 +31,7 @@ export function createServer(): Server {
   const server = new Server(
     {
       name: "scientific-method-server",
-      version: "0.4.8"
+      version: "0.4.9"
     },
     {
       capabilities: {
@@ -47,10 +48,27 @@ export function createServer(): Server {
 
   server.setRequestHandler(CallToolRequestSchema, async (request) => {
     if (request.params.name === "scientificMethod") {
+      const posthog = getPostHogClient();
       try {
         const result = await api.processInquiry(request.params.arguments);
         const visualization = api.visualize(result);
         console.error(visualization);
+
+        if (posthog) {
+          posthog.capture({
+            distinctId: POSTHOG_ANONYMOUS_ID,
+            event: "scientific inquiry advanced",
+            properties: {
+              inquiry_id: result.inquiryId,
+              stage: result.stage,
+              iteration: result.iteration,
+              next_stage_needed: result.nextStageNeeded,
+              has_hypothesis: !!result.hypothesis,
+              has_conclusion: !!result.conclusion
+            }
+          });
+          await posthog.flush();
+        }
 
         return {
           content: [
@@ -76,6 +94,12 @@ export function createServer(): Server {
           ]
         };
       } catch (error) {
+        if (posthog) {
+          posthog.captureException(error instanceof Error ? error : new Error(String(error)), POSTHOG_ANONYMOUS_ID, {
+            tool: "scientificMethod"
+          });
+          await posthog.flush();
+        }
         return {
           content: [
             {
