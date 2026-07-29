@@ -1,17 +1,24 @@
 {
   "$schema": "../../node_modules/wrangler/config-schema.json",
-  "name": "sequential-thinking",
   "main": "dist/worker.js",
   "compatibility_flags": ["nodejs_compat"],
   "compatibility_date": "2026-07-29",
   "workers_dev": false,
+  "preview_urls": true,
+  "observability": {
+    "logs": {
+      "enabled": true,
+      "invocation_logs": false
+    }
+  },
+  "cache": {
+    "enabled": true
+  },
+  "name": "sequential-thinking",
   "routes": [
     {
       "pattern": "sequential-thinking.florentin.dev",
       "custom_domain": true
     }
-  ],
-  "secrets": {
-    "required": ["POSTHOG_API_KEY"]
-  }
+  ]
 }
