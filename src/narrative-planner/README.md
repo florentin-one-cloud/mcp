@@ -39,7 +39,7 @@ Use with MCP clients like Cursor or Claude Desktop:
 The server is also deployed as a Cloudflare Worker for HTTP access:
 
 ```
-https://narrative-planner.{account}.workers.dev
+https://mcp.florentin-one.de/narrative-planner
 ```
 
 Configure your MCP client to use the HTTP endpoint for web-based access.
