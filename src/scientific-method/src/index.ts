@@ -2,6 +2,7 @@
 
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { createServer } from "./mcp/index.js";
+import { shutdownMcpAnalytics } from "../../shared/posthog/index.js";
 
 // Export Code Mode API
 export { ScientificMethodCodeMode } from "./codemode/index.js";
@@ -10,6 +11,11 @@ export * from "./core/types.js";
 // Run MCP server if main
 if (import.meta.main) {
   const server = createServer();
+
+  process.on("SIGTERM", async () => {
+    await shutdownMcpAnalytics();
+    process.exit(0);
+  });
 
   async function runServer() {
     const transport = new StdioServerTransport();

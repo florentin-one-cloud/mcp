@@ -2,7 +2,7 @@ import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { CallToolRequestSchema, ListToolsRequestSchema } from "@modelcontextprotocol/sdk/types.js";
 import { CollaborativeReasoning } from "../codemode/index.js";
 import { COLLABORATIVE_REASONING_TOOL } from "./tools.js";
-import { getPostHogClient, POSTHOG_ANONYMOUS_ID } from "../../../shared/posthog/index.js";
+import { getPostHogClient, POSTHOG_ANONYMOUS_ID, instrumentMcpServer } from "../../../shared/posthog/index.js";
 
 /**
  * Factory function that creates and configures a collaborative reasoning MCP server instance.
@@ -20,6 +20,7 @@ export default function createServer(): Server {
     }
   );
 
+  instrumentMcpServer(server);
   const collaborativeReasoning = new CollaborativeReasoning();
 
   server.setRequestHandler(ListToolsRequestSchema, async () => ({

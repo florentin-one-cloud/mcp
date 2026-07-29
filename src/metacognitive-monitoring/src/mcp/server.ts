@@ -10,7 +10,7 @@ import {
 import { MetacognitiveAnalyzer } from "../core/analyzer.js";
 import { MetacognitiveFormatter } from "../core/formatter.js";
 import { METACOGNITIVE_MONITORING_TOOL } from "./tools.js";
-import { getPostHogClient, POSTHOG_ANONYMOUS_ID } from "../../../shared/posthog/index.js";
+import { getPostHogClient, POSTHOG_ANONYMOUS_ID, instrumentMcpServer } from "../../../shared/posthog/index.js";
 
 /**
  * Factory function that creates and configures a metacognitive monitoring MCP server instance.
@@ -36,6 +36,7 @@ export function createServer(): Server {
     }
   );
 
+  instrumentMcpServer(server);
   const analyzer = new MetacognitiveAnalyzer();
 
   server.setRequestHandler(ListToolsRequestSchema, async () => ({

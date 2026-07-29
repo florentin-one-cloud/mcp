@@ -3,7 +3,7 @@ import { ListToolsRequestSchema, CallToolRequestSchema, CallToolRequest } from "
 import { NarrativePlanner } from "../codemode/index.js";
 import { NARRATIVE_PLANNER_TOOL } from "./tools.js";
 import { NarrativeInput } from "../core/types.js";
-import { getPostHogClient, POSTHOG_ANONYMOUS_ID } from "../../../shared/posthog/index.js";
+import { getPostHogClient, POSTHOG_ANONYMOUS_ID, instrumentMcpServer } from "../../../shared/posthog/index.js";
 
 export class NarrativePlannerServer {
   private planner: NarrativePlanner;
@@ -30,6 +30,7 @@ export class NarrativePlannerServer {
 
 export default function createServer(): Server {
   const server = new Server({ name: "narrative-planner-server", version: "0.4.16" }, { capabilities: { tools: {} } });
+  instrumentMcpServer(server);
   const narrativeServer = new NarrativePlannerServer();
 
   server.setRequestHandler(ListToolsRequestSchema, async () => ({ tools: [NARRATIVE_PLANNER_TOOL] }));

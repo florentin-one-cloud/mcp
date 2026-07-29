@@ -3,7 +3,7 @@ import { CallToolRequestSchema, ListToolsRequestSchema } from "@modelcontextprot
 import { SEQUENTIAL_THINKING_TOOL } from "./tools.js";
 import { SequentialThinking } from "../codemode/index.js";
 import { ThoughtData } from "../core/types.js";
-import { getPostHogClient, POSTHOG_ANONYMOUS_ID } from "../../../shared/posthog/index.js";
+import { getPostHogClient, POSTHOG_ANONYMOUS_ID, instrumentMcpServer } from "../../../shared/posthog/index.js";
 
 /**
  * Factory function that creates and configures a sequential thinking MCP server instance.
@@ -26,6 +26,7 @@ export default function createServer(): Server {
     }
   );
 
+  instrumentMcpServer(server);
   // We use the Code Mode API to handle the logic
   const thinking = new SequentialThinking();
 
