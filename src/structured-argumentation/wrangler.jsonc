@@ -1,0 +1,14 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "mcp-structured-argumentation",
+  "main": "dist/worker.js",
+  "compatibility_date": "2026-07-29",
+  "workers_dev": false,
+  "secrets_store_secrets": [
+    {
+      "binding": "POSTHOG_API_KEY",
+      "store_id": "5f175a552dc743bab0c0cff4ae95859a",
+      "secret_name": "florentin-one-POSTHOG_API_KEY"
+    }
+  ]
+}
