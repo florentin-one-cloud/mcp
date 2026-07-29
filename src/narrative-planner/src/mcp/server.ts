@@ -29,7 +29,7 @@ export class NarrativePlannerServer {
 }
 
 export default function createServer(): Server {
-  const server = new Server({ name: "narrative-planner-server", version: "0.4.17" }, { capabilities: { tools: {} } });
+  const server = new Server({ name: "narrative-planner-server", version: "0.4.18" }, { capabilities: { tools: {} } });
   instrumentMcpServer(server);
   const narrativeServer = new NarrativePlannerServer();
 

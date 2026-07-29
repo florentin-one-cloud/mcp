@@ -13,7 +13,7 @@ export function createServer(): Server {
   const server = new Server(
     {
       name: "structured-argumentation-server",
-      version: "0.4.17"
+      version: "0.4.18"
     },
     {
       capabilities: {

@@ -1,6 +1,6 @@
 {
   "name": "@florentin-one/mcp-scientific-method",
-  "version": "0.4.17",
+  "version": "0.4.18",
   "description": "MCP server for hypothesis-driven experiments and scientific inquiry (scientific method)",
   "license": "MIT",
   "main": "./dist/index.js",

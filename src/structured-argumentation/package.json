@@ -1,6 +1,6 @@
 {
   "name": "@florentin-one/mcp-structured-argumentation",
-  "version": "0.4.17",
+  "version": "0.4.18",
   "description": "MCP server for diagrammatic thinking and spatial representation",
   "license": "MIT",
   "main": "./dist/index.js",

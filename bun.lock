@@ -26,7 +26,7 @@
     },
     "src/collaborative-reasoning": {
       "name": "@florentin-one/mcp-collaborative-reasoning",
-      "version": "0.4.17",
+      "version": "0.4.18",
       "bin": {
         "mcp-server-collaborative-reasoning": "dist/index.js"
       },
@@ -41,7 +41,7 @@
     },
     "src/constraint-solver": {
       "name": "@florentin-one/mcp-constraint-solver",
-      "version": "0.4.17",
+      "version": "0.4.18",
       "bin": {
         "mcp-server-constraint-solver": "dist/index.js"
       },
@@ -56,7 +56,7 @@
     },
     "src/metacognitive-monitoring": {
       "name": "@florentin-one/mcp-metacognitive-monitoring",
-      "version": "0.4.17",
+      "version": "0.4.18",
       "bin": {
         "mcp-server-metacognitive-monitoring": "dist/index.js"
       },
@@ -71,7 +71,7 @@
     },
     "src/narrative-planner": {
       "name": "@florentin-one/mcp-narrative-planner",
-      "version": "0.4.17",
+      "version": "0.4.18",
       "bin": {
         "mcp-server-narrative-planner": "dist/index.js"
       },
@@ -85,7 +85,7 @@
     },
     "src/scientific-method": {
       "name": "@florentin-one/mcp-scientific-method",
-      "version": "0.4.17",
+      "version": "0.4.18",
       "bin": {
         "mcp-server-scientific-method": "dist/index.js"
       },
@@ -100,7 +100,7 @@
     },
     "src/sequential-thinking": {
       "name": "@florentin-one/mcp-sequential-thinking",
-      "version": "0.4.17",
+      "version": "0.4.18",
       "bin": {
         "mcp-server-sequential-thinking": "dist/index.js"
       },
@@ -115,7 +115,7 @@
     },
     "src/structured-argumentation": {
       "name": "@florentin-one/mcp-structured-argumentation",
-      "version": "0.4.17",
+      "version": "0.4.18",
       "bin": {
         "mcp-server-structured-argumentation": "dist/index.js"
       },
