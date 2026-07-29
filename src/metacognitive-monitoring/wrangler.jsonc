@@ -2,8 +2,9 @@
   "$schema": "../../node_modules/wrangler/config-schema.json",
   "name": "mcp-metacognitive-monitoring",
   "main": "dist/worker.js",
+  "compatibility_flags": ["nodejs_compat"],
   "compatibility_date": "2026-07-29",
-  "workers_dev": false,
+  "workers_dev": true,
   "secrets_store_secrets": [
     {
       "binding": "POSTHOG_API_KEY",
