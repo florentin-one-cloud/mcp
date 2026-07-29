@@ -11,11 +11,7 @@
       "custom_domain": true
     }
   ],
-  "secrets_store_secrets": [
-    {
-      "binding": "POSTHOG_API_KEY",
-      "store_id": "a5c78b7b903940898c0880c4cced17d2",
-      "secret_name": "internal-mcp-POSTHOG_API_KEY"
-    }
-  ]
+  "secrets": {
+    "required": ["POSTHOG_API_KEY"]
+  }
 }
