@@ -1,0 +1,57 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "mcp-gateway",
+  "main": "dist/worker.js",
+  "compatibility_flags": ["nodejs_compat"],
+  "compatibility_date": "2026-07-29",
+  "cache": {
+    "enabled": true
+  },
+  "workers_dev": true,
+  "preview_urls": true,
+  "observability": {
+    "logs": {
+      "enabled": true,
+      "invocation_logs": false
+    }
+  },
+  "placement": {
+    "mode": "smart"
+  },
+  "services": [
+    {
+      "binding": "COLLABORATIVE_REASONING",
+      "service": "collaborative-reasoning"
+    },
+    {
+      "binding": "CONSTRAINT_SOLVER",
+      "service": "constraint-solver"
+    },
+    {
+      "binding": "METACOGNITIVE_MONITORING",
+      "service": "metacognitive-monitoring"
+    },
+    {
+      "binding": "NARRATIVE_PLANNER",
+      "service": "narrative-planner"
+    },
+    {
+      "binding": "SCIENTIFIC_METHOD",
+      "service": "scientific-method"
+    },
+    {
+      "binding": "SEQUENTIAL_THINKING",
+      "service": "sequential-thinking"
+    },
+    {
+      "binding": "STRUCTURED_ARGUMENTATION",
+      "service": "structured-argumentation"
+    }
+  ],
+  "routes": [
+    {
+      "pattern": "mcp.florentin-one.de",
+      "custom_domain": true
+    }
+  ]
+}

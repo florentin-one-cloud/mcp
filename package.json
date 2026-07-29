@@ -1,15 +1,15 @@
 {
   "name": "mcp",
-  "author": "Florentin One (https://florentin.dev)",
+  "author": "Florentin One (https://florentin-one.de)",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/florentin-one/mcp.git"
+    "url": "git+https://github.com/florentin-one-cloud/mcp.git"
   },
   "bugs": {
-    "url": "https://github.com/florentin-one/mcp/issues"
+    "url": "https://github.com/florentin-one-cloud/mcp/issues"
   },
-  "description": "WeMake Model Context Protocol (MCP) servers",
-  "homepage": "https://wemake.cx",
+  "description": "Florentin One Model Context Protocol (MCP) servers",
+  "homepage": "https://florentin-one.de",
   "license": "MIT",
   "type": "module",
   "workspaces": [
@@ -47,7 +47,7 @@
     "prettier": "3.6.2",
     "typescript": "5.9.3",
     "vite-tsconfig-paths": "5.1.4",
-    "wrangler": "^4.114.0"
+    "wrangler": "^4.115.0"
   },
   "prettier": {
     "trailingComma": "none",

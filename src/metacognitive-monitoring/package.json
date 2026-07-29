@@ -6,9 +6,9 @@
     "mcp",
     "metacognitive-monitoring"
   ],
-  "homepage": "https://github.com/florentin-one/mcp/tree/main/src/metacognitive-monitoring",
+  "homepage": "https://github.com/florentin-one-cloud/mcp/tree/main/src/metacognitive-monitoring",
   "bugs": {
-    "url": "https://github.com/florentin-one/mcp/issues"
+    "url": "https://github.com/florentin-one-cloud/mcp/issues"
   },
   "license": "MIT",
   "author": "Phichayut 'Florentin' Sakwiset (https://github.com/heyFlorentin)",
@@ -23,7 +23,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/florentin-one/mcp.git",
+    "url": "git+https://github.com/florentin-one-cloud/mcp.git",
     "directory": "src/metacognitive-monitoring"
   },
   "scripts": {

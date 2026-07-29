@@ -16,16 +16,10 @@
   },
   "secrets_store_secrets": [
     {
-      "binding": "posthog-project-token_mcp",
-      "store_id": "a5c78b7b903940898c0880c4cced17d2",
-      "secret_name": "POSTHOG_PROJECT_TOKEN"
+      "binding": "mcp_posthog-project-token",
+      "store_id": "c381082a6e3b46eb861dcf7f3073d008",
+      "secret_name": "mcp-POSTHOG_PROJECT_TOKEN"
     }
   ],
-  "name": "narrative-planner",
-  "routes": [
-    {
-      "pattern": "narrative-planner.florentin.dev",
-      "custom_domain": true
-    }
-  ]
+  "name": "narrative-planner"
 }
