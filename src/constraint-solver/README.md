@@ -8,13 +8,13 @@ systematic constraint satisfaction checking.
 ### NPM
 
 ```bash
-npm install @florentin-one/constraint-solver
+npm install @florentin-one/mcp-constraint-solver
 ```
 
 ### Using with bunx (no installation required)
 
 ```bash
-bunx @florentin-one/constraint-solver@latest
+bunx @florentin-one/mcp-constraint-solver@latest
 ```
 
 ## 🚀 Usage
@@ -28,7 +28,7 @@ Use with MCP clients like Cursor or Claude Desktop:
   "mcpServers": {
     "Constraint Solver": {
       "command": "bunx",
-      "args": ["@florentin-one/constraint-solver@latest"]
+      "args": ["@florentin-one/mcp-constraint-solver@latest"]
     }
   }
 }
@@ -57,7 +57,7 @@ This server follows the **MCP Code Mode** architecture, separating concerns into
 You can use the Constraint Solver directly in your TypeScript applications:
 
 ```typescript
-import { ConstraintSolver } from "@florentin-one/constraint-solver";
+import { ConstraintSolver } from "@florentin-one/mcp-constraint-solver";
 
 const solver = new ConstraintSolver();
 
@@ -158,7 +158,7 @@ Constraint evaluation uses safe JavaScript evaluation:
   "mcpServers": {
     "Constraint Solver": {
       "command": "bunx",
-      "args": ["@florentin-one/constraint-solver@latest"]
+      "args": ["@florentin-one/mcp-constraint-solver@latest"]
     }
   }
 }
@@ -173,7 +173,7 @@ The server supports various configuration options:
   "mcpServers": {
     "Constraint Solver": {
       "command": "bunx",
-      "args": ["@florentin-one/constraint-solver@latest"],
+      "args": ["@florentin-one/mcp-constraint-solver@latest"],
       "env": {
         "CONSTRAINT_MAX_VARIABLES": "100",
         "CONSTRAINT_MAX_EXPRESSIONS": "50",

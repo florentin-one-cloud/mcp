@@ -8,13 +8,13 @@ rigorous scientific methodology.
 ### NPM
 
 ```bash
-npm install @florentin-one/scientific-method
+npm install @florentin-one/mcp-scientific-method
 ```
 
 ### Using with bunx (no installation required)
 
 ```bash
-bunx @florentin-one/scientific-method@latest
+bunx @florentin-one/mcp-scientific-method@latest
 ```
 
 ## 🚀 Usage
@@ -28,7 +28,7 @@ Use with MCP clients like Cursor or Claude Desktop:
   "mcpServers": {
     "Scientific Method": {
       "command": "bunx",
-      "args": ["@florentin-one/scientific-method@latest"]
+      "args": ["@florentin-one/mcp-scientific-method@latest"]
     }
   }
 }
@@ -160,7 +160,7 @@ Systematic approach to result interpretation:
   "mcpServers": {
     "Scientific Method": {
       "command": "bunx",
-      "args": ["@florentin-one/scientific-method@latest"]
+      "args": ["@florentin-one/mcp-scientific-method@latest"]
     }
   }
 }
@@ -173,7 +173,7 @@ Systematic approach to result interpretation:
   "mcpServers": {
     "Scientific Method": {
       "command": "bunx",
-      "args": ["@florentin-one/scientific-method@latest"],
+      "args": ["@florentin-one/mcp-scientific-method@latest"],
       "env": {
         "INQUIRY_DEPTH": "comprehensive",
         "STATISTICAL_RIGOR": "high",

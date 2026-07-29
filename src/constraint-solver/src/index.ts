@@ -19,7 +19,7 @@ export * from "./core/types.js";
  * Factory function that creates and configures a constraint solver MCP server instance.
  */
 export default function createServer(): Server {
-  const server = new Server({ name: "constraint-solver-server", version: "0.4.18" }, { capabilities: { tools: {} } });
+  const server = new Server({ name: "constraint-solver-server", version: "0.4.13" }, { capabilities: { tools: {} } });
   instrumentMcpServer(server);
   const constraintServer = new ConstraintMcpServer();
 

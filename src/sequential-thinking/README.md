@@ -8,13 +8,13 @@ enabling systematic problem breakdown and iterative refinement.
 ### NPM
 
 ```bash
-npm install @florentin-one/sequential-thinking
+npm install @florentin-one/mcp-sequential-thinking
 ```
 
 ### Using with bunx (no installation required)
 
 ```bash
-bunx @florentin-one/sequential-thinking@latest
+bunx @florentin-one/mcp-sequential-thinking@latest
 ```
 
 ## 🚀 Usage
@@ -28,7 +28,7 @@ Use with MCP clients like Cursor or Claude Desktop:
   "mcpServers": {
     "Sequential Thinking": {
       "command": "bunx",
-      "args": ["@florentin-one/sequential-thinking@latest"]
+      "args": ["@florentin-one/mcp-sequential-thinking@latest"]
     }
   }
 }
@@ -96,7 +96,7 @@ interface ThoughtData {
   "mcpServers": {
     "Sequential Thinking": {
       "command": "bunx",
-      "args": ["@florentin-one/sequential-thinking@latest"]
+      "args": ["@florentin-one/mcp-sequential-thinking@latest"]
     }
   }
 }
@@ -109,7 +109,7 @@ interface ThoughtData {
 LLMs can use the TypeScript API directly for better performance and type safety:
 
 ```typescript
-import { SequentialThinking } from "@florentin-one/sequential-thinking";
+import { SequentialThinking } from "@florentin-one/mcp-sequential-thinking";
 
 const thinker = new SequentialThinking();
 

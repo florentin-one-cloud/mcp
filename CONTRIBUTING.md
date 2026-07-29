@@ -41,25 +41,23 @@ bun test
 
 ### Repository Structure
 
-```
+```tree
 mcp/
 ├── src/                              # MCP servers
 │   ├── metacognitive-monitoring/     # Each server has its own directory
 │   │   ├── src/                      # Source code
-│   │   │   ├── index.ts             # Main entry point (stdio)
-│   │   │   ├── worker.ts            # Cloudflare Worker entry point
-│   │   │   └── ...                  # Server implementation
+│   │   │   ├── index.ts              # Main entry point (stdio)
+│   │   │   ├── worker.ts             # Cloudflare Worker entry point
+│   │   │   └── ...                   # Server implementation
 │   │   ├── dist/                     # Build output (gitignored)
 │   │   ├── package.json              # Server package configuration
-│   │   ├── wrangler.toml            # Cloudflare Workers config
-│   │   └── README.md                # Server documentation
+│   │   ├── wrangler.toml             # Cloudflare Workers config
+│   │   └── README.md                 # Server documentation
 │   └── .../                          # Other servers
 ├── .github/workflows/                # CI/CD pipelines
-│   ├── publish-npm.yml              # NPM publishing workflow
-│   └── deploy-workers.yml           # Cloudflare deployment workflow
+│   └── publish.yml                   # NPM publishing workflow
 ├── package.json                      # Monorepo configuration
 ├── README.md                         # Main documentation
-├── DEPLOYMENT.md                     # Deployment guide
 └── CONTRIBUTING.md                   # This file
 ```
 
@@ -266,7 +264,7 @@ git push origin v0.4.7
 #### 4. Monitor Deployment
 
 - Check [GitHub Actions](https://github.com/florentin-one-cloud/mcp/actions) for build status
-- Verify package appears on [NPM](https://www.npmjs.com/org/wemake.cx)
+- Verify package appears on [NPM](https://www.npmjs.com/org/florentin-one)
 - Check [Cloudflare Dashboard](https://dash.cloudflare.com) for worker deployments
 
 ### Cloudflare Workers Deployment
@@ -367,7 +365,6 @@ src/
 2. **Update documentation** if needed:
    - Server README.md
    - Root README.md (if adding new server)
-   - DEPLOYMENT.md (if changing deployment process)
 
 3. **Check code quality**:
    - No console.log statements (use proper logging)

@@ -1,10 +1,10 @@
-# 💙 WeMake: Enterprise MCP Server Ecosystem
+# Florentine One MCP Server Ecosystem
 
 > **AI-First Enterprise Solutions for the German Market**
 
-WeMake AI delivers production-ready [Model Context Protocol](https://modelcontextprotocol.io/) (MCP) servers designed
-for enterprise environments, with a focus on GDPR compliance, German healthcare standards, and zero-downtime deployment
-on Cloudflare Workers.
+Florentine One delivers production-ready [Model Context Protocol](https://modelcontextprotocol.io/) (MCP) servers
+designed for enterprise environments, with a focus on GDPR compliance, German healthcare standards, and zero-downtime
+deployment on Cloudflare Workers.
 
 Our MCP servers enable Large Language Models to securely access enterprise data sources, business tools, and AI agents
 while maintaining the highest standards of security, privacy, and regulatory compliance.
@@ -40,19 +40,19 @@ All MCP servers are published to NPM under the `@florentin-one` scope and can be
 
 ```bash
 # Install a specific server
-npm install @florentin-one/metacognitive-monitoring
-npm install @florentin-one/structured-argumentation
-npm install @florentin-one/collaborative-reasoning
-npm install @florentin-one/sequential-thinking
-npm install @florentin-one/scientific-method
-npm install @florentin-one/constraint-solver
-npm install @florentin-one/narrative-planner
+npm install @florentin-one/mcp-metacognitive-monitoring
+npm install @florentin-one/mcp-structured-argumentation
+npm install @florentin-one/mcp-collaborative-reasoning
+npm install @florentin-one/mcp-sequential-thinking
+npm install @florentin-one/mcp-scientific-method
+npm install @florentin-one/mcp-constraint-solver
+npm install @florentin-one/mcp-narrative-planner
 ```
 
 Or use with `bunx` for immediate execution without installation:
 
 ```bash
-bunx @florentin-one/metacognitive-monitoring@latest
+bunx @florentin-one/mcp-metacognitive-monitoring@latest
 ```
 
 ### MCP Client Configuration
@@ -66,7 +66,7 @@ Add to your `~/.cursor/mcp.json`:
   "mcpServers": {
     "Metacognitive Monitoring": {
       "command": "bunx",
-      "args": ["@florentin-one/metacognitive-monitoring@latest"]
+      "args": ["@florentin-one/mcp-metacognitive-monitoring@latest"]
     }
   }
 }
@@ -81,7 +81,7 @@ Add to your Claude Desktop configuration:
   "mcpServers": {
     "metacognitive-monitoring": {
       "command": "bunx",
-      "args": ["@florentin-one/metacognitive-monitoring@latest"]
+      "args": ["@florentin-one/mcp-metacognitive-monitoring@latest"]
     }
   }
 }
@@ -105,13 +105,13 @@ All packages are automatically published to NPM when version tags are pushed:
 
 **Published Packages**:
 
-- [@florentin-one/metacognitive-monitoring](https://www.npmjs.com/package/@florentin-one/metacognitive-monitoring)
-- [@florentin-one/structured-argumentation](https://www.npmjs.com/package/@florentin-one/structured-argumentation)
-- [@florentin-one/collaborative-reasoning](https://www.npmjs.com/package/@florentin-one/collaborative-reasoning)
-- [@florentin-one/sequential-thinking](https://www.npmjs.com/package/@florentin-one/sequential-thinking)
-- [@florentin-one/scientific-method](https://www.npmjs.com/package/@florentin-one/scientific-method)
-- [@florentin-one/constraint-solver](https://www.npmjs.com/package/@florentin-one/constraint-solver)
-- [@florentin-one/narrative-planner](https://www.npmjs.com/package/@florentin-one/narrative-planner)
+- [@florentin-one/mcp-metacognitive-monitoring](https://www.npmjs.com/package/@florentin-one/mcp-metacognitive-monitoring)
+- [@florentin-one/mcp-structured-argumentation](https://www.npmjs.com/package/@florentin-one/mcp-structured-argumentation)
+- [@florentin-one/mcp-collaborative-reasoning](https://www.npmjs.com/package/@florentin-one/mcp-collaborative-reasoning)
+- [@florentin-one/mcp-sequential-thinking](https://www.npmjs.com/package/@florentin-one/mcp-sequential-thinking)
+- [@florentin-one/mcp-scientific-method](https://www.npmjs.com/package/@florentin-one/mcp-scientific-method)
+- [@florentin-one/mcp-constraint-solver](https://www.npmjs.com/package/@florentin-one/mcp-constraint-solver)
+- [@florentin-one/mcp-narrative-planner](https://www.npmjs.com/package/@florentin-one/mcp-narrative-planner)
 
 ### Cloudflare Workers Deployment
 
@@ -123,9 +123,6 @@ All MCP servers are deployed as HTTP endpoints on Cloudflare Workers for low-lat
 - **HTTP Access**: Each server exposes MCP protocol over HTTP for web-based clients
 
 **Worker Endpoints**: `https://mcp.florentin-one.de/{server-name}`
-
-For detailed deployment instructions, troubleshooting, and environment configuration, see
-[DEPLOYMENT.md](DEPLOYMENT.md).
 
 ## 🔧 Development
 
@@ -171,7 +168,7 @@ bunx wrangler dev dist/worker.js
 
 ### Project Structure
 
-```
+```tree
 mcp/
 ├── src/
 │   ├── metacognitive-monitoring/   # Self-monitoring and reasoning quality
@@ -182,7 +179,6 @@ mcp/
 │   ├── constraint-solver/          # Constraint satisfaction validation
 │   └── narrative-planner/          # Story structure planning
 ├── .github/workflows/              # CI/CD pipelines
-├── DEPLOYMENT.md                   # Detailed deployment guide
 └── CONTRIBUTING.md                 # Contribution guidelines
 
 ```

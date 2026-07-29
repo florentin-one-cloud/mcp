@@ -8,13 +8,13 @@ through structured multi-persona reasoning.
 ### NPM
 
 ```bash
-npm install @florentin-one/collaborative-reasoning
+npm install @florentin-one/mcp-collaborative-reasoning
 ```
 
 ### Using with bunx (no installation required)
 
 ```bash
-bunx @florentin-one/collaborative-reasoning@latest
+bunx @florentin-one/mcp-collaborative-reasoning@latest
 ```
 
 ## 🚀 Usage
@@ -28,7 +28,7 @@ Use with MCP clients like Cursor or Claude Desktop:
   "mcpServers": {
     "Collaborative Reasoning": {
       "command": "bunx",
-      "args": ["@florentin-one/collaborative-reasoning@latest"]
+      "args": ["@florentin-one/mcp-collaborative-reasoning@latest"]
     }
   }
 }
@@ -114,13 +114,13 @@ This server supports the MCP Code Mode architecture, allowing direct programmati
 #### Installation
 
 ```sh
-npm install @florentin-one/collaborative-reasoning
+npm install @florentin-one/mcp-collaborative-reasoning
 ```
 
 #### Example
 
 ```typescript
-import { CollaborativeReasoning } from "@florentin-one/collaborative-reasoning";
+import { CollaborativeReasoning } from "@florentin-one/mcp-collaborative-reasoning";
 
 const collaborativeReasoning = new CollaborativeReasoning();
 
@@ -188,7 +188,7 @@ console.log(collaborativeReasoning.visualize(result));
   "mcpServers": {
     "Collaborative Reasoning": {
       "command": "bunx",
-      "args": ["@florentin-one/collaborative-reasoning@latest"]
+      "args": ["@florentin-one/mcp-collaborative-reasoning@latest"]
     }
   }
 }
@@ -203,7 +203,7 @@ The server supports various configuration options:
   "mcpServers": {
     "Collaborative Reasoning": {
       "command": "bunx",
-      "args": ["@florentin-one/collaborative-reasoning@latest"],
+      "args": ["@florentin-one/mcp-collaborative-reasoning@latest"],
       "env": {
         "COLLABORATION_MAX_PERSONAS": "8",
         "COLLABORATION_MAX_ITERATIONS": "20",
