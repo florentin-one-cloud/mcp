@@ -1,25 +1,25 @@
 {
   "mcpServers": {
     "Metacognitive Monitoring": {
-      "url": "https://metacognitive-monitoring.florentin.dev"
+      "url": "https://metacognitive-monitoring.florentin-one.workers.dev"
     },
     "Sequential Thinking": {
-      "url": "https://sequential-thinking.florentin.dev"
+      "url": "https://sequential-thinking.florentin-one.workers.dev"
     },
     "Collaborative Reasoning": {
-      "url": "https://collaborative-reasoning.florentin.dev"
+      "url": "https://collaborative-reasoning.florentin-one.workers.dev"
     },
     "Constraint Solver": {
-      "url": "https://constraint-solver.florentin.dev"
+      "url": "https://constraint-solver.florentin-one.workers.dev"
     },
     "Structured Argumentation": {
-      "url": "https://structured-argumentation.florentin.dev"
+      "url": "https://structured-argumentation.florentin-one.workers.dev"
     },
     "Scientific Method": {
-      "url": "https://scientific-method.florentin.dev"
+      "url": "https://scientific-method.florentin-one.workers.dev"
     },
     "Narrative Planner": {
-      "url": "https://narrative-planner.florentin.dev"
+      "url": "https://narrative-planner.florentin-one.workers.dev"
     }
   }
 }
