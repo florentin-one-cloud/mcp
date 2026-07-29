@@ -15,7 +15,7 @@ import { getPostHogClient, POSTHOG_ANONYMOUS_ID } from "../../../shared/posthog/
 /**
  * Factory function that creates and configures a metacognitive monitoring MCP server instance.
  *
- * This function initializes a Server with the name "metacognitive-monitoring-server" and version "0.4.9",
+ * This function initializes a Server with the name "metacognitive-monitoring-server" and version " 0.4.10",
  * registers the metacognitive monitoring tool, and sets up request handlers for listing available
  * tools and processing metacognitive monitoring requests. The server facilitates systematic
  * self-monitoring of knowledge and reasoning quality across various domains and reasoning tasks.
@@ -26,7 +26,7 @@ export function createServer(): Server {
   const server = new Server(
     {
       name: "metacognitive-monitoring-server",
-      version: "0.4.9"
+      version: " 0.4.10"
     },
     {
       capabilities: {

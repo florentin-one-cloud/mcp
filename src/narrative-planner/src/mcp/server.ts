@@ -29,7 +29,7 @@ export class NarrativePlannerServer {
 }
 
 export default function createServer(): Server {
-  const server = new Server({ name: "narrative-planner-server", version: "0.4.9" }, { capabilities: { tools: {} } });
+  const server = new Server({ name: "narrative-planner-server", version: " 0.4.10" }, { capabilities: { tools: {} } });
   const narrativeServer = new NarrativePlannerServer();
 
   server.setRequestHandler(ListToolsRequestSchema, async () => ({ tools: [NARRATIVE_PLANNER_TOOL] }));
