@@ -1,6 +1,6 @@
 {
-  "name": "mcp-collaborative-reasoning",
-  "version": " 0.4.10",
+  "name": "@florentin-one/mcp-collaborative-reasoning",
+  "version": "0.4.11",
   "description": "MCP server for diagrammatic thinking and spatial representation",
   "license": "MIT",
   "main": "./dist/index.js",
@@ -8,7 +8,7 @@
   "types": "./dist/types/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/florentin-one/mcp/mcp.git",
+    "url": "git+https://github.com/florentin-one/mcp.git",
     "directory": "src/collaborative-reasoning"
   },
   "publishConfig": {

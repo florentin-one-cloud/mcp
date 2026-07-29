@@ -26,7 +26,7 @@ with development, testing, and deployment.
 
 ```bash
 # Clone the repository
-git clone https://github.com/florentin-one/mcp/mcp.git
+git clone https://github.com/florentin-one/mcp.git
 cd mcp
 
 # Install dependencies
