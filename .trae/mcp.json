@@ -1,25 +1,7 @@
 {
   "mcpServers": {
-    "Metacognitive Monitoring": {
-      "url": "https://mcp.florentin-one.de/metacognitive-monitoring"
-    },
-    "Sequential Thinking": {
-      "url": "https://mcp.florentin-one.de/sequential-thinking"
-    },
-    "Collaborative Reasoning": {
-      "url": "https://mcp.florentin-one.de/collaborative-reasoning"
-    },
-    "Constraint Solver": {
-      "url": "https://mcp.florentin-one.de/constraint-solver"
-    },
-    "Structured Argumentation": {
-      "url": "https://mcp.florentin-one.de/structured-argumentation"
-    },
-    "Scientific Method": {
-      "url": "https://mcp.florentin-one.de/scientific-method"
-    },
-    "Narrative Planner": {
-      "url": "https://mcp.florentin-one.de/narrative-planner"
+    "LSTR": {
+      "url": "https://mcp.florentin-one.de/mcp"
     },
     "PostHog": {
       "url": "https://mcp.posthog.com/mcp"
