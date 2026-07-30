@@ -1,0 +1,80 @@
+name: Deploy MCP Workers
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - name: Install dependencies
+        run: bun install --frozen
+      - name: Type check
+        run: bun run check
+      - name: Test all workspaces
+        run: bun run test:all
+
+  deploy-mcp-servers:
+    needs: check
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        server:
+          - collaborative-reasoning
+          - constraint-solver
+          - metacognitive-monitoring
+          - narrative-planner
+          - scientific-method
+          - sequential-thinking
+          - structured-argumentation
+    steps:
+      - uses: actions/checkout@v7
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - name: Install dependencies
+        run: bun install --frozen
+      - name: Build ${{ matrix.server }}
+        run: bun run --filter='./src/${{ matrix.server }}' build
+      - name: Deploy ${{ matrix.server }}
+        uses: cloudflare/wrangler-action@v4
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: src/${{ matrix.server }}
+          command: deploy
+
+  deploy-gateway:
+    needs: deploy-mcp-servers
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - name: Install dependencies
+        run: bun install --frozen
+      - name: Build gateway
+        run: bun run --filter='./src/gateway' build
+      - name: Deploy gateway
+        uses: cloudflare/wrangler-action@v4
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: src/gateway
+          command: deploy
