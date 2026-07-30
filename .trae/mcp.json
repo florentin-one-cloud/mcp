@@ -20,6 +20,9 @@
     },
     "Narrative Planner": {
       "url": "https://mcp.florentin-one.de/narrative-planner"
+    },
+    "PostHog": {
+      "url": "https://mcp.posthog.com/mcp"
     }
   }
 }
