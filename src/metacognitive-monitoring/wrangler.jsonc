@@ -14,12 +14,5 @@
   "cache": {
     "enabled": true
   },
-  "secrets_store_secrets": [
-    {
-      "binding": "mcp_posthog-project-token",
-      "store_id": "c381082a6e3b46eb861dcf7f3073d008",
-      "secret_name": "mcp-POSTHOG_PROJECT_TOKEN"
-    }
-  ],
   "name": "metacognitive-monitoring"
 }
