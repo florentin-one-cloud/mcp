@@ -37,6 +37,7 @@
       "devDependencies": {
         "@types/node": "^22",
         "typescript": "^5.3.3",
+        "wrangler": "^4.115.0",
       },
     },
     "src/constraint-solver": {
@@ -52,6 +53,7 @@
       "devDependencies": {
         "@types/node": "^22",
         "typescript": "^5.3.3",
+        "wrangler": "^4.115.0",
       },
     },
     "src/metacognitive-monitoring": {
@@ -67,6 +69,7 @@
       "devDependencies": {
         "@types/node": "^22",
         "typescript": "^5.3.3",
+        "wrangler": "^4.115.0",
       },
     },
     "src/narrative-planner": {
@@ -81,6 +84,7 @@
       "devDependencies": {
         "@types/node": "^22",
         "typescript": "^5.3.3",
+        "wrangler": "^4.115.0",
       },
     },
     "src/scientific-method": {
@@ -96,6 +100,7 @@
       "devDependencies": {
         "@types/node": "^22",
         "typescript": "^5.3.3",
+        "wrangler": "^4.115.0",
       },
     },
     "src/sequential-thinking": {
@@ -111,6 +116,7 @@
       "devDependencies": {
         "@types/node": "^22",
         "typescript": "^5.3.3",
+        "wrangler": "^4.115.0",
       },
     },
     "src/structured-argumentation": {
@@ -126,6 +132,7 @@
       "devDependencies": {
         "@types/node": "^22",
         "typescript": "^5.3.3",
+        "wrangler": "^4.115.0",
       },
     },
   },
