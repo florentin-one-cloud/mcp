@@ -7,33 +7,33 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: deploy-${{ github.ref }}
+  group: deploy-main
   cancel-in-progress: true
 
 jobs:
-  check:
+  build:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: latest
       - name: Install dependencies
-        run: bun install --frozen
+        run: bun install
+      - name: Build all
+        run: bun run build-all
       - name: Type check
         run: bun run check
-      - name: Test all workspaces
+      - name: Test all
         run: bun run test:all
 
-  deploy-mcp-servers:
-    needs: check
+  deploy-services:
+    needs: build
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 10
     strategy:
-      fail-fast: false
+      fail-fast: true
       matrix:
-        server:
+        worker:
           - collaborative-reasoning
           - constraint-solver
           - metacognitive-monitoring
@@ -42,39 +42,36 @@ jobs:
           - sequential-thinking
           - structured-argumentation
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: latest
       - name: Install dependencies
-        run: bun install --frozen
-      - name: Build ${{ matrix.server }}
-        run: bun run --filter='./src/${{ matrix.server }}' build
-      - name: Deploy ${{ matrix.server }}
+        run: bun install
+      - name: Build all
+        run: bun run build-all
+      - name: Deploy ${{ matrix.worker }}
         uses: cloudflare/wrangler-action@v4
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          workingDirectory: src/${{ matrix.server }}
-          command: deploy
+          packageManager: bun
+          workingDirectory: src/${{ matrix.worker }}
 
+  # Gateway must deploy last: it uses service bindings that reference the workers above
   deploy-gateway:
-    needs: deploy-mcp-servers
+    needs: deploy-services
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: latest
       - name: Install dependencies
-        run: bun install --frozen
-      - name: Build gateway
-        run: bun run --filter='./src/gateway' build
+        run: bun install
+      - name: Build all
+        run: bun run build-all
       - name: Deploy gateway
         uses: cloudflare/wrangler-action@v4
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          packageManager: bun
           workingDirectory: src/gateway
-          command: deploy
