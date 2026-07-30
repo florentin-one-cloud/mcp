@@ -55,23 +55,3 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           packageManager: bun
           workingDirectory: src/${{ matrix.worker }}
-
-  # Gateway must deploy last: it uses service bindings that reference the workers above
-  deploy-gateway:
-    needs: deploy-services
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@v4
-      - uses: oven-sh/setup-bun@v2
-      - name: Install dependencies
-        run: bun install
-      - name: Build all
-        run: bun run build-all
-      - name: Deploy gateway
-        uses: cloudflare/wrangler-action@v4
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          packageManager: bun
-          workingDirectory: src/gateway
