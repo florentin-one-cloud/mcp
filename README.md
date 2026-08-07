@@ -122,7 +122,7 @@ All MCP servers are deployed as HTTP endpoints on Cloudflare Workers for low-lat
 - **Global Distribution**: Deployed across Cloudflare's edge network for sub-50ms response times
 - **HTTP Access**: Each server exposes MCP protocol over HTTP for web-based clients
 
-**Worker Endpoints**: `https://mcp.florentin-one.de/{server-name}`
+**Worker Endpoints**: `https://mcp.florentin-one.de/mcp/{server-name}`
 
 ## 🔧 Development
 

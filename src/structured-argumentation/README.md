@@ -39,7 +39,7 @@ Use with MCP clients like Cursor or Claude Desktop:
 The server is also deployed as a Cloudflare Worker for HTTP access:
 
 ```
-https://mcp.florentin-one.de/structured-argumentation
+https://mcp.florentin-one.de/mcp/structured-argumentation
 ```
 
 Configure your MCP client to use the HTTP endpoint for web-based access.
