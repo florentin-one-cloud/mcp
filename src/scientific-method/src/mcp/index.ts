@@ -1,135 +1,117 @@
-import { Server } from "@modelcontextprotocol/sdk/server/index.js";
-import { CallToolRequestSchema, ListToolsRequestSchema } from "@modelcontextprotocol/sdk/types.js";
+import type { Server } from "@modelcontextprotocol/sdk/server/index.js";
+import { createFlorentinMcpServer, type ToolCallResult, type ToolHandler } from "../../../shared/mcp-base/src/index.js";
 import { ScientificMethodCodeMode } from "../codemode/index.js";
 import { SCIENTIFIC_METHOD_TOOL } from "./tools.js";
-import { getPostHogClient, POSTHOG_ANONYMOUS_ID, instrumentMcpServer } from "../../../shared/posthog/index.js";
+import { getPostHogClient, POSTHOG_ANONYMOUS_ID } from "../../../shared/posthog/index.js";
 
 /**
- * Creates and configures the MCP server instance.
+ * Creates and configures the MCP server instance via the shared Florentin One
+ * factory, delegating tool registration, PostHog instrumentation, and
+ * protocol discovery to `createFlorentinMcpServer`.
  *
- * **Architectural Role**:
- * This function acts as the **MCP Adapter Layer**. Its primary role is to bridge the
- * generic Model Context Protocol (MCP) with the specific business logic of the
- * Scientific Method Code Mode API.
- *
- * **Purpose**:
- * - **Protocol Adaptation**: It translates MCP tool calls (JSON-RPC requests) into
- *   method calls on the `ScientificMethodCodeMode` API.
- * - **Response Formatting**: It formats the results from the API into the standard
- *   MCP content structure (e.g., text blocks, error messages).
- * - **Error Handling**: It catches exceptions from the API and converts them into
- *   MCP-compliant error responses.
- *
- * **Communication Flow**:
- * 1. MCP Client sends `tools/list` -> Returns `scientificMethod` tool definition.
- * 2. MCP Client sends `tools/call` -> Adapter extracts arguments -> Calls `api.processInquiry`.
- * 3. Adapter receives result -> Formats as JSON text -> Sends response to Client.
+ * Custom PostHog event capture ("scientific inquiry advanced") is moved into
+ * the `onToolCall` hook, preserving the same event properties and flush
+ * behavior as the previous manual implementation.
  *
  * @returns A fully configured `Server` instance ready to connect to a transport.
  */
 export function createServer(): Server {
-  const server = new Server(
-    {
-      name: "scientific-method-server",
-      version: "0.4.13"
-    },
-    {
-      capabilities: {
-        tools: {}
-      }
-    }
-  );
-
-  instrumentMcpServer(server);
   const api = new ScientificMethodCodeMode();
+  const posthog = getPostHogClient();
 
-  server.setRequestHandler(ListToolsRequestSchema, async () => ({
-    tools: [SCIENTIFIC_METHOD_TOOL]
-  }));
+  const handleScientificMethod: ToolHandler = async (args, _meta) => {
+    try {
+      const result = await api.processInquiry(args);
+      const visualization = api.visualize(result);
+      console.error(visualization);
 
-  server.setRequestHandler(CallToolRequestSchema, async (request) => {
-    if (request.params.name === "scientificMethod") {
-      const posthog = getPostHogClient();
-      try {
-        const result = await api.processInquiry(request.params.arguments);
-        const visualization = api.visualize(result);
-        console.error(visualization);
-
-        if (posthog) {
-          posthog.capture({
-            distinctId: POSTHOG_ANONYMOUS_ID,
-            event: "scientific inquiry advanced",
-            properties: {
-              inquiry_id: result.inquiryId,
-              stage: result.stage,
-              iteration: result.iteration,
-              next_stage_needed: result.nextStageNeeded,
-              has_hypothesis: !!result.hypothesis,
-              has_conclusion: !!result.conclusion
-            }
-          });
-          await posthog.flush();
-        }
-
-        return {
-          content: [
-            {
-              type: "text",
-              text: JSON.stringify(
-                {
-                  inquiryId: result.inquiryId,
-                  stage: result.stage,
-                  iteration: result.iteration,
-                  hasObservation: !!result.observation,
-                  hasQuestion: !!result.question,
-                  hasHypothesis: !!result.hypothesis,
-                  hasExperiment: !!result.experiment,
-                  hasAnalysis: !!result.analysis,
-                  hasConclusion: !!result.conclusion,
-                  nextStageNeeded: result.nextStageNeeded
-                },
-                null,
-                2
-              )
-            }
-          ]
-        };
-      } catch (error) {
-        if (posthog) {
-          posthog.captureException(error instanceof Error ? error : new Error(String(error)), POSTHOG_ANONYMOUS_ID, {
-            tool: "scientificMethod"
-          });
-          await posthog.flush();
-        }
-        return {
-          content: [
-            {
-              type: "text",
-              text: JSON.stringify(
-                {
-                  error: error instanceof Error ? error.message : String(error),
-                  status: "failed"
-                },
-                null,
-                2
-              )
-            }
-          ],
-          isError: true
-        };
-      }
+      return {
+        content: [
+          {
+            type: "text",
+            text: JSON.stringify(
+              {
+                inquiryId: result.inquiryId,
+                stage: result.stage,
+                iteration: result.iteration,
+                hasObservation: !!result.observation,
+                hasQuestion: !!result.question,
+                hasHypothesis: !!result.hypothesis,
+                hasExperiment: !!result.experiment,
+                hasAnalysis: !!result.analysis,
+                hasConclusion: !!result.conclusion,
+                nextStageNeeded: result.nextStageNeeded
+              },
+              null,
+              2
+            )
+          }
+        ]
+      };
+    } catch (error) {
+      return {
+        content: [
+          {
+            type: "text",
+            text: JSON.stringify(
+              {
+                error: error instanceof Error ? error.message : String(error),
+                status: "failed"
+              },
+              null,
+              2
+            )
+          }
+        ],
+        isError: true
+      };
     }
+  };
 
-    return {
-      content: [
-        {
-          type: "text",
-          text: `Unknown tool: ${request.params.name}`
+  const onToolCall = async (
+    toolName: string,
+    args: unknown,
+    result: ToolCallResult,
+    error?: Error
+  ) => {
+    if (!posthog) return;
+
+    if (error || result.isError) {
+      const errorMessage = result.isError
+        ? (result.content[0]?.text ?? "Unknown error")
+        : error instanceof Error
+          ? error.message
+          : String(error);
+      posthog.captureException(
+        error instanceof Error ? error : new Error(String(errorMessage)),
+        POSTHOG_ANONYMOUS_ID,
+        { tool: toolName }
+      );
+    } else {
+      const a = args as Record<string, unknown> | undefined;
+      posthog.capture({
+        distinctId: POSTHOG_ANONYMOUS_ID,
+        event: "scientific inquiry advanced",
+        properties: {
+          inquiry_id: a?.inquiryId,
+          stage: a?.stage,
+          iteration: a?.iteration,
+          next_stage_needed: a?.nextStageNeeded,
+          has_hypothesis: !!(a as Record<string, unknown>)?.hypothesis,
+          has_conclusion: !!(a as Record<string, unknown>)?.conclusion
         }
-      ],
-      isError: true
-    };
-  });
+      });
+    }
+    await posthog.flush();
+  };
 
-  return server;
+  return createFlorentinMcpServer({
+    name: "scientific-method-server",
+    version: "0.4.13",
+    tools: [SCIENTIFIC_METHOD_TOOL],
+    toolHandlers: {
+      scientificMethod: handleScientificMethod
+    },
+    onToolCall
+  });
 }

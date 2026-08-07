@@ -1,7 +1,5 @@
-import { Server } from "@modelcontextprotocol/sdk/server/index.js";
+import { createFlorentinMcpServer } from "../../../shared/mcp-base/src/index.js";
 import {
-  CallToolRequestSchema,
-  ListToolsRequestSchema,
   ListPromptsRequestSchema,
   GetPromptRequestSchema,
   McpError,
@@ -10,39 +8,91 @@ import {
 import { MetacognitiveAnalyzer } from "../core/analyzer.js";
 import { MetacognitiveFormatter } from "../core/formatter.js";
 import { METACOGNITIVE_MONITORING_TOOL } from "./tools.js";
-import { getPostHogClient, POSTHOG_ANONYMOUS_ID, instrumentMcpServer } from "../../../shared/posthog/index.js";
+import { getPostHogClient, POSTHOG_ANONYMOUS_ID } from "../../../shared/posthog/index.js";
 
 /**
  * Factory function that creates and configures a metacognitive monitoring MCP server instance.
  *
- * This function initializes a Server with the name "metacognitive-monitoring-server" and version "0.4.13",
- * registers the metacognitive monitoring tool, and sets up request handlers for listing available
- * tools and processing metacognitive monitoring requests. The server facilitates systematic
- * self-monitoring of knowledge and reasoning quality across various domains and reasoning tasks.
+ * Uses the shared `createFlorentinMcpServer` factory which handles server instantiation,
+ * PostHog instrumentation, tool listing, and tool dispatch. Custom PostHog analytics events
+ * (metacognitive assessment completed / captureException) are captured via the `onToolCall` hook.
+ * Prompt handlers are registered separately as the factory does not manage prompts.
  *
  * @returns A configured Server instance ready for MCP communication
  */
-export function createServer(): Server {
-  const server = new Server(
-    {
-      name: "metacognitive-monitoring-server",
-      version: "0.4.13"
-    },
-    {
-      capabilities: {
-        tools: {},
-        prompts: {}
-      }
-    }
-  );
-
-  instrumentMcpServer(server);
+export function createServer() {
   const analyzer = new MetacognitiveAnalyzer();
 
-  server.setRequestHandler(ListToolsRequestSchema, async () => ({
-    tools: [METACOGNITIVE_MONITORING_TOOL]
-  }));
+  const server = createFlorentinMcpServer({
+    name: "metacognitive-monitoring-server",
+    version: "0.4.13",
+    tools: [METACOGNITIVE_MONITORING_TOOL],
+    capabilities: { prompts: {} },
+    toolHandlers: {
+      metacognitiveMonitoring: async (args: unknown) => {
+        try {
+          const { data, result } = analyzer.process(args);
 
+          // Generate visualization for server logs
+          const visualization = MetacognitiveFormatter.visualize(data);
+          console.error(visualization);
+
+          return {
+            content: [
+              {
+                type: "text",
+                text: JSON.stringify(result, null, 2)
+              }
+            ]
+          };
+        } catch (error) {
+          return {
+            content: [
+              {
+                type: "text",
+                text: JSON.stringify(
+                  {
+                    error: error instanceof Error ? error.message : String(error),
+                    status: "failed"
+                  },
+                  null,
+                  2
+                )
+              }
+            ],
+            isError: true
+          };
+        }
+      }
+    },
+    onToolCall: async (toolName, args, result, error) => {
+      const posthog = getPostHogClient();
+      if (!posthog) return;
+
+      if (error || result.isError) {
+        const firstContent = result.content[0];
+        const errMsg = firstContent && "text" in firstContent ? firstContent.text : "unknown error";
+        posthog.captureException(new Error(String(errMsg)), POSTHOG_ANONYMOUS_ID, {
+          tool: toolName
+        });
+      } else {
+        const data = args as Record<string, unknown>;
+        posthog.capture({
+          distinctId: POSTHOG_ANONYMOUS_ID,
+          event: "metacognitive assessment completed",
+          properties: {
+            stage: data.stage,
+            monitoring_id: data.monitoringId,
+            iteration: data.iteration,
+            overall_confidence: data.overallConfidence
+          }
+        });
+      }
+      await posthog.flush();
+    }
+  });
+
+  // Register prompt handlers (prompts are not managed by the factory)
   const METACOGNITIVE_PROMPTS = [
     {
       name: "metacognitive-monitoring-workflow",
@@ -184,75 +234,6 @@ export function createServer(): Server {
             type: "text",
             text: `Unknown prompt: ${promptName}`
           }
-        }
-      ],
-      isError: true
-    };
-  });
-
-  server.setRequestHandler(CallToolRequestSchema, async (request) => {
-    if (request.params.name === "metacognitiveMonitoring") {
-      const posthog = getPostHogClient();
-      try {
-        const { data, result } = analyzer.process(request.params.arguments);
-
-        // Generate visualization for server logs
-        const visualization = MetacognitiveFormatter.visualize(data);
-        console.error(visualization);
-
-        if (posthog) {
-          posthog.capture({
-            distinctId: POSTHOG_ANONYMOUS_ID,
-            event: "metacognitive assessment completed",
-            properties: {
-              stage: data.stage,
-              monitoring_id: data.monitoringId,
-              iteration: data.iteration,
-              overall_confidence: data.overallConfidence
-            }
-          });
-          await posthog.flush();
-        }
-
-        return {
-          content: [
-            {
-              type: "text",
-              text: JSON.stringify(result, null, 2)
-            }
-          ]
-        };
-      } catch (error) {
-        if (posthog) {
-          posthog.captureException(error instanceof Error ? error : new Error(String(error)), POSTHOG_ANONYMOUS_ID, {
-            tool: "metacognitiveMonitoring"
-          });
-          await posthog.flush();
-        }
-        return {
-          content: [
-            {
-              type: "text",
-              text: JSON.stringify(
-                {
-                  error: error instanceof Error ? error.message : String(error),
-                  status: "failed"
-                },
-                null,
-                2
-              )
-            }
-          ],
-          isError: true
-        };
-      }
-    }
-
-    return {
-      content: [
-        {
-          type: "text",
-          text: `Unknown tool: ${request.params.name}`
         }
       ],
       isError: true

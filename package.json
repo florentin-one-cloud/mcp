@@ -27,9 +27,12 @@
     "test:coverage": "pnpm exec vitest run --coverage",
     "test:coverage:all": "pnpm -r test -- --coverage",
     "format": "prettier --write . && eslint . --ext .ts,.tsx --fix",
-    "check": "tsc --noEmit"
+    "check": "tsc --noEmit",
+    "create-server": "node --experimental-strip-types scripts/create-server.ts"
   },
   "dependencies": {
+    "@cfworker/json-schema": "^4.1.1",
+    "@cloudflare/codemode": "0.5.1",
     "@modelcontextprotocol/sdk": "1.26.0",
     "@posthog/mcp": "0.10.1",
     "posthog-node": "5.46.1"

@@ -32,21 +32,29 @@ jobs:
       - name: Test all
         run: pnpm run test:all
 
+  discover:
+    runs-on: ubuntu-latest
+    outputs:
+      workers: ${{ steps.discover.outputs.workers }}
+    steps:
+      - uses: actions/checkout@v6
+      - id: discover
+        run: |
+          WORKERS=$(ls -d src/*/package.json | while read f; do
+            if grep -q '"name": *"@florentin-one/mcp-' "$f" 2>/dev/null; then
+              basename "$(dirname "$f")"
+            fi
+          done | jq -R -s -c 'split("\n") | map(select(length > 0))')
+          echo "workers=$WORKERS" >> "$GITHUB_OUTPUT"
+
   deploy-services:
-    needs: build
+    needs: [build, discover]
     runs-on: ubuntu-latest
     timeout-minutes: 10
     strategy:
       fail-fast: true
       matrix:
-        worker:
-          - collaborative-reasoning
-          - constraint-solver
-          - metacognitive-monitoring
-          - narrative-planner
-          - scientific-method
-          - sequential-thinking
-          - structured-argumentation
+        worker: ${{ fromJson(needs.discover.outputs.workers) }}
     steps:
       - uses: actions/checkout@v6
       - uses: pnpm/action-setup@v4
