@@ -1,4 +1,4 @@
-import { describe, expect, it, beforeEach } from "bun:test";
+import { describe, expect, it, beforeEach } from "vitest";
 import createServer from "./mcp/server.js";
 import { CollaborativeReasoning } from "./codemode/index.js";
 

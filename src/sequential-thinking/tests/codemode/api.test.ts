@@ -1,4 +1,4 @@
-import { describe, expect, it, beforeEach } from "bun:test";
+import { describe, expect, it, beforeEach } from "vitest";
 import { SequentialThinking } from "../../src/codemode/index.js";
 import { ThoughtData } from "../../src/core/types.js";
 

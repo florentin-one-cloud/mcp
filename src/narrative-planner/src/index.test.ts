@@ -1,4 +1,4 @@
-import { describe, expect, it, beforeEach } from "bun:test";
+import { describe, expect, it, beforeEach } from "vitest";
 import createServer, { NarrativePlannerServer, NarrativePlanner } from "./index.js";
 import { NARRATIVE_PLANNER_TOOL } from "./mcp/tools.js";
 

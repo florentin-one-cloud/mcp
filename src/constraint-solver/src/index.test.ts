@@ -1,4 +1,4 @@
-import { describe, expect, it, beforeEach } from "bun:test";
+import { describe, expect, it, beforeEach } from "vitest";
 import createServer from "./index.js";
 import { ConstraintMcpServer } from "./mcp/server.js";
 import { JSONRPCMessage, TextContent } from "@modelcontextprotocol/sdk/types.js";

@@ -1,4 +1,4 @@
-import { describe, expect, it, beforeEach } from "bun:test";
+import { describe, expect, it, beforeEach } from "vitest";
 import { StructuredArgumentation } from "./codemode/index.js";
 import { createServer } from "./mcp/index.js";
 

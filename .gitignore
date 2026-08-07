@@ -1,5 +1,6 @@
-# dependencies (bun install)
+# dependencies
 node_modules
+.pnpm-store/
 
 # output
 out
@@ -19,10 +20,6 @@ html.meta.json.gz
 playwright-report/  
 test-results.xml
 junit.xml
-
-# Bun runtime artefacts
-bun.lockb
-.bun/
 
 # code coverage
 coverage

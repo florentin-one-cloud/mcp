@@ -1,4 +1,4 @@
-import { describe, expect, it } from "bun:test";
+import { describe, expect, it } from "vitest";
 import createServer from "../../src/mcp/server.js";
 import { SEQUENTIAL_THINKING_TOOL } from "../../src/mcp/tools.js";
 
