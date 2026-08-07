@@ -1,15 +1,12 @@
 #!/usr/bin/env node
-
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
-import { createServer } from "./mcp/index.js";
+import createPortalServer from "./portal-server.js";
 
-// Export Code Mode API
-export { ScientificMethodCodeMode } from "./codemode/index.js";
-export * from "./core/types.js";
+// Re-export for direct usage
+export default createPortalServer;
 
-// Run MCP server if main
 if (import.meta.main) {
-  const server = createServer();
+  const server = createPortalServer();
 
   process.on("SIGTERM", async () => {
     process.exit(0);
@@ -18,11 +15,11 @@ if (import.meta.main) {
   async function runServer() {
     const transport = new StdioServerTransport();
     await server.connect(transport);
-    console.error("Scientific Method MCP Server running on stdio");
+    console.error("MCP Portal Gateway running on stdio");
   }
 
   runServer().catch((error) => {
-    console.error("Fatal error running server:", error);
+    console.error("Fatal error running portal server:", error);
     throw error;
   });
 }

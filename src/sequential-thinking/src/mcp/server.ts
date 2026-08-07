@@ -1,83 +1,57 @@
-import { Server } from "@modelcontextprotocol/sdk/server/index.js";
-import { CallToolRequestSchema, ListToolsRequestSchema } from "@modelcontextprotocol/sdk/types.js";
+import { createFlorentinMcpServer } from "../../../shared/mcp-base/src/index.js";
 import { SEQUENTIAL_THINKING_TOOL } from "./tools.js";
 import { SequentialThinking } from "../codemode/index.js";
 import { ThoughtData } from "../core/types.js";
-import { getPostHogClient, POSTHOG_ANONYMOUS_ID, instrumentMcpServer } from "../../../shared/posthog/index.js";
+import { getPostHogClient, POSTHOG_ANONYMOUS_ID } from "../../../shared/posthog/index.js";
 
 /**
  * Factory function that creates and configures a sequential thinking MCP server instance.
  *
- * This function initializes a Server with the name "sequential-thinking-server" and version "0.4.13",
- * registers the SEQUENTIAL_THINKING_TOOL, and sets up request handlers.
+ * Uses the shared createFlorentinMcpServer factory which handles:
+ * - Server instantiation with capabilities
+ * - PostHog instrumentation (via @posthog/mcp instrument)
+ * - server/discover, tools/list, and tools/call handlers
+ *
+ * Custom analytics events (sequential thinking step processed) are captured
+ * via the onToolCall hook using the PostHog client backed by POSTHOG_API_KEY.
  *
  * @returns A configured Server instance ready for MCP communication
  */
-export default function createServer(): Server {
-  const server = new Server(
-    {
-      name: "sequential-thinking-server",
-      version: "0.4.13"
-    },
-    {
-      capabilities: {
-        tools: {}
-      }
-    }
-  );
-
-  instrumentMcpServer(server);
-  // We use the Code Mode API to handle the logic
+export default function createServer() {
   const thinking = new SequentialThinking();
 
-  server.setRequestHandler(ListToolsRequestSchema, async () => ({
-    tools: [SEQUENTIAL_THINKING_TOOL]
-  }));
-
-  server.setRequestHandler(CallToolRequestSchema, async (request) => {
-    if (request.params.name === "sequentialthinking") {
-      // Cast the arguments to ThoughtData (runtime validation happens inside the tracker)
-      const args = request.params.arguments as unknown as ThoughtData;
-      const result = thinking.think(args);
-
-      const posthog = getPostHogClient();
-      if (posthog) {
-        if (result.isError) {
-          const firstContent = result.content[0];
-          const errMsg = firstContent && "text" in firstContent ? firstContent.text : "unknown error";
-          posthog.captureException(new Error(String(errMsg)), POSTHOG_ANONYMOUS_ID, {
-            tool: "sequentialthinking"
-          });
-        } else {
-          posthog.capture({
-            distinctId: POSTHOG_ANONYMOUS_ID,
-            event: "sequential thinking step processed",
-            properties: {
-              thought_number: args.thoughtNumber,
-              total_thoughts: args.totalThoughts,
-              next_thought_needed: args.nextThoughtNeeded,
-              is_revision: args.isRevision ?? false,
-              has_branch: !!args.branchFromThought,
-              branch_id: args.branchId ?? null
-            }
-          });
-        }
-        await posthog.flush();
+  return createFlorentinMcpServer({
+    name: "sequential-thinking-server",
+    version: "0.4.13",
+    tools: [SEQUENTIAL_THINKING_TOOL],
+    toolHandlers: {
+      sequentialthinking: async (args: unknown) => {
+        return thinking.think(args as ThoughtData);
       }
-
-      return result;
+    },
+    onToolCall: async (toolName: string, args: unknown, _result, error?: Error) => {
+      const posthog = getPostHogClient();
+      if (!posthog) return;
+      const data = args as ThoughtData;
+      if (error) {
+        posthog.captureException(error, POSTHOG_ANONYMOUS_ID, {
+          tool: toolName
+        });
+      } else {
+        posthog.capture({
+          distinctId: POSTHOG_ANONYMOUS_ID,
+          event: "sequential thinking step processed",
+          properties: {
+            thought_number: data.thoughtNumber,
+            total_thoughts: data.totalThoughts,
+            next_thought_needed: data.nextThoughtNeeded,
+            is_revision: data.isRevision ?? false,
+            has_branch: !!data.branchFromThought,
+            branch_id: data.branchId ?? null
+          }
+        });
+      }
+      await posthog.flush();
     }
-
-    return {
-      content: [
-        {
-          type: "text",
-          text: `Unknown tool: ${request.params.name}`
-        }
-      ],
-      isError: true
-    };
   });
-
-  return server;
 }

@@ -1,0 +1,25 @@
+{
+  "name": "@florentin-one/mcp-base",
+  "version": "1.0.0",
+  "description": "Shared MCP 2026-07-28 server factory for Florentin One MCP servers",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": "./dist/index.js",
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.26.0",
+    "@posthog/mcp": "0.10.1",
+    "posthog-node": "5.46.1"
+  },
+  "devDependencies": {
+    "tsup": "8.5.1",
+    "typescript": "5.9.3",
+    "vitest": "3.1.3"
+  }
+}
