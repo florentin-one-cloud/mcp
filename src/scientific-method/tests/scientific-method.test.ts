@@ -1,4 +1,4 @@
-import { describe, expect, it } from "bun:test";
+import { describe, expect, it } from "vitest";
 import { ScientificMethodCodeMode } from "../src/codemode/index.js";
 
 describe("Scientific Method Code Mode", () => {

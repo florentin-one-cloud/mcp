@@ -40,8 +40,7 @@ const config = [
     files: [".github/scripts/**/*.ts"],
     languageOptions: {
       globals: {
-        ...globals.node,
-        Bun: "readonly"
+        ...globals.node
       }
     }
   }

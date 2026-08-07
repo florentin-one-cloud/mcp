@@ -1,0 +1,30 @@
+- [x] Root `package.json` declares `"packageManager": "pnpm@11.0.0"`
+- [x] Root `package.json` engines field specifies Node 22, not bun
+- [x] All root scripts use `pnpm`/`pnpm exec` (no `bun` or `bunx`)
+- [x] `.npmrc` exists with `engine-strict=true`
+- [x] `pnpm-workspace.yaml` exists with `packages: ["src/*"]`
+- [x] `bun.lock` has been deleted
+- [x] `.gitignore` does NOT exclude `pnpm-lock.yaml` and does exclude `.pnpm-store/`
+- [x] `.gitignore` no longer references `bun.lockb` or `.bun/`
+- [x] `tsconfig.json` does NOT extend `@tsconfig/bun`
+- [x] `eslint.config.mjs` does NOT reference `Bun: "readonly"`
+- [x] Root devDependencies no longer include `@tsconfig/bun` or `@types/bun`
+- [x] Root devDependencies include `vitest` and `tsup` pinned to exact versions
+- [x] `pnpm-lock.yaml` exists and is valid
+- [x] All 7 workspace `package.json` files have no `engines.bun` field
+- [x] All 7 workspace build scripts use `tsup` (not `bun build`)
+- [x] All 7 workspace test scripts use `vitest run` (not `bun test`)
+- [x] All 7 workspace deploy scripts use `pnpm exec wrangler deploy` (not `bunx wrangler deploy`)
+- [x] All 7 workspace start scripts use `node` (not `bun run`)
+- [x] `vitest.config.ts` exists at project root with workspace config
+- [x] Each workspace has appropriate `tsup.config.ts` and `vitest.config.ts`
+- [x] Zero files in `src/` import from `bun:test`
+- [x] `.github/workflows/deploy.yml` uses `pnpm/action-setup@v4` instead of `oven-sh/setup-bun@v2`
+- [x] `.github/workflows/deploy.yml` uses `actions/setup-node@v4` with `node-version: 22` and `cache: pnpm`
+- [x] `.github/workflows/deploy.yml` install step runs `pnpm install --frozen-lockfile`
+- [x] `.github/workflows/deploy.yml` build/test steps use `pnpm run` commands
+- [x] `.github/workflows/deploy.yml` wrangler action uses `packageManager: pnpm`
+- [x] `pnpm install --frozen-lockfile` completes without errors
+- [x] `pnpm run build-all` completes without errors
+- [x] `pnpm run check` (typecheck) completes without errors
+- [x] `pnpm run test:all` completes without errors, all tests pass

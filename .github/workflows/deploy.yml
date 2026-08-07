@@ -16,15 +16,21 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v6
-      - uses: oven-sh/setup-bun@v2
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
       - name: Install dependencies
-        run: bun install
+        run: pnpm install --frozen-lockfile
       - name: Build all
-        run: bun run build-all
+        run: pnpm run build-all
       - name: Type check
-        run: bun run check
+        run: pnpm run check
       - name: Test all
-        run: bun run test:all
+        run: pnpm run test:all
 
   deploy-services:
     needs: build
@@ -43,15 +49,21 @@ jobs:
           - structured-argumentation
     steps:
       - uses: actions/checkout@v6
-      - uses: oven-sh/setup-bun@v2
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
       - name: Install dependencies
-        run: bun install
+        run: pnpm install --frozen-lockfile
       - name: Build all
-        run: bun run build-all
+        run: pnpm run build-all
       - name: Deploy ${{ matrix.worker }}
         uses: cloudflare/wrangler-action@v4
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          packageManager: bun
+          packageManager: pnpm
           workingDirectory: src/${{ matrix.worker }}

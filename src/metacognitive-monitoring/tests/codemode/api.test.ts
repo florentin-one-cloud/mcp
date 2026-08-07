@@ -1,4 +1,4 @@
-import { describe, expect, it } from "bun:test";
+import { describe, expect, it } from "vitest";
 import { metacognitive, MetacognitiveCodeMode, MetacognitiveMonitoringData } from "../../src/codemode/index.js";
 
 describe("Metacognitive Code Mode API", () => {

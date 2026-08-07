@@ -22,17 +22,17 @@ scene: git_message
 
 MUST be one of:
 
-| Type | Description |
-| ------ | ------------- |
-| `feat` | New feature |
-| `fix` | Bug fix |
-| `docs` | Documentation only |
-| `style` | Formatting, missing semicolons, etc. (no code change) |
+| Type       | Description                                             |
+| ---------- | ------------------------------------------------------- |
+| `feat`     | New feature                                             |
+| `fix`      | Bug fix                                                 |
+| `docs`     | Documentation only                                      |
+| `style`    | Formatting, missing semicolons, etc. (no code change)   |
 | `refactor` | Code change that neither fixes a bug nor adds a feature |
-| `test` | Adding or correcting tests |
-| `chore` | Build process, tooling, dependencies |
-| `perf` | Performance improvement |
-| `ci` | CI/CD configuration |
+| `test`     | Adding or correcting tests                              |
+| `chore`    | Build process, tooling, dependencies                    |
+| `perf`     | Performance improvement                                 |
+| `ci`       | CI/CD configuration                                     |
 
 ## Subject
 
