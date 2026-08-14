@@ -1,10 +1,7 @@
 {
   "mcpServers": {
-    "LSTR": {
-      "url": "https://mcp.florentin-one.de/mcp"
-    },
-    "PostHog": {
-      "url": "https://mcp.posthog.com/mcp"
+    "lstr-reasoning": {
+      "url": "https://mcp.beta.lstr.one/mcp"
     }
   }
 }
