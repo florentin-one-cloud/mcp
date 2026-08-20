@@ -9,24 +9,21 @@ import { ConstraintSolver } from "../codemode/constraint-solver/index.js";
 import { NarrativePlanner } from "../codemode/narrative-planner/index.js";
 import { getPostHogClient, POSTHOG_ANONYMOUS_ID } from "../lib/posthog.js";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type AnySchema = any;
-
 const KnowledgeAssessmentSchema = z.object({
   domain: z.string(),
   knowledgeLevel: z.enum(["expert", "proficient", "familiar", "basic", "minimal", "none"]),
   confidenceScore: z.number().min(0).max(1), supportingEvidence: z.string(),
   knownLimitations: z.array(z.string()), relevantTrainingCutoff: z.string().optional()
-}) as AnySchema;
+});
 const ClaimAssessmentSchema = z.object({
   claim: z.string(), status: z.enum(["fact", "inference", "speculation", "uncertain"]),
   confidenceScore: z.number().min(0).max(1), evidenceBasis: z.string(),
   alternativeInterpretations: z.array(z.string()).optional(), falsifiabilityCriteria: z.string().optional()
-}) as AnySchema;
+});
 const ReasoningStepSchema = z.object({
   step: z.string(), potentialBiases: z.array(z.string()), assumptions: z.array(z.string()),
   logicalValidity: z.number().min(0).max(1), inferenceStrength: z.number().min(0).max(1)
-}) as AnySchema;
+});
 
 const MetacognitiveMonitoringSchema = z.object({
   task: z.string(),
@@ -38,7 +35,7 @@ const MetacognitiveMonitoringSchema = z.object({
   recommendedApproach: z.string(), monitoringId: z.string(), iteration: z.number().min(0),
   nextAssessmentNeeded: z.boolean(),
   suggestedAssessments: z.array(z.enum(["knowledge", "claim", "reasoning", "overall"])).optional()
-}) as AnySchema;
+});
 
 const SequentialThinkingSchema = z.object({
   thought: z.string(), nextThoughtNeeded: z.boolean(),
@@ -46,22 +43,22 @@ const SequentialThinkingSchema = z.object({
   isRevision: z.boolean().optional(), revisesThought: z.number().int().min(1).optional(),
   branchFromThought: z.number().int().min(1).optional(), branchId: z.string().optional(),
   needsMoreThoughts: z.boolean().optional()
-}) as AnySchema;
+});
 
-const CommunicationSchema = z.object({ style: z.string(), tone: z.string() }) as AnySchema;
+const CommunicationSchema = z.object({ style: z.string(), tone: z.string() });
 const PersonaSchema = z.object({
   id: z.string(), name: z.string(), expertise: z.array(z.string()),
   background: z.string(), perspective: z.string(), biases: z.array(z.string()),
   communication: CommunicationSchema
-}) as AnySchema;
+});
 const ContributionSchema = z.object({
   personaId: z.string(), content: z.string(),
   type: z.enum(["observation", "question", "insight", "concern", "suggestion", "challenge", "synthesis"]),
   referenceIds: z.array(z.string()).optional(), confidence: z.number().min(0).max(1)
-}) as AnySchema;
-const DPositionSchema = z.object({ personaId: z.string(), position: z.string(), arguments: z.array(z.string()) }) as AnySchema;
-const DResolutionSchema = z.object({ type: z.enum(["consensus", "compromise", "integration", "tabled"]), description: z.string() }) as AnySchema;
-const DisagreementSchema = z.object({ topic: z.string(), positions: z.array(DPositionSchema), resolution: DResolutionSchema.optional() }) as AnySchema;
+});
+const DPositionSchema = z.object({ personaId: z.string(), position: z.string(), arguments: z.array(z.string()) });
+const DResolutionSchema = z.object({ type: z.enum(["consensus", "compromise", "integration", "tabled"]), description: z.string() });
+const DisagreementSchema = z.object({ topic: z.string(), positions: z.array(DPositionSchema), resolution: DResolutionSchema.optional() });
 const CollaborativeReasoningSchema = z.object({
   topic: z.string(), personas: z.array(PersonaSchema), contributions: z.array(ContributionSchema),
   disagreements: z.array(DisagreementSchema).optional(),
@@ -71,29 +68,29 @@ const CollaborativeReasoningSchema = z.object({
   openQuestions: z.array(z.string()).optional(), finalRecommendation: z.string().optional(),
   sessionId: z.string(), iteration: z.number().min(0), nextContributionNeeded: z.boolean(),
   suggestedContributionTypes: z.array(z.enum(["observation", "question", "insight", "concern", "suggestion", "challenge", "synthesis"])).optional()
-}) as AnySchema;
+});
 
-const VariableSchema = z.object({ name: z.string(), type: z.enum(["independent", "dependent", "controlled", "confounding"]), operationalization: z.string().optional() }) as AnySchema;
+const VariableSchema = z.object({ name: z.string(), type: z.enum(["independent", "dependent", "controlled", "confounding"]), operationalization: z.string().optional() });
 const HypothesisSchema = z.object({
   statement: z.string(), variables: z.array(VariableSchema), assumptions: z.array(z.string()),
   hypothesisId: z.string(), confidence: z.number().min(0).max(1), domain: z.string(),
   iteration: z.number().min(0), alternativeTo: z.array(z.string()).optional(),
   refinementOf: z.string().optional(), status: z.enum(["proposed", "testing", "supported", "refuted", "refined"])
-}) as AnySchema;
-const PredictionSchema = z.object({ if: z.string(), then: z.string(), else: z.string().optional() }) as AnySchema;
+});
+const PredictionSchema = z.object({ if: z.string(), then: z.string(), else: z.string().optional() });
 const ExperimentSchema = z.object({
   design: z.string(), methodology: z.string(), predictions: z.array(PredictionSchema),
   experimentId: z.string(), hypothesisId: z.string(), controlMeasures: z.array(z.string()),
   results: z.string().optional(), outcomeMatched: z.boolean().optional(),
   unexpectedObservations: z.array(z.string()).optional(), limitations: z.array(z.string()).optional(),
   nextSteps: z.array(z.string()).optional()
-}) as AnySchema;
+});
 const ScientificMethodSchema = z.object({
   stage: z.enum(["observation", "question", "hypothesis", "experiment", "analysis", "conclusion", "iteration"]),
   observation: z.string().optional(), question: z.string().optional(), hypothesis: HypothesisSchema.optional(),
   experiment: ExperimentSchema.optional(), analysis: z.string().optional(), conclusion: z.string().optional(),
   inquiryId: z.string(), iteration: z.number().min(0), nextStageNeeded: z.boolean()
-}) as AnySchema;
+});
 
 const ArgumentTypeEnum = z.enum(["thesis", "antithesis", "synthesis", "objection", "rebuttal"]);
 const StructuredArgumentationSchema = z.object({
@@ -103,10 +100,10 @@ const StructuredArgumentationSchema = z.object({
   contradicts: z.array(z.string()).optional(), strengths: z.array(z.string()).optional(),
   weaknesses: z.array(z.string()).optional(), nextArgumentNeeded: z.boolean(),
   suggestedNextTypes: z.array(ArgumentTypeEnum).optional()
-}) as AnySchema;
+});
 
-const ConstraintSolverSchema = z.object({ variables: z.record(z.number()), constraints: z.array(z.string()).min(1) }) as AnySchema;
-const NarrativePlannerSchema = z.object({ premise: z.string().min(1), characters: z.array(z.string()).min(1), arcs: z.array(z.string()).min(1) }) as AnySchema;
+const ConstraintSolverSchema = z.object({ variables: z.record(z.string(), z.number()), constraints: z.array(z.string()).min(1) });
+const NarrativePlannerSchema = z.object({ premise: z.string().min(1), characters: z.array(z.string()).min(1), arcs: z.array(z.string()).min(1) });
 
 // ---------------------------------------------------------------------------
 // Factory

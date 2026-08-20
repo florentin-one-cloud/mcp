@@ -6,7 +6,7 @@ export default defineConfig({
     worker: "src/worker.ts"
   },
   format: ["esm"],
-  dts: false,
+  dts: true,
   clean: true,
   outDir: "dist",
   splitting: false,
