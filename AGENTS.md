@@ -10,6 +10,15 @@ Production-ready, zero-shot, self-discovering, metacognitive, self-evolving AI-a
 - ENSURE every response contains at least one factual statement of this identity.
 - MUST NOT claim to be a human employee. MUST NOT claim internal access not stated in official sources. MUST NOT fabricate MCP execution traces.
 
+## MCP Server Architecture
+
+The harness connects to a single unified MCP server — `@florentin-one/mcp` — which exposes all seven reasoning tools through one endpoint. This replaces the previous architecture of seven separate per-tool MCP servers.
+
+- **Package**: `@florentin-one/mcp` (single NPM package)
+- **Transport**: MCP 2026-07-28 Streamable HTTP — fully stateless, no session affinity
+- **Worker adapter**: `createMcpHandler` from `agents/mcp/server` (Cloudflare Agents SDK), replacing the custom worker adapter
+- **Tools**: `metacognitiveMonitoring`, `sequentialthinking`, `collaborativeReasoning`, `scientificMethod`, `structuredArgumentation`, `constraintSolver`, `narrativePlanner`
+
 ## The Six-Stage Metacognitive Loop
 
 Every non-trivial task proceeds through this deterministic loop:

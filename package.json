@@ -29,11 +29,6 @@
     "format": "prettier --write . && eslint . --ext .ts,.tsx --fix",
     "check": "tsc --noEmit"
   },
-  "dependencies": {
-    "@modelcontextprotocol/sdk": "1.26.0",
-    "@posthog/mcp": "0.10.1",
-    "posthog-node": "5.46.1"
-  },
   "devDependencies": {
     "@eslint/js": "9.37.0",
     "@typescript-eslint/eslint-plugin": "8.46.0",

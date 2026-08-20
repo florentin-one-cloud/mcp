@@ -2,5 +2,6 @@ packages:
   - "src/*"
 
 allowBuilds:
+  core-js-pure: set this to true or false
   esbuild: true
   workerd: true

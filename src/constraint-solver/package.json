@@ -44,5 +44,6 @@
     "@types/node": "22",
     "typescript": "5.9.3",
     "wrangler": "4.115.0"
-  }
+  },
+  "deprecated": "Merged into @florentin-one/mcp v1.0.0. Install npm install @florentin-one/mcp instead."
 }

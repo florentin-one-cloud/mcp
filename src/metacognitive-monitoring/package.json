@@ -44,5 +44,6 @@
   "publishConfig": {
     "access": "public",
     "tag": "latest"
-  }
+  },
+  "deprecated": "Merged into @florentin-one/mcp v1.0.0. Install npm install @florentin-one/mcp instead."
 }

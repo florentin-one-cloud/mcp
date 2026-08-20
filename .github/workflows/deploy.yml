@@ -1,4 +1,4 @@
-name: Deploy MCP Workers
+name: Deploy MCP Worker
 
 on:
   push:
@@ -32,21 +32,10 @@ jobs:
       - name: Test all
         run: pnpm run test:all
 
-  deploy-services:
+  deploy:
     needs: build
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    strategy:
-      fail-fast: true
-      matrix:
-        worker:
-          - collaborative-reasoning
-          - constraint-solver
-          - metacognitive-monitoring
-          - narrative-planner
-          - scientific-method
-          - sequential-thinking
-          - structured-argumentation
     steps:
       - uses: actions/checkout@v6
       - uses: pnpm/action-setup@v4
@@ -60,10 +49,10 @@ jobs:
         run: pnpm install --frozen-lockfile
       - name: Build all
         run: pnpm run build-all
-      - name: Deploy ${{ matrix.worker }}
+      - name: Deploy Florentin One MCP
         uses: cloudflare/wrangler-action@v4
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           packageManager: pnpm
-          workingDirectory: src/${{ matrix.worker }}
+          workingDirectory: src/florentin-one-mcp

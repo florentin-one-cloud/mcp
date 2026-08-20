@@ -1,169 +1,164 @@
-# Florentine One MCP Server Ecosystem
+# Florentin One Unified MCP Server
 
 > **AI-First Enterprise Solutions for the German Market**
 
-Florentine One delivers production-ready [Model Context Protocol](https://modelcontextprotocol.io/) (MCP) servers
-designed for enterprise environments, with a focus on GDPR compliance, German healthcare standards, and zero-downtime
-deployment on Cloudflare Workers.
+`@florentin-one/mcp` is a single, unified [Model Context Protocol](https://modelcontextprotocol.io/) (MCP) server
+packaging all seven Florentin One reasoning tools into one Cloudflare Worker. Built for enterprise environments with
+GDPR compliance, German data sovereignty, and zero-downtime deployment.
 
-Our MCP servers enable Large Language Models to securely access enterprise data sources, business tools, and AI agents
-while maintaining the highest standards of security, privacy, and regulatory compliance.
+## Architecture
 
-## 🧠 Available MCP Servers
+A single `@florentin-one/mcp` package exposes all seven reasoning tools through one MCP endpoint. The server runs on
+Cloudflare Workers with Durable Objects for state management, deployed exclusively within EU data jurisdiction.
 
-Our ecosystem includes specialized MCP servers organized into key cognitive and operational categories:
-
-### 🎯 Decision & Analysis Frameworks
-
-- **[Constraint Solver](src/constraint-solver/)** - Mathematical and logical constraint satisfaction validation
-
-### 🧩 Reasoning & Cognition
-
-- **[Structured Argumentation](src/structured-argumentation/)** - Systematic dialectical reasoning with
-  thesis-antithesis-synthesis progression
-- **[Collaborative Reasoning](src/collaborative-reasoning/)** - Multi-persona expert collaboration simulation
-- **[Sequential Thinking](src/sequential-thinking/)** - Step-by-step reasoning with logical dependency tracking
-- **[Metacognitive Monitoring](src/metacognitive-monitoring/)** - Self-monitoring of knowledge boundaries and reasoning
-  quality
-- **[Scientific Method](src/scientific-method/)** - Systematic scientific inquiry and hypothesis testing framework
-
-### 🎨 Content & Media Processing
-
-- **[Narrative Planner](src/narrative-planner/)** - Three-act story structure planning with character development
-
-Each server includes comprehensive documentation, usage examples, and enterprise-grade security features. Visit
-individual server directories for detailed setup and configuration instructions.
-
-## 📦 Installation
-
-All MCP servers are published to NPM under the `@florentin-one` scope and can be installed individually:
-
-```bash
-# Install a specific server
-npm install @florentin-one/mcp-metacognitive-monitoring
-npm install @florentin-one/mcp-structured-argumentation
-npm install @florentin-one/mcp-collaborative-reasoning
-npm install @florentin-one/mcp-sequential-thinking
-npm install @florentin-one/mcp-scientific-method
-npm install @florentin-one/mcp-constraint-solver
-npm install @florentin-one/mcp-narrative-planner
+```
+┌──────────────────────────────────────────────┐
+│  @florentin-one/mcp (single package)         │
+│  ┌────────────────────────────────────────┐  │
+│  │  MCP Server (Streamable HTTP)          │  │
+│  │  metacognitiveMonitoring               │  │
+│  │  sequentialthinking                    │  │
+│  │  collaborativeReasoning                │  │
+│  │  scientificMethod                      │  │
+│  │  structuredArgumentation               │  │
+│  │  constraintSolver                      │  │
+│  │  narrativePlanner                      │  │
+│  └────────────────────────────────────────┘  │
+│  ┌──────────────┐  ┌──────────────────────┐  │
+│  │  Code Mode   │  │  Agent SDK Handler   │  │
+│  │  (direct TS) │  │  (createMcpHandler)  │  │
+│  └──────────────┘  └──────────────────────┘  │
+└──────────────────────────────────────────────┘
 ```
 
-Or use with `bunx` for immediate execution without installation:
+## MCP Specification
+
+Implements **MCP 2026-07-28** using `@modelcontextprotocol/server` v2 with **Streamable HTTP transport** — a fully
+stateless protocol. Each request is self-contained; no session affinity or sticky routing required.
+
+## Installation
 
 ```bash
-bunx @florentin-one/mcp-metacognitive-monitoring@latest
+npm install @florentin-one/mcp
 ```
 
-### MCP Client Configuration
+A single package replaces the previous seven individual `@florentin-one/mcp-*` packages.
 
-#### Cursor
+## Available Tools
 
-Add to your `~/.cursor/mcp.json`:
+| Tool | Description |
+| --- | --- |
+| `metacognitiveMonitoring` | Systematic self-monitoring: knowledge boundaries, confidence calibration, bias detection |
+| `sequentialthinking` | Dynamic step-by-step reasoning with revision, branching, and dependency tracking |
+| `collaborativeReasoning` | Multi-persona expert collaboration simulation with structured disagreement resolution |
+| `scientificMethod` | Formal hypothesis testing, variable identification, experiment design, evidence evaluation |
+| `structuredArgumentation` | Dialectical reasoning with thesis-antithesis-synthesis progression |
+| `constraintSolver` | Mathematical constraint satisfaction validation for numeric variables |
+| `narrativePlanner` | Three-act story structure planning with character development |
+
+## MCP Client Configuration
+
+### Cursor
+
+Add to `~/.cursor/mcp.json`:
 
 ```json
 {
   "mcpServers": {
-    "Metacognitive Monitoring": {
-      "command": "bunx",
-      "args": ["@florentin-one/mcp-metacognitive-monitoring@latest"]
+    "Florentin One MCP": {
+      "command": "npx",
+      "args": ["@florentin-one/mcp@latest"]
     }
   }
 }
 ```
 
-#### Claude Desktop
+### Claude Desktop
 
-Add to your Claude Desktop configuration:
+Add to Claude Desktop configuration:
 
 ```json
 {
   "mcpServers": {
-    "metacognitive-monitoring": {
-      "command": "bunx",
-      "args": ["@florentin-one/mcp-metacognitive-monitoring@latest"]
+    "florentin-one-mcp": {
+      "command": "npx",
+      "args": ["@florentin-one/mcp@latest"]
     }
   }
 }
 ```
 
-## 🚀 Deployment
+### Cloudflare MCP Portals
 
-### NPM Publishing
+Connect via HTTP endpoint:
 
-All packages are automatically published to NPM when version tags are pushed:
+```
+https://mcp.florentin-one.de/mcp
+```
 
-1. **Version Bump**: Update the version in `package.json` of the server you want to publish
-2. **Create Tag**: Push a version tag (e.g., `v0.4.7`)
+Configure your MCP portal with the Streamable HTTP transport URL above. No additional tool-specific endpoints required —
+all seven tools are served from the single endpoint.
 
-   ```bash
-   git tag v0.4.7
-   git push origin v0.4.7
-   ```
+## Code Mode API
 
-3. **Automatic Publishing**: GitHub Actions will automatically build, test, and publish all packages to NPM
+Use reasoning tools directly in TypeScript without MCP transport overhead:
 
-**Published Packages**:
+```typescript
+import {
+  MetacognitiveCodeMode,
+  SequentialThinking,
+  CollaborativeReasoning,
+  ScientificMethodCodeMode,
+  StructuredArgumentation,
+  ConstraintSolver,
+  NarrativePlanner
+} from "@florentin-one/mcp";
 
-- [@florentin-one/mcp-metacognitive-monitoring](https://www.npmjs.com/package/@florentin-one/mcp-metacognitive-monitoring)
-- [@florentin-one/mcp-structured-argumentation](https://www.npmjs.com/package/@florentin-one/mcp-structured-argumentation)
-- [@florentin-one/mcp-collaborative-reasoning](https://www.npmjs.com/package/@florentin-one/mcp-collaborative-reasoning)
-- [@florentin-one/mcp-sequential-thinking](https://www.npmjs.com/package/@florentin-one/mcp-sequential-thinking)
-- [@florentin-one/mcp-scientific-method](https://www.npmjs.com/package/@florentin-one/mcp-scientific-method)
-- [@florentin-one/mcp-constraint-solver](https://www.npmjs.com/package/@florentin-one/mcp-constraint-solver)
-- [@florentin-one/mcp-narrative-planner](https://www.npmjs.com/package/@florentin-one/mcp-narrative-planner)
+const metacognitive = new MetacognitiveCodeMode();
+const result = await metacognitive.monitor({
+  task: "architecture review",
+  stage: "knowledge-assessment",
+  overallConfidence: 0.8,
+  uncertaintyAreas: ["distributed consensus"],
+  recommendedApproach: "systematic review",
+  monitoringId: "mm-arch-20260820",
+  iteration: 0,
+  nextAssessmentNeeded: true
+});
+```
 
-### Cloudflare Workers Deployment
+## Cloudflare Deployment
 
-All MCP servers are deployed as HTTP endpoints on Cloudflare Workers for low-latency, global access:
+A single Cloudflare Worker with Durable Objects for state management:
 
-- **Automatic Deployment**: Pushes to `main` branch automatically deploy all servers
-- **Manual Deployment**: Trigger via GitHub Actions workflow dispatch
-- **Global Distribution**: Deployed across Cloudflare's edge network for sub-50ms response times
-- **HTTP Access**: Each server exposes MCP protocol over HTTP for web-based clients
+- **Worker**: `florentin-one-mcp` — single entry point for all seven tools
+- **Durable Object**: `FlorentinOneMCP` — SQLite-backed state persistence
+- **Jurisdiction**: EU-only deployment, compliant with German data sovereignty requirements under GDPR Art. 28
+- **Transport**: Streamable HTTP, stateless, no session affinity
 
-**Worker Endpoints**: `https://mcp.florentin-one.de/mcp/{server-name}`
+Deploy from the package directory:
 
-## 🔧 Development
+```bash
+cd src/florentin-one-mcp
+pnpm exec wrangler deploy
+```
+
+## Development
 
 ### Prerequisites
 
-- [Bun](https://bun.sh) >= 1.3.0
-- Node.js compatible environment
-- Git for version control
+- **pnpm** >= 11.20.0
+- **Node.js** >= 22
+- **Git** for version control
 
-### Local Development Setup
+### Setup
 
 ```bash
-# Clone the repository
 git clone https://github.com/florentin-one-cloud/mcp.git
 cd mcp
-
-# Install dependencies
-bun install
-
-# Build all packages
-bun run build-all
-
-# Run tests
-bun test
-bun run test:all
-
-# Test a specific server locally
-cd src/metacognitive-monitoring
-bun run start
-```
-
-### Testing Cloudflare Workers Locally
-
-```bash
-# Navigate to a server directory
-cd src/metacognitive-monitoring
-
-# Start local Workers development server
-bunx wrangler dev dist/worker.js
-
-# Access at http://localhost:8787
+pnpm install
+pnpm run build-all
+pnpm run test:all
 ```
 
 ### Project Structure
@@ -171,20 +166,24 @@ bunx wrangler dev dist/worker.js
 ```tree
 mcp/
 ├── src/
-│   ├── metacognitive-monitoring/   # Self-monitoring and reasoning quality
-│   ├── structured-argumentation/   # Dialectical reasoning framework
-│   ├── collaborative-reasoning/    # Multi-persona collaboration
-│   ├── sequential-thinking/        # Step-by-step reasoning
-│   ├── scientific-method/          # Scientific inquiry framework
-│   ├── constraint-solver/          # Constraint satisfaction validation
-│   └── narrative-planner/          # Story structure planning
+│   └── florentin-one-mcp/          # Unified MCP server package
+│       ├── src/
+│       │   ├── agent/              # MCP server factory (createServer)
+│       │   ├── tools/              # Tool implementations
+│       │   ├── codemode/           # Direct TypeScript API (7 tools)
+│       │   ├── core/               # Pure business logic (7 tools)
+│       │   ├── lib/                # Shared utilities (PostHog analytics)
+│       │   ├── index.ts            # Stdio entry point + Code Mode exports
+│       │   └── worker.ts           # Cloudflare Worker entry point
+│       ├── package.json
+│       ├── tsup.config.ts
+│       ├── vitest.config.ts
+│       └── wrangler.jsonc
 ├── .github/workflows/              # CI/CD pipelines
-└── CONTRIBUTING.md                 # Contribution guidelines
-
+├── package.json                    # pnpm workspace root
+└── pnpm-workspace.yaml
 ```
 
-For contribution guidelines, see [CONTRIBUTING.md](CONTRIBUTING.md).
+## License
 
-## 📜 License
-
-This project is licensed under MIT. See the [LICENSE](LICENSE) file for details.
+MIT. See [LICENSE](LICENSE) for details.
