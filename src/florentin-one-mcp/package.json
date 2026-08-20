@@ -45,7 +45,8 @@
     "build": "tsup && tsc",
     "start": "node ./dist/index.js",
     "test": "vitest run",
-    "deploy": "pnpm exec wrangler deploy"
+    "deploy": "pnpm exec wrangler deploy",
+    "generate-types": "wrangler types"
   },
   "dependencies": {
     "@modelcontextprotocol/server": "^2.0.0",

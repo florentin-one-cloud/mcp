@@ -14,19 +14,5 @@
   "cache": {
     "enabled": true
   },
-  "name": "florentin-one-mcp",
-  "durable_objects": {
-    "bindings": [
-      {
-        "name": "FLORENTIN_ONE_MCP",
-        "class_name": "FlorentinOneMCP"
-      }
-    ]
-  },
-  "migrations": [
-    {
-      "tag": "v1",
-      "new_sqlite_classes": ["FlorentinOneMCP"]
-    }
-  ]
+  "name": "florentin-one-mcp"
 }
