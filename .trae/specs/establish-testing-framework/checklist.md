@@ -1,0 +1,32 @@
+# Checklist
+
+- [ ] Root `vitest.config.ts` defines workspace with unit, integration, and E2E projects, each with correct timeout values
+- [ ] `src/florentin-one-mcp/vitest.config.ts` extends root tiered configuration
+- [ ] `pnpm run test:unit` executes only `__tests__/unit/**` files and completes in <10s
+- [ ] `pnpm run test:integration` executes only `__tests__/integration/**` files and completes in <60s
+- [ ] `pnpm run test:e2e` executes only `__tests__/e2e/**` files
+- [ ] `miniflare` is installed and configured for local KV, R2, D1 mocking
+- [ ] `src/florentin-one-mcp/__tests__/helpers/cloudflare-mocks.ts` exports factory functions for all Cloudflare binding types
+- [ ] `templates/unit.test.ts` exists with inline documentation and standardized structure
+- [ ] `templates/integration.test.ts` exists with Cloudflare mock setup patterns
+- [ ] `templates/e2e.test.ts` exists with wrangler deployment validation patterns
+- [ ] `templates/README.md` exists with quickstart guide
+- [ ] `.github/workflows/test.yml` triggers on `pull_request` (open, synchronize) and `push` to `main`
+- [ ] `test.yml` runs unit and integration jobs in parallel
+- [ ] `test.yml` runs E2E job only on `push` to `main`, not on PR events
+- [ ] `test.yml` uploads JSON test report artifacts per tier
+- [ ] `test.yml` runs deprecation check as non-blocking step with PR annotations
+- [ ] `.github/workflows/deploy.yml` includes a `check-tests` job that queries `test.yml` conclusion for the current commit SHA
+- [ ] `deploy.yml` aborts deployment when test conclusion is `failure` or `cancelled`
+- [ ] `scripts/test-cleanup.ts` detects orphaned test files referencing removed source modules
+- [ ] `pnpm run test:cleanup` exits code 0 with warnings, never blocks CI
+- [ ] `scripts/test-history.ts` downloads test report artifacts and aggregates failure patterns
+- [ ] `pnpm run test:history` outputs recurring failure summary sorted by frequency
+- [ ] Unit tests exist for `metacognitive-monitoring/analyzer.ts` covering knowledge assessment and confidence calculation
+- [ ] Unit tests exist for `sequential-thinking/tracker.ts` covering thought sequencing and termination logic
+- [ ] Integration test exists for MCP agent server endpoint validating tool discovery response via miniflare
+- [ ] E2E smoke test exists that deploys to preview and validates `tools/list` response
+- [ ] `src/shared/test-utils/index.ts` exports `createMockExecutionContext`, `createMockEnv`, and `assertMCPResponse`
+- [ ] `docs/testing-framework.md` covers architecture, tier strategy, templates, CI pipeline, and annual maintenance procedures
+- [ ] All test suites pass on a clean checkout with `pnpm install --frozen-lockfile && pnpm run test:all`
+- [ ] CI pipeline completes successfully on a PR with all checks green
