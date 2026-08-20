@@ -1,6 +1,4 @@
 import { PostHog } from "posthog-node";
-import { Server } from "@modelcontextprotocol/sdk/server/index.js";
-import { instrument } from "@posthog/mcp";
 
 let _client: PostHog | null = null;
 let _analyticsClient: PostHog | null = null;
@@ -53,13 +51,6 @@ function getMcpAnalyticsClient(): PostHog | null {
   }
 
   return _analyticsClient;
-}
-
-export function instrumentMcpServer(server: Server): void {
-  const posthog = getMcpAnalyticsClient();
-  if (posthog) {
-    instrument(server, posthog);
-  }
 }
 
 export async function shutdownMcpAnalytics(): Promise<void> {

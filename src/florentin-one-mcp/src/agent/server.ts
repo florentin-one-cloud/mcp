@@ -133,7 +133,7 @@ export function createServer(): McpServer {
     inputSchema: MetacognitiveMonitoringSchema
   }, async (args: Record<string, unknown>) => {
     try {
-      const result = await metacognitive.monitor(args);
+      const result = await metacognitive.monitor(args as any);
       const p = ph(); if (p) { p.capture({ distinctId: aid, event: "metacognitive assessment completed", properties: { stage: args.stage } }); await p.flush(); }
       return { content: [{ type: "text" as const, text: JSON.stringify(result, null, 2) }] };
     } catch (error) {
@@ -147,7 +147,7 @@ export function createServer(): McpServer {
     inputSchema: SequentialThinkingSchema
   }, async (args: Record<string, unknown>) => {
     try {
-      const result = sequentialThinking.think(args);
+      const result = sequentialThinking.think(args as any);
       const p = ph(); if (p) { p.capture({ distinctId: aid, event: "sequential thought processed", properties: { thought_number: args.thoughtNumber } }); await p.flush(); }
       return { content: result.content };
     } catch (error) {

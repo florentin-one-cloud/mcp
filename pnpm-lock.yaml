@@ -45,44 +45,6 @@ importers:
         specifier: 4.115.0
         version: 4.115.0(@cloudflare/workers-types@5.20260819.1)
 
-  src/collaborative-reasoning:
-    dependencies:
-      '@modelcontextprotocol/sdk':
-        specifier: 1.26.0
-        version: 1.26.0(@cfworker/json-schema@4.1.1)(supports-color@10.2.2)(zod@4.4.3)
-      chalk:
-        specifier: 5.3.0
-        version: 5.3.0
-    devDependencies:
-      '@types/node':
-        specifier: '22'
-        version: 22.20.1
-      typescript:
-        specifier: 5.9.3
-        version: 5.9.3
-      wrangler:
-        specifier: 4.115.0
-        version: 4.115.0(@cloudflare/workers-types@5.20260819.1)
-
-  src/constraint-solver:
-    dependencies:
-      '@modelcontextprotocol/sdk':
-        specifier: 1.26.0
-        version: 1.26.0(@cfworker/json-schema@4.1.1)(supports-color@10.2.2)(zod@4.4.3)
-      expr-eval:
-        specifier: 2.0.2
-        version: 2.0.2
-    devDependencies:
-      '@types/node':
-        specifier: '22'
-        version: 22.20.1
-      typescript:
-        specifier: 5.9.3
-        version: 5.9.3
-      wrangler:
-        specifier: 4.115.0
-        version: 4.115.0(@cloudflare/workers-types@5.20260819.1)
-
   src/florentin-one-mcp:
     dependencies:
       '@modelcontextprotocol/server':
@@ -97,104 +59,15 @@ importers:
       chalk:
         specifier: 5.3.0
         version: 5.3.0
+      expr-eval:
+        specifier: 2.0.2
+        version: 2.0.2
       posthog-node:
         specifier: 5.46.1
         version: 5.46.1
       zod:
         specifier: 3.25.76
         version: 3.25.76
-    devDependencies:
-      '@types/node':
-        specifier: '22'
-        version: 22.20.1
-      typescript:
-        specifier: 5.9.3
-        version: 5.9.3
-      wrangler:
-        specifier: 4.115.0
-        version: 4.115.0(@cloudflare/workers-types@5.20260819.1)
-
-  src/metacognitive-monitoring:
-    dependencies:
-      '@modelcontextprotocol/sdk':
-        specifier: 1.26.0
-        version: 1.26.0(@cfworker/json-schema@4.1.1)(supports-color@10.2.2)(zod@4.4.3)
-      chalk:
-        specifier: 5.3.0
-        version: 5.3.0
-    devDependencies:
-      '@types/node':
-        specifier: '22'
-        version: 22.20.1
-      typescript:
-        specifier: 5.9.3
-        version: 5.9.3
-      wrangler:
-        specifier: 4.115.0
-        version: 4.115.0(@cloudflare/workers-types@5.20260819.1)
-
-  src/narrative-planner:
-    dependencies:
-      '@modelcontextprotocol/sdk':
-        specifier: 1.26.0
-        version: 1.26.0(@cfworker/json-schema@4.1.1)(supports-color@10.2.2)(zod@4.4.3)
-    devDependencies:
-      '@types/node':
-        specifier: '22'
-        version: 22.20.1
-      typescript:
-        specifier: 5.9.3
-        version: 5.9.3
-      wrangler:
-        specifier: 4.115.0
-        version: 4.115.0(@cloudflare/workers-types@5.20260819.1)
-
-  src/scientific-method:
-    dependencies:
-      '@modelcontextprotocol/sdk':
-        specifier: 1.26.0
-        version: 1.26.0(@cfworker/json-schema@4.1.1)(supports-color@10.2.2)(zod@4.4.3)
-      chalk:
-        specifier: 5.3.0
-        version: 5.3.0
-    devDependencies:
-      '@types/node':
-        specifier: '22'
-        version: 22.20.1
-      typescript:
-        specifier: 5.9.3
-        version: 5.9.3
-      wrangler:
-        specifier: 4.115.0
-        version: 4.115.0(@cloudflare/workers-types@5.20260819.1)
-
-  src/sequential-thinking:
-    dependencies:
-      '@modelcontextprotocol/sdk':
-        specifier: 1.26.0
-        version: 1.26.0(@cfworker/json-schema@4.1.1)(supports-color@10.2.2)(zod@4.4.3)
-      chalk:
-        specifier: 5.3.0
-        version: 5.3.0
-    devDependencies:
-      '@types/node':
-        specifier: '22'
-        version: 22.20.1
-      typescript:
-        specifier: 5.9.3
-        version: 5.9.3
-      wrangler:
-        specifier: 4.115.0
-        version: 4.115.0(@cloudflare/workers-types@5.20260819.1)
-
-  src/structured-argumentation:
-    dependencies:
-      '@modelcontextprotocol/sdk':
-        specifier: 1.26.0
-        version: 1.26.0(@cfworker/json-schema@4.1.1)(supports-color@10.2.2)(zod@4.4.3)
-      chalk:
-        specifier: 5.3.0
-        version: 5.3.0
     devDependencies:
       '@types/node':
         specifier: '22'
@@ -1096,16 +969,6 @@ packages:
   '@modelcontextprotocol/core@2.0.0':
     resolution: {integrity: sha512-pJCEwGG7Lfr/+PQp9ZTwKXNeO5wzbfKL7H3MYpCorM4oFBoQrdjnBgEoqG+RjhsvS1FKrDbKux+M1HhlnGWqcA==}
     engines: {node: '>=20'}
-
-  '@modelcontextprotocol/sdk@1.26.0':
-    resolution: {integrity: sha512-Y5RmPncpiDtTXDbLKswIJzTqu2hyBKxTNsgKqKclDbhIgg1wgtf1fRuvxgTnRfcnxtvvgbIEcqUOzZrJ6iSReg==}
-    engines: {node: '>=18'}
-    peerDependencies:
-      '@cfworker/json-schema': ^4.1.1
-      zod: ^3.25 || ^4.0
-    peerDependenciesMeta:
-      '@cfworker/json-schema':
-        optional: true
 
   '@modelcontextprotocol/sdk@1.30.0':
     resolution: {integrity: sha512-xKd8OIzlqNzcqcNumGAa6g+PW2kjD5vrpcKOnfldAUPP3j7lnqMPwlTXQm8gF+UwH72z0lqaRbjr9hqGz0eITA==}
@@ -3624,30 +3487,6 @@ snapshots:
     dependencies:
       zod: 4.4.3
 
-  '@modelcontextprotocol/sdk@1.26.0(@cfworker/json-schema@4.1.1)(supports-color@10.2.2)(zod@4.4.3)':
-    dependencies:
-      '@hono/node-server': 1.19.17(hono@4.13.0)
-      ajv: 8.20.0
-      ajv-formats: 3.0.1(ajv@8.20.0)
-      content-type: 1.0.5
-      cors: 2.8.6
-      cross-spawn: 7.0.6
-      eventsource: 3.0.7
-      eventsource-parser: 3.1.0
-      express: 5.2.1(supports-color@10.2.2)
-      express-rate-limit: 8.6.2(express@5.2.1(supports-color@10.2.2))(supports-color@10.2.2)
-      hono: 4.13.0
-      jose: 6.2.8
-      json-schema-typed: 8.0.2
-      pkce-challenge: 5.0.1
-      raw-body: 3.0.2
-      zod: 4.4.3
-      zod-to-json-schema: 3.25.2(zod@4.4.3)
-    optionalDependencies:
-      '@cfworker/json-schema': 4.1.1
-    transitivePeerDependencies:
-      - supports-color
-
   '@modelcontextprotocol/sdk@1.30.0(@cfworker/json-schema@4.1.1)(supports-color@10.2.2)(zod@3.25.76)':
     dependencies:
       '@hono/node-server': 1.19.17(hono@4.13.0)
@@ -5617,10 +5456,6 @@ snapshots:
   zod-to-json-schema@3.25.2(zod@3.25.76):
     dependencies:
       zod: 3.25.76
-
-  zod-to-json-schema@3.25.2(zod@4.4.3):
-    dependencies:
-      zod: 4.4.3
 
   zod@3.25.76: {}
 
