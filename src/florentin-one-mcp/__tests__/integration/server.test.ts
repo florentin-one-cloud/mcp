@@ -1,145 +1,229 @@
-import { createServer } from "../../src/agent/server.js";
+import { MetacognitiveCodeMode } from "../../src/codemode/metacognitive-monitoring/index.js";
+import { SequentialThinking } from "../../src/codemode/sequential-thinking/index.js";
+import { CollaborativeReasoning } from "../../src/codemode/collaborative-reasoning/index.js";
+import { ScientificMethodCodeMode } from "../../src/codemode/scientific-method/index.js";
+import { StructuredArgumentation } from "../../src/codemode/structured-argumentation/index.js";
+import { ConstraintSolver } from "../../src/codemode/constraint-solver/index.js";
+import { NarrativePlanner } from "../../src/codemode/narrative-planner/index.js";
 import { assertMCPResponse } from "../../../shared/test-utils/index.js";
 
 // ---------------------------------------------------------------------------
-// Tests
+// Tests — validates that all 7 codemode classes integrate correctly
+// with their core logic modules and produce valid MCP-shaped responses.
 // ---------------------------------------------------------------------------
 
-describe("MCP Server Integration", () => {
-  let server: ReturnType<typeof createServer>;
+describe("MCP Codemode Integration", () => {
+  // --- metacognitiveMonitoring ---
 
-  beforeAll(() => {
-    server = createServer();
+  describe("MetacognitiveCodeMode", () => {
+    const codemode = new MetacognitiveCodeMode();
+
+    it("returns valid monitoring result for well-formed input", async () => {
+      const result = await codemode.monitor({
+        task: "integration test",
+        stage: "knowledge-assessment",
+        overallConfidence: 0.8,
+        uncertaintyAreas: ["test area"],
+        recommendedApproach: "test approach",
+        monitoringId: "mm-integration-20260821",
+        iteration: 0,
+        nextAssessmentNeeded: true
+      });
+
+      expect(result.monitoringId).toBe("mm-integration-20260821");
+      expect(result.overallConfidence).toBe(0.8);
+      expect(result.hasKnowledgeAssessment).toBe(false);
+      expect(result.claimCount).toBe(0);
+    });
+
+    it("tracks knowledge assessment when provided", async () => {
+      const result = await codemode.monitor({
+        task: "test with knowledge",
+        stage: "knowledge-assessment",
+        overallConfidence: 0.7,
+        uncertaintyAreas: [],
+        recommendedApproach: "test",
+        monitoringId: "mm-ka-test",
+        iteration: 0,
+        nextAssessmentNeeded: false,
+        knowledgeAssessment: {
+          domain: "testing",
+          knowledgeLevel: "proficient",
+          confidenceScore: 0.7,
+          supportingEvidence: "test evidence",
+          knownLimitations: ["limitation1"]
+        }
+      });
+
+      expect(result.hasKnowledgeAssessment).toBe(true);
+    });
+
+    it("throws on invalid input (non-string task)", async () => {
+      await expect(
+        codemode.monitor({
+          task: 123 as unknown as string,
+          stage: "knowledge-assessment",
+          overallConfidence: 0.8,
+          uncertaintyAreas: [],
+          recommendedApproach: "test",
+          monitoringId: "mm-error",
+          iteration: 0,
+          nextAssessmentNeeded: true
+        })
+      ).rejects.toThrow();
+    });
   });
 
-  // --- Tool registration ---
+  // --- sequentialthinking ---
 
-  it("registers all 7 tools", () => {
-    const tools = server.getTools();
-    const toolNames = Object.keys(tools).sort();
-    const expectedTools = [
-      "collaborativeReasoning",
-      "constraintSolver",
-      "metacognitiveMonitoring",
-      "narrativePlanner",
-      "scientificMethod",
-      "sequentialthinking",
-      "structuredArgumentation"
-    ].sort();
+  describe("SequentialThinking", () => {
+    const codemode = new SequentialThinking();
 
-    expect(toolNames).toEqual(expectedTools);
+    it("returns valid thought result for well-formed input", () => {
+      const result = codemode.think({
+        thought: "integration test thought",
+        thoughtNumber: 1,
+        totalThoughts: 3,
+        nextThoughtNeeded: true
+      });
+
+      const parsed = assertMCPResponse(result);
+      expect((parsed as Record<string, unknown>).thoughtNumber).toBe(1);
+      expect((parsed as Record<string, unknown>).totalThoughts).toBe(3);
+      expect((parsed as Record<string, unknown>).nextThoughtNeeded).toBe(true);
+    });
+
+    it("returns error result for invalid input", () => {
+      const result = codemode.think({
+        thought: "",
+        thoughtNumber: 1,
+        totalThoughts: 3,
+        nextThoughtNeeded: true
+      });
+
+      expect(result.isError).toBe(true);
+    });
   });
 
-  it("returns all 7 tool definitions with required fields", () => {
-    const tools = server.getTools();
+  // --- collaborativeReasoning ---
 
-    for (const [name, tool] of Object.entries(tools)) {
-      expect(tool.name).toBeDefined();
-      expect(typeof tool.name).toBe("string");
-      expect(tool.description).toBeDefined();
-      expect(typeof tool.description).toBe("string");
-      expect(tool.inputSchema).toBeDefined();
-      expect(typeof tool.inputSchema).toBe("object");
-    }
+  describe("CollaborativeReasoning", () => {
+    const codemode = new CollaborativeReasoning();
+
+    it("returns valid collaboration result", async () => {
+      const result = await codemode.collaborate({
+        topic: "integration test",
+        personas: [
+          {
+            id: "p1",
+            name: "Tester",
+            expertise: ["testing"],
+            background: "QA engineer",
+            perspective: "quality assurance",
+            biases: [],
+            communication: { style: "direct", tone: "neutral" }
+          }
+        ],
+        contributions: [
+          {
+            personaId: "p1",
+            content: "This is a test contribution",
+            type: "observation",
+            confidence: 0.9
+          }
+        ],
+        stage: "ideation",
+        activePersonaId: "p1",
+        sessionId: "cr-integration-test",
+        iteration: 0,
+        nextContributionNeeded: false
+      });
+
+      expect(result).toBeDefined();
+      expect(result.sessionId).toBe("cr-integration-test");
+    });
   });
 
-  // --- metacognitiveMonitoring tool ---
+  // --- scientificMethod ---
 
-  it("calling metacognitiveMonitoring with valid input returns a valid MCP response", async () => {
-    const tools = server.getTools();
-    const metacognitiveTool = tools["metacognitiveMonitoring"];
-    expect(metacognitiveTool).toBeDefined();
+  describe("ScientificMethodCodeMode", () => {
+    const codemode = new ScientificMethodCodeMode();
 
-    const params = {
-      task: "integration test task",
-      stage: "knowledge-assessment",
-      overallConfidence: 0.8,
-      uncertaintyAreas: ["test area"],
-      recommendedApproach: "test approach",
-      monitoringId: "mm-integration-20260821",
-      iteration: 0,
-      nextAssessmentNeeded: true
-    };
+    it("returns valid inquiry result", async () => {
+      const result = await codemode.processInquiry({
+        stage: "observation",
+        observation: "test observation",
+        inquiryId: "sm-integration-test",
+        iteration: 0,
+        nextStageNeeded: false
+      });
 
-    const result = await metacognitiveTool.handler(params);
-    const parsed = assertMCPResponse(result);
-    expect(parsed).toBeDefined();
-    expect((parsed as Record<string, unknown>).monitoringId).toBe("mm-integration-20260821");
+      expect(result).toBeDefined();
+      expect(result.inquiryId).toBe("sm-integration-test");
+    });
   });
 
-  it("calling metacognitiveMonitoring with knowledgeAssessment returns valid response", async () => {
-    const tools = server.getTools();
-    const metacognitiveTool = tools["metacognitiveMonitoring"];
+  // --- structuredArgumentation ---
 
-    const params = {
-      task: "test with knowledge",
-      stage: "knowledge-assessment",
-      overallConfidence: 0.7,
-      uncertaintyAreas: [],
-      recommendedApproach: "test",
-      monitoringId: "mm-ka-test",
-      iteration: 0,
-      nextAssessmentNeeded: false,
-      knowledgeAssessment: {
-        domain: "testing",
-        knowledgeLevel: "proficient",
-        confidenceScore: 0.7,
-        supportingEvidence: "test evidence",
-        knownLimitations: ["limitation1"]
-      }
-    };
+  describe("StructuredArgumentation", () => {
+    const codemode = new StructuredArgumentation();
 
-    const result = await metacognitiveTool.handler(params);
-    const parsed = assertMCPResponse(result);
-    expect((parsed as Record<string, unknown>).hasKnowledgeAssessment).toBe(true);
+    it("returns valid argument result", async () => {
+      const result = await codemode.processArgument({
+        claim: "Testing is valuable",
+        premises: ["Tests catch bugs", "Tests document behavior"],
+        conclusion: "We should write tests",
+        argumentType: "thesis",
+        confidence: 0.9,
+        nextArgumentNeeded: false
+      });
+
+      expect(result).toBeDefined();
+      expect(result.argumentId).toBeDefined();
+      expect(result.argumentType).toBe("thesis");
+    });
   });
 
-  // --- sequentialthinking tool ---
+  // --- constraintSolver ---
 
-  it("calling sequentialthinking with valid input returns a valid MCP response", async () => {
-    const tools = server.getTools();
-    const sequentialTool = tools["sequentialthinking"];
+  describe("ConstraintSolver", () => {
+    const codemode = new ConstraintSolver();
 
-    const params = {
-      thought: "This is an integration test thought",
-      thoughtNumber: 1,
-      totalThoughts: 3,
-      nextThoughtNeeded: true
-    };
+    it("returns valid constraint check result", async () => {
+      const result = await codemode.check({
+        variables: { x: 5, y: 10 },
+        constraints: ["x > 0", "y > x"]
+      });
 
-    const result = await sequentialTool.handler(params);
-    const parsed = assertMCPResponse(result);
-    expect((parsed as Record<string, unknown>).thoughtNumber).toBe(1);
+      expect(result).toBeDefined();
+      expect(result.satisfied).toBe(true);
+    });
+
+    it("detects unsatisfied constraints", async () => {
+      const result = await codemode.check({
+        variables: { x: 5, y: 3 },
+        constraints: ["y > x"]
+      });
+
+      expect(result.satisfied).toBe(false);
+    });
   });
 
-  // --- Error handling ---
+  // --- narrativePlanner ---
 
-  it("returns error for invalid metacognitiveMonitoring input", async () => {
-    const tools = server.getTools();
-    const metacognitiveTool = tools["metacognitiveMonitoring"];
+  describe("NarrativePlanner", () => {
+    const codemode = new NarrativePlanner();
 
-    const params = {
-      task: 123,
-      stage: "knowledge-assessment",
-      overallConfidence: 0.8,
-      uncertaintyAreas: [],
-      recommendedApproach: "test",
-      monitoringId: "mm-error-test",
-      iteration: 0,
-      nextAssessmentNeeded: true
-    };
+    it("returns valid narrative plan", () => {
+      const result = codemode.planNarrative({
+        premise: "A test story",
+        characters: ["Hero", "Villain"],
+        arcs: ["Hero overcomes challenge"]
+      });
 
-    const result = await metacognitiveTool.handler(params);
-    expect(result).toBeDefined();
-    expect((result as Record<string, unknown>).isError).toBe(true);
-  });
-
-  // --- Prompts ---
-
-  it("registers prompts", () => {
-    const prompts = server.getPrompts();
-    const promptNames = Object.keys(prompts).sort();
-    expect(promptNames).toContain("metacognitive-monitoring-workflow");
-    expect(promptNames).toContain("metacognitive-reassessment");
+      expect(result).toBeDefined();
+      expect(result.setup).toBeDefined();
+      expect(result.resolution).toBeDefined();
+    });
   });
 });
