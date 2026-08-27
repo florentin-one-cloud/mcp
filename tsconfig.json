@@ -3,6 +3,7 @@
 
   "compilerOptions": {
     "lib": ["ESNext"],
+    "types": ["vitest/globals"],
     "target": "ESNext",
     "module": "preserve",
     "moduleDetection": "force",
