@@ -148,8 +148,8 @@ export function assertMCPResponse(response: unknown): unknown {
  * const user = userFixture({ name: "Alice" }); // { name: "Alice", age: 0 }
  */
 export function createTestFixture<T extends Record<string, unknown>>(defaults: T) {
-  return (overrides?: Partial<T>): T => {
+  return (overrides?: Partial<T> & Record<string, unknown>): T => {
     if (!overrides) return { ...defaults };
-    return { ...defaults, ...overrides };
+    return { ...defaults, ...overrides } as T;
   };
 }

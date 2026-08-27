@@ -7,6 +7,29 @@
 
 const PRODUCTION_URL = "https://florentin-one-mcp.florentin-one.workers.dev";
 
+interface McpTool {
+  name: string;
+  description: string;
+  inputSchema: Record<string, unknown>;
+}
+
+interface McpContentItem {
+  type: string;
+  text: string;
+}
+
+interface McpJsonRpcResponse {
+  jsonrpc: string;
+  id: number;
+  result: {
+    tools: McpTool[];
+    serverInfo: { name: string };
+    capabilities: { tools: unknown };
+    content: McpContentItem[];
+    isError: boolean;
+  };
+}
+
 function hasApiToken(): boolean {
   return typeof process !== "undefined" && !!process.env["CLOUDFLARE_API_TOKEN"];
 }
@@ -38,7 +61,7 @@ describe("E2E Smoke Test (Production Worker)", () => {
 
     expect(response.status).toBe(200);
 
-    const body = await response.json();
+    const body = (await response.json()) as McpJsonRpcResponse;
     expect(body).toBeDefined();
     expect(body.jsonrpc).toBe("2.0");
     expect(body.id).toBe(1);
@@ -84,7 +107,7 @@ describe("E2E Smoke Test (Production Worker)", () => {
 
     expect(response.status).toBe(200);
 
-    const body = await response.json();
+    const body = (await response.json()) as McpJsonRpcResponse;
     expect(body.result).toBeDefined();
     expect(body.result.serverInfo).toBeDefined();
     expect(body.result.serverInfo.name).toBe("florentin-one-mcp");
@@ -123,7 +146,7 @@ describe("E2E Smoke Test (Production Worker)", () => {
 
     expect(response.status).toBe(200);
 
-    const body = await response.json();
+    const body = (await response.json()) as McpJsonRpcResponse;
     expect(body.result).toBeDefined();
     expect(body.result.content).toBeDefined();
     expect(Array.isArray(body.result.content)).toBe(true);
@@ -166,7 +189,7 @@ describe("E2E Smoke Test (Production Worker)", () => {
 
     expect(response.status).toBe(200);
 
-    const body = await response.json();
+    const body = (await response.json()) as McpJsonRpcResponse;
     expect(body.result).toBeDefined();
     // The tool handler catches errors and returns isError: true
     expect(body.result.isError).toBe(true);

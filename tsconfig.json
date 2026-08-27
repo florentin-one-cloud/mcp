@@ -31,5 +31,6 @@
     "exactOptionalPropertyTypes": true,
     "noImplicitReturns": true,
     "noUncheckedIndexedAccess": false
-  }
+  },
+  "exclude": ["templates", "dist", "node_modules"]
 }

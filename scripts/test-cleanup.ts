@@ -13,7 +13,7 @@
  */
 
 import { readFile, readdir, stat } from "node:fs/promises";
-import { realpathSync, existsSync } from "node:fs";
+import { realpathSync, existsSync, Dirent } from "node:fs";
 import * as path from "node:path";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
@@ -53,7 +53,7 @@ async function findTestDirs(root: string): Promise<string[]> {
   const results: string[] = [];
 
   async function walk(dir: string): Promise<void> {
-    let entries: ReturnType<typeof readdir> extends Promise<infer T> ? T : never;
+    let entries: Dirent<string>[];
     try {
       entries = await readdir(dir, { withFileTypes: true });
     } catch {
@@ -86,7 +86,7 @@ async function findTsFiles(dir: string): Promise<string[]> {
   const results: string[] = [];
 
   async function walk(current: string): Promise<void> {
-    let entries: ReturnType<typeof readdir> extends Promise<infer T> ? T : never;
+    let entries: Dirent<string>[];
     try {
       entries = await readdir(current, { withFileTypes: true });
     } catch {
