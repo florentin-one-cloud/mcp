@@ -1,6 +1,6 @@
 {
   "name": "@florentin-one/kette",
-  "version": "1.0.2",
+  "version": "0.1.0",
   "description": "Kette — Florentin One KI-Wertschöpfungskette. Die einheitliche MCP-Server-Infrastruktur für die lückenlose KI-Wertschöpfungskette nach BMFTR-HTAD-Richtlinie. Alle sieben Reasoning-Tools in einem Cloudflare Worker.",
   "license": "MIT",
   "type": "module",
