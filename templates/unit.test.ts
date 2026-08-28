@@ -1,5 +1,5 @@
 /**
- * Unit Test Template — @florentin-one/mcp
+ * Unit Test Template — @florentin-one/kette
  * ==========================================
  *
  * Copy this file to your package's __tests__/unit/ directory.

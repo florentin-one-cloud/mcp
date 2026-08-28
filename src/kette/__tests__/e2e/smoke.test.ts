@@ -5,7 +5,7 @@
 // unless CLOUDFLARE_API_TOKEN is set, indicating a deliberate e2e run.
 // ---------------------------------------------------------------------------
 
-const PRODUCTION_URL = "https://florentin-one-mcp.florentin-one.workers.dev";
+const PRODUCTION_URL = "https://kette.florentin-one.workers.dev";
 
 interface McpTool {
   name: string;
@@ -110,7 +110,7 @@ describe("E2E Smoke Test (Production Worker)", () => {
     const body = (await response.json()) as McpJsonRpcResponse;
     expect(body.result).toBeDefined();
     expect(body.result.serverInfo).toBeDefined();
-    expect(body.result.serverInfo.name).toBe("florentin-one-mcp");
+    expect(body.result.serverInfo.name).toBe("kette");
     expect(body.result.capabilities).toBeDefined();
     expect(body.result.capabilities.tools).toBeDefined();
   });

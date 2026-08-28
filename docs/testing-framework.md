@@ -1,4 +1,4 @@
-# Testing Framework — @florentin-one/mcp
+# Testing Framework — @florentin-one/kette
 
 **Audience:** Developers maintaining the Florentin One MCP monorepo.
 **Purpose:** Reference for the tiered test architecture, CI pipeline, templates, and annual maintenance procedures.
@@ -32,7 +32,7 @@ The testing framework implements a three-tier test pyramid using vitest workspac
 
 ### How vitest workspace projects map to tiers
 
-The root `vitest.config.ts` defines three workspace projects, each pointing at the same package root (`src/florentin-one-mcp`) but with different `include` globs and runtime configurations:
+The root `vitest.config.ts` defines three workspace projects, each pointing at the same package root (`src/kette`) but with different `include` globs and runtime configurations:
 
 | Project       | `include` pattern              | Environment      | Timeout |
 |---------------|--------------------------------|------------------|---------|
@@ -78,7 +78,7 @@ The `integration` project uses `@cloudflare/vitest-pool-workers` and `environmen
 ### E2E (main-branch only)
 
 - **What**: Smoke tests against the deployed Cloudflare Worker at the production URL.
-- **Environment**: `node`. Tests make real HTTP requests to `https://florentin-one-mcp.florentin-one.workers.dev`.
+- **Environment**: `node`. Tests make real HTTP requests to `https://kette.florentin-one.workers.dev`.
 - **Location**: `src/<package>/__tests__/e2e/`.
 - **Prerequisites**: `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` secrets set in CI. Tests skip locally unless the token is present.
 - **Run**: `pnpm run test:e2e` (or `pnpm exec vitest --project e2e`).
@@ -112,13 +112,13 @@ All templates follow the same conventions:
 
 ```bash
 # Unit test
-cp templates/unit.test.ts src/florentin-one-mcp/__tests__/unit/my-module.test.ts
+cp templates/unit.test.ts src/kette/__tests__/unit/my-module.test.ts
 
 # Integration test
-cp templates/integration.test.ts src/florentin-one-mcp/__tests__/integration/my-workflow.test.ts
+cp templates/integration.test.ts src/kette/__tests__/integration/my-workflow.test.ts
 
 # E2E test
-cp templates/e2e.test.ts src/florentin-one-mcp/__tests__/e2e/my-scenario.test.ts
+cp templates/e2e.test.ts src/kette/__tests__/e2e/my-scenario.test.ts
 ```
 
 After copying, replace all `TODO` markers with actual code. The templates compile as-is (they contain placeholder assertions that always pass), so you can verify the copy was successful before writing real tests.
@@ -162,7 +162,7 @@ All jobs use `pnpm install --frozen-lockfile` and run tests with `--reporter=jso
 
 2. **`build`**: Runs `pnpm run build-all`, `pnpm run check` (type-check), and `pnpm run test:all`. Gated on `check-tests` passing.
 
-3. **`deploy`**: Runs `cloudflare/wrangler-action@v4` in `src/florentin-one-mcp`. Gated on `build` passing.
+3. **`deploy`**: Runs `cloudflare/wrangler-action@v4` in `src/kette`. Gated on `build` passing.
 
 ### Interpreting CI annotations from the cleanup job
 
@@ -170,7 +170,7 @@ The `cleanup` job runs `pnpm run test:cleanup` and pipes output through a grep f
 
 **Example annotation:**
 ```
-::warning::[test-cleanup] ORPHANED: src/florentin-one-mcp/__tests__/unit/old-module.test.ts:5 — missing import "./deleted-module.js"
+::warning::[test-cleanup] ORPHANED: src/kette/__tests__/unit/old-module.test.ts:5 — missing import "./deleted-module.js"
 ```
 
 This means a test file imports a source module that no longer exists. Delete the orphaned test file or update its imports.
@@ -206,7 +206,7 @@ This fetches the last 20 `test.yml` workflow runs from GitHub, downloads test re
 
 ### Step 3: Review and update Cloudflare mock helpers
 
-File: `src/florentin-one-mcp/__tests__/helpers/cloudflare-mocks.ts`
+File: `src/kette/__tests__/helpers/cloudflare-mocks.ts`
 
 Check the Miniflare `compatibilityDate` and `compatibilityFlags`. Update to match the current `wrangler.jsonc` configuration. Verify that `createMiniflareInstance()` declares all bindings used by the worker (KV namespaces, R2 buckets, D1 databases).
 
@@ -216,7 +216,7 @@ If new Cloudflare services were added to the worker (e.g., Queues, Durable Objec
 
 Files: `templates/unit.test.ts`, `templates/integration.test.ts`, `templates/e2e.test.ts`
 
-Review templates against the actual test files in `src/florentin-one-mcp/__tests__/`. If the real tests have diverged from the templates (new import patterns, new utility functions, different assertion style), update the templates to match.
+Review templates against the actual test files in `src/kette/__tests__/`. If the real tests have diverged from the templates (new import patterns, new utility functions, different assertion style), update the templates to match.
 
 ### Step 5: Verify all tiers pass
 
@@ -249,8 +249,8 @@ Navigate to `https://github.com/florentin-one-cloud/mcp/actions/workflows/test.y
 ```typescript
 // vitest.config.ts — add to the `workspace` array
 {
-  root: "./src/florentin-one-mcp",
-  extends: "./src/florentin-one-mcp/vitest.config.ts",
+  root: "./src/kette",
+  extends: "./src/kette/vitest.config.ts",
   test: {
     name: "contract",
     testTimeout: 30000,
@@ -296,14 +296,14 @@ contract:
 **Step 4:** Create the directory and add tests:
 
 ```bash
-mkdir -p src/florentin-one-mcp/__tests__/contract
+mkdir -p src/kette/__tests__/contract
 ```
 
 ### Add a new Cloudflare service mock
 
 **Scenario:** The worker now uses Cloudflare Queues. You need a mock binding for integration tests.
 
-**Step 1:** Add the binding to `createMiniflareInstance()` in `src/florentin-one-mcp/__tests__/helpers/cloudflare-mocks.ts`:
+**Step 1:** Add the binding to `createMiniflareInstance()` in `src/kette/__tests__/helpers/cloudflare-mocks.ts`:
 
 ```typescript
 // Inside the workers[0].config.env object:
@@ -461,7 +461,7 @@ export default defineConfig({
 pnpm exec vitest --project unit
 
 # Run a single test file
-pnpm exec vitest run --project unit src/florentin-one-mcp/__tests__/unit/tracker.test.ts
+pnpm exec vitest run --project unit src/kette/__tests__/unit/tracker.test.ts
 
 # Run tests matching a pattern
 pnpm exec vitest run --project integration -t "metacognitiveMonitoring"
@@ -477,12 +477,12 @@ pnpm exec vitest run --project unit --update
 | File                                                | Purpose                                           |
 |-----------------------------------------------------|---------------------------------------------------|
 | `vitest.config.ts`                                  | Root workspace config, defines 3 tier projects    |
-| `src/florentin-one-mcp/vitest.config.ts`            | Package-level vitest defaults (globals, node env) |
+| `src/kette/vitest.config.ts`            | Package-level vitest defaults (globals, node env) |
 | `templates/unit.test.ts`                            | Unit test template                                |
 | `templates/integration.test.ts`                     | Integration test template (miniflare)             |
 | `templates/e2e.test.ts`                             | E2E test template (deployed worker)               |
 | `src/shared/test-utils/index.ts`                    | `createMockEnv`, `createMockExecutionContext`, `assertMCPResponse`, `createTestFixture` |
-| `src/florentin-one-mcp/__tests__/helpers/cloudflare-mocks.ts` | `createMiniflareInstance`, `getMockKV`, `getMockR2`, `getMockD1` |
+| `src/kette/__tests__/helpers/cloudflare-mocks.ts` | `createMiniflareInstance`, `getMockKV`, `getMockR2`, `getMockD1` |
 | `scripts/test-cleanup.ts`                           | Orphaned test detection                           |
 | `scripts/test-history.ts`                           | CI failure aggregation                            |
 | `.github/workflows/test.yml`                        | CI test pipeline (unit, integration, e2e, cleanup)|

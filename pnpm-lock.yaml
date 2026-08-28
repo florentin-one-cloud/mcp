@@ -48,7 +48,7 @@ importers:
         specifier: 4.115.0
         version: 4.115.0(@cloudflare/workers-types@5.20260819.1)
 
-  src/florentin-one-mcp:
+  src/kette:
     dependencies:
       '@modelcontextprotocol/server':
         specifier: ^2.0.0

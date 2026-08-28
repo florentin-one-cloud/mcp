@@ -5,8 +5,8 @@ export default defineConfig({
     globals: true,
     workspace: [
       {
-        root: "./src/florentin-one-mcp",
-        extends: "./src/florentin-one-mcp/vitest.config.ts",
+        root: "./src/kette",
+        extends: "./src/kette/vitest.config.ts",
         test: {
           name: "unit",
           testTimeout: 10000,
@@ -14,8 +14,8 @@ export default defineConfig({
         }
       },
       {
-        root: "./src/florentin-one-mcp",
-        extends: "./src/florentin-one-mcp/vitest.config.ts",
+        root: "./src/kette",
+        extends: "./src/kette/vitest.config.ts",
         test: {
           name: "integration",
           testTimeout: 60000,
@@ -24,8 +24,8 @@ export default defineConfig({
         }
       },
       {
-        root: "./src/florentin-one-mcp",
-        extends: "./src/florentin-one-mcp/vitest.config.ts",
+        root: "./src/kette",
+        extends: "./src/kette/vitest.config.ts",
         test: {
           name: "e2e",
           include: ["__tests__/e2e/**"],

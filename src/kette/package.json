@@ -1,7 +1,7 @@
 {
-  "name": "@florentin-one/mcp",
+  "name": "@florentin-one/kette",
   "version": "1.0.2",
-  "description": "Florentin One Unified MCP Server — all reasoning tools in one Cloudflare Worker",
+  "description": "Kette — Florentin One KI-Wertschöpfungskette. Die einheitliche MCP-Server-Infrastruktur für die lückenlose KI-Wertschöpfungskette nach BMFTR-HTAD-Richtlinie. Alle sieben Reasoning-Tools in einem Cloudflare Worker.",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",
@@ -10,7 +10,7 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/florentin-one-cloud/mcp.git",
-    "directory": "src/florentin-one-mcp"
+    "directory": "src/kette"
   },
   "publishConfig": {
     "access": "public",
@@ -19,9 +19,14 @@
   "bugs": {
     "url": "https://github.com/florentin-one-cloud/mcp/issues"
   },
-  "homepage": "https://github.com/florentin-one-cloud/mcp/tree/main/src/florentin-one-mcp",
+  "homepage": "https://github.com/florentin-one-cloud/mcp/tree/main/src/kette",
   "author": "Phichayut 'Florentin' Sakwiset (https://github.com/heyFlorentin)",
   "keywords": [
+    "kette",
+    "wertschöpfungskette",
+    "vertikale-ki",
+    "industrielle-ki",
+    "domänenspezifisch",
     "mcp",
     "model-context-protocol",
     "reasoning",
@@ -36,7 +41,7 @@
     "agents-sdk"
   ],
   "bin": {
-    "florentin-one-mcp": "dist/index.js"
+    "kette": "dist/index.js"
   },
   "files": [
     "dist"

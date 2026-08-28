@@ -12,7 +12,7 @@ Evaluates new MCP tool proposals through a structured 4-stage pipeline: (1) elic
 
 - A developer proposes a new MCP tool for the Florentin One Enterprise MCP Server Ecosystem.
 - An existing tool requires a structured cost-benefit assessment before resource allocation.
-- Planning the next tool to add to the unified `florentin-one-mcp` server's reasoning toolkit.
+- Planning the next tool to add to the unified `kette` server's reasoning toolkit.
 - Comparing multiple competing tool proposals to prioritize implementation order.
 
 ## When NOT to Use
@@ -26,7 +26,7 @@ Evaluates new MCP tool proposals through a structured 4-stage pipeline: (1) elic
 
 - The proposer MUST articulate the tool's purpose in one sentence.
 - The proposer MUST define at least one concrete use case with user persona.
-- The `src/florentin-one-mcp/` and `src/<tool-name>/` directory patterns from this repo MUST be available as reference.
+- The `src/kette/` and `src/<tool-name>/` directory patterns from this repo MUST be available as reference.
 - Access to `https://modelcontextprotocol.io/specification/2026-07-28` for spec reference.
 
 ## Workflow
@@ -138,7 +138,7 @@ Validate the tool proposal against the following mandatory requirements from the
 | 6 | **Cache-friendly list.** Tool list results carry cache hints. The tool definition MUST be stable — changing `inputSchema` between versions is a breaking change. | If the tool design plans to mutate its schema frequently, flag as caution. | PASS / FAIL / CAUTION |
 | 7 | **Error codes.** Tool errors MUST use standard JSON-RPC error codes (`-32602` for invalid params, `-32603` for internal error, `-32000` for application errors). | If the tool design uses custom error shapes outside JSON-RPC envelope, FAIL. | PASS / FAIL |
 
-> **Why:** MCP 2026-07-28 is the current specification revision. The `@modelcontextprotocol/server` v2.0.0 dependency in `florentin-one-mcp` targets this revision. Backward-incompatible proposals waste implementation effort.
+> **Why:** MCP 2026-07-28 is the current specification revision. The `@modelcontextprotocol/server` v2.0.0 dependency in `kette` targets this revision. Backward-incompatible proposals waste implementation effort.
 
 #### 3.2 Zod Schema Template
 

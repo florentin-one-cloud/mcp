@@ -1,5 +1,5 @@
 /**
- * Integration Test Template — @florentin-one/mcp
+ * Integration Test Template — @florentin-one/kette
  * =================================================
  *
  * Copy this file to your package's __tests__/integration/ directory.

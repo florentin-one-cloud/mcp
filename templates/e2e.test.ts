@@ -1,5 +1,5 @@
 /**
- * E2E Test Template — @florentin-one/mcp
+ * E2E Test Template — @florentin-one/kette
  * ========================================
  *
  * Copy this file to your package's __tests__/e2e/ directory.

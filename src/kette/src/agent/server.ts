@@ -110,7 +110,7 @@ const NarrativePlannerSchema = z.object({ premise: z.string().min(1), characters
 // ---------------------------------------------------------------------------
 
 export function createServer(): McpServer {
-  const server = new McpServer({ name: "florentin-one-mcp", version: "1.0.0" });
+  const server = new McpServer({ name: "kette", version: "1.0.0" });
 
   const metacognitive = new MetacognitiveCodeMode();
   const sequentialThinking = new SequentialThinking();

@@ -1,19 +1,19 @@
-# Florentin One Unified MCP Server
+# Kette — Florentin One KI-Wertschöpfungskette
 
 > **AI-First Enterprise Solutions for the German Market**
 
-`@florentin-one/mcp` is a single, unified [Model Context Protocol](https://modelcontextprotocol.io/) (MCP) server
+`@florentin-one/kette` is a single, unified [Model Context Protocol](https://modelcontextprotocol.io/) (MCP) server
 packaging all seven Florentin One reasoning tools into one Cloudflare Worker. Built for enterprise environments with
 GDPR compliance, German data sovereignty, and zero-downtime deployment.
 
 ## Architecture
 
-A single `@florentin-one/mcp` package exposes all seven reasoning tools through one MCP endpoint. The server runs on
+A single `@florentin-one/kette` package exposes all seven reasoning tools through one MCP endpoint. The server runs on
 Cloudflare Workers with Durable Objects for state management, deployed exclusively within EU data jurisdiction.
 
 ```
 ┌──────────────────────────────────────────────┐
-│  @florentin-one/mcp (single package)         │
+│  @florentin-one/kette (single package)         │
 │  ┌────────────────────────────────────────┐  │
 │  │  MCP Server (Streamable HTTP)          │  │
 │  │  metacognitiveMonitoring               │  │
@@ -39,10 +39,10 @@ stateless protocol. Each request is self-contained; no session affinity or stick
 ## Installation
 
 ```bash
-npm install @florentin-one/mcp
+npm install @florentin-one/kette
 ```
 
-A single package replaces the previous seven individual `@florentin-one/mcp-*` packages.
+A single package replaces the previous seven individual `@florentin-one/kette-*` packages.
 
 ## Available Tools
 
@@ -65,9 +65,9 @@ Add to `~/.cursor/mcp.json`:
 ```json
 {
   "mcpServers": {
-    "Florentin One MCP": {
+    "Florentin One Kette": {
       "command": "npx",
-      "args": ["@florentin-one/mcp@latest"]
+      "args": ["@florentin-one/kette@latest"]
     }
   }
 }
@@ -80,9 +80,9 @@ Add to Claude Desktop configuration:
 ```json
 {
   "mcpServers": {
-    "florentin-one-mcp": {
+    "kette": {
       "command": "npx",
-      "args": ["@florentin-one/mcp@latest"]
+      "args": ["@florentin-one/kette@latest"]
     }
   }
 }
@@ -93,7 +93,7 @@ Add to Claude Desktop configuration:
 Connect via HTTP endpoint:
 
 ```
-https://mcp.florentin-one.de/mcp
+https://kette.florentin-one.de/mcp
 ```
 
 Configure your MCP portal with the Streamable HTTP transport URL above. No additional tool-specific endpoints required —
@@ -112,7 +112,7 @@ import {
   StructuredArgumentation,
   ConstraintSolver,
   NarrativePlanner
-} from "@florentin-one/mcp";
+} from "@florentin-one/kette";
 
 const metacognitive = new MetacognitiveCodeMode();
 const result = await metacognitive.monitor({
@@ -131,7 +131,7 @@ const result = await metacognitive.monitor({
 
 A single Cloudflare Worker with Durable Objects for state management:
 
-- **Worker**: `florentin-one-mcp` — single entry point for all seven tools
+- **Worker**: `kette` — single entry point for all seven tools
 - **Durable Object**: `FlorentinOneMCP` — SQLite-backed state persistence
 - **Jurisdiction**: EU-only deployment, compliant with German data sovereignty requirements under GDPR Art. 28
 - **Transport**: Streamable HTTP, stateless, no session affinity
@@ -139,7 +139,7 @@ A single Cloudflare Worker with Durable Objects for state management:
 Deploy from the package directory:
 
 ```bash
-cd src/florentin-one-mcp
+cd src/kette
 pnpm exec wrangler deploy
 ```
 
@@ -166,7 +166,7 @@ pnpm run test:all
 ```tree
 mcp/
 ├── src/
-│   └── florentin-one-mcp/          # Unified MCP server package
+│   └── kette/                      # Kette — KI-Wertschöpfungskette MCP server package
 │       ├── src/
 │       │   ├── agent/              # MCP server factory (createServer)
 │       │   ├── tools/              # Tool implementations
@@ -183,6 +183,19 @@ mcp/
 ├── package.json                    # pnpm workspace root
 └── pnpm-workspace.yaml
 ```
+
+## Dokumentation (HTAD-alignment)
+
+Alle Dokumentation ist auf Deutsch und Englisch verfügbar, mit primärer Ausrichtung auf den DACH-regulierten Markt und die BMFTR-HTAD-Richtlinie "KI in Wertschöpfungsketten" (Juli 2026).
+
+| Dokument | Inhalt |
+|---|---|
+| [Grundlagen KI-Wertschöpfungskette](docs/kette-ki-wertschoepfungskette.md) | Positionierung, 7 Tools als Kettenglieder, vertikale vs. horizontale KI |
+| [Strategisches Framework](docs/kette-strategic-framework.md) | HTAD-Alignment-Matrix, Technologische Souveränität, Blaupause-Transfer-Konzept |
+| [Operative Methodik](docs/kette-operational-methodology.md) | LSTR 6-Stufen-Chain, MCP 2026-07-28 Transport, Cloudflare Deploy, GDPR Art. 28, Edge-AI |
+| [Anwendungsfälle (DACH-Domänen)](docs/kette-use-cases.md) | Maschinenbau, Medizintechnik, Chemie/Cleantech, Agrar, IKT — je mit HTAD-Mapping |
+| [Leitphilosophien](docs/kette-philosophy.md) | Augmentation über Automation, Systeme über Tools, Outcome über Output, Problem-First |
+| [Formale Ethische Standards](docs/kette-ethics.md) | EU AI Act (Art. 5 + Risikoklassen), WeMake Ethics, GDPR, HITL-Vier-Stufen-Modell |
 
 ## License
 

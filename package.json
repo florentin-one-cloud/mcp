@@ -1,5 +1,5 @@
 {
-  "name": "mcp",
+  "name": "kette",
   "author": "Florentin One (https://florentin-one.de)",
   "repository": {
     "type": "git",
@@ -8,7 +8,7 @@
   "bugs": {
     "url": "https://github.com/florentin-one-cloud/mcp/issues"
   },
-  "description": "Florentin One Model Context Protocol (MCP) servers",
+  "description": "Kette — Florentin One KI-Wertschöpfungskette. Reasoning-Infrastruktur für die lückenlose KI-Wertschöpfungskette.",
   "homepage": "https://florentin-one.de",
   "license": "MIT",
   "type": "module",

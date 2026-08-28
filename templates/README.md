@@ -1,4 +1,4 @@
-# Test Templates — @florentin-one/mcp
+# Test Templates — @florentin-one/kette
 
 One-page quickstart for the tiered testing strategy.
 
@@ -38,7 +38,7 @@ pnpm run test               # all tiers
   - `assertMCPResponse(response)` — validate MCP protocol response shape, return parsed JSON
   - `createTestFixture(defaults)` — generic factory for test data with optional overrides
 
-- **Cloudflare Mock Helpers** (`src/florentin-one-mcp/__tests__/helpers/cloudflare-mocks.ts`)
+- **Cloudflare Mock Helpers** (`src/kette/__tests__/helpers/cloudflare-mocks.ts`)
   - `createMiniflareInstance()` — start an in-memory Miniflare runtime
   - `getMockKV(mf)` / `getMockR2(mf)` / `getMockD1(mf)` — extract typed bindings
 

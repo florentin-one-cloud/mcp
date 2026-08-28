@@ -1,4 +1,4 @@
-# Contributing to Florentin One MCP
+# Contributing to Kette — Florentin One KI-Wertschöpfungskette
 
 ## Getting Started
 
@@ -24,7 +24,7 @@ pnpm run test:all
 ```tree
 mcp/
 ├── src/
-│   └── florentin-one-mcp/          # Unified MCP server package
+│   └── kette/                      # Kette — KI-Wertschöpfungskette MCP server package
 │       ├── src/
 │       │   ├── agent/              # MCP server factory (createServer)
 │       │   │   └── server.ts       # Registers all 7 tools on one McpServer
@@ -68,7 +68,7 @@ mcp/
 pnpm run build-all
 ```
 
-This runs `tsup` + `tsc` in `src/florentin-one-mcp/`, producing `dist/` with the worker bundle, stdio entry point, and type declarations.
+This runs `tsup` + `tsc` in `src/kette/`, producing `dist/` with the worker bundle, stdio entry point, and type declarations.
 
 ### Testing
 
@@ -77,7 +77,7 @@ This runs `tsup` + `tsc` in `src/florentin-one-mcp/`, producing `dist/` with the
 pnpm run test:all
 
 # Run tests for the unified package only
-cd src/florentin-one-mcp
+cd src/kette
 pnpm test
 
 # Run with coverage
@@ -96,15 +96,15 @@ Each reasoning tool follows the same layered architecture:
 
 To add or modify a tool:
 
-1. Implement or update logic in `src/florentin-one-mcp/src/core/<tool>/`
-2. Update the Code Mode wrapper in `src/florentin-one-mcp/src/codemode/<tool>/`
-3. Register the tool in `src/florentin-one-mcp/src/agent/server.ts`
+1. Implement or update logic in `src/kette/src/core/<tool>/`
+2. Update the Code Mode wrapper in `src/kette/src/codemode/<tool>/`
+3. Register the tool in `src/kette/src/agent/server.ts`
 4. Add tests and run `pnpm run test:all`
 
 ### Testing the Worker Locally
 
 ```bash
-cd src/florentin-one-mcp
+cd src/kette
 pnpm run build
 pnpm exec wrangler dev
 ```
@@ -122,15 +122,15 @@ curl -X POST http://localhost:8787 \
 ### Cloudflare Workers
 
 ```bash
-cd src/florentin-one-mcp
+cd src/kette
 pnpm exec wrangler deploy
 ```
 
-A single `florentin-one-mcp` worker is deployed. The worker uses `createMcpHandler` from `agents/mcp/server` (Cloudflare Agents SDK) with MCP 2026-07-28 Streamable HTTP transport.
+A single `kette` worker is deployed. The worker uses `createMcpHandler` from `agents/mcp/server` (Cloudflare Agents SDK) with MCP 2026-07-28 Streamable HTTP transport.
 
 ### NPM Publishing
 
-1. Update the version in `src/florentin-one-mcp/package.json`
+1. Update the version in `src/kette/package.json`
 2. Create and push a version tag:
 
    ```bash
@@ -138,7 +138,7 @@ A single `florentin-one-mcp` worker is deployed. The worker uses `createMcpHandl
    git push origin v1.0.1
    ```
 
-3. GitHub Actions automatically builds, tests, and publishes `@florentin-one/mcp` to NPM.
+3. GitHub Actions automatically builds, tests, and publishes `@florentin-one/kette` to NPM.
 
 ## Commit Messages
 
