@@ -54,3 +54,4 @@ report.*.json
 # Agents
 .trae
 AGENTS.md
+.agents
