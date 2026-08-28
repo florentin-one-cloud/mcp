@@ -12,7 +12,7 @@
 ### Clone and Setup
 
 ```bash
-git clone https://github.com/florentin-one-cloud/mcp.git
+git clone https://github.com/florentin-one-cloud/kette.git
 cd mcp
 pnpm install
 pnpm run build-all
@@ -174,5 +174,5 @@ Examples:
 
 ## Getting Help
 
-- **Issues**: [GitHub Issues](https://github.com/florentin-one-cloud/mcp/issues)
+- **Issues**: [GitHub Issues](https://github.com/florentin-one-cloud/kette/issues)
 - **Documentation**: [MCP Specification](https://modelcontextprotocol.io/)

@@ -1,6 +1,6 @@
 {
   "name": "@florentin-one/kette",
-  "version": "0.1.0",
+  "version": "0.1.3",
   "description": "Kette — Florentin One KI-Wertschöpfungskette. Die einheitliche MCP-Server-Infrastruktur für die lückenlose KI-Wertschöpfungskette nach BMFTR-HTAD-Richtlinie. Alle sieben Reasoning-Tools in einem Cloudflare Worker.",
   "license": "MIT",
   "type": "module",
@@ -9,7 +9,7 @@
   "types": "./dist/types/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/florentin-one-cloud/mcp.git",
+    "url": "git+https://github.com/florentin-one-cloud/kette.git",
     "directory": "src/kette"
   },
   "publishConfig": {
@@ -17,9 +17,9 @@
     "tag": "latest"
   },
   "bugs": {
-    "url": "https://github.com/florentin-one-cloud/mcp/issues"
+    "url": "https://github.com/florentin-one-cloud/kette/issues"
   },
-  "homepage": "https://github.com/florentin-one-cloud/mcp/tree/main/src/kette",
+  "homepage": "https://github.com/florentin-one-cloud/kette/tree/main/src/kette",
   "author": "Phichayut 'Florentin' Sakwiset (https://github.com/heyFlorentin)",
   "keywords": [
     "kette",

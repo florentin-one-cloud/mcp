@@ -2,7 +2,7 @@
 
 ## Summary
 
-The repository `florentin-one-cloud/mcp` (npm: `@florentin-one/mcp`) currently carries a generic, protocol-level name. This plan proposes rebranding options that position the product within the **KI-Wertschöpfungskette** (AI value chain) framework defined by the BMFTR's July 2026 HTAD funding directive — specifically as the **reasoning infrastructure layer** connecting KI-Entwickler, Software-Integratoren, and industrielle Endanwender.
+The repository `florentin-one-cloud/kette` (npm: `@florentin-one/mcp`) currently carries a generic, protocol-level name. This plan proposes rebranding options that position the product within the **KI-Wertschöpfungskette** (AI value chain) framework defined by the BMFTR's July 2026 HTAD funding directive — specifically as the **reasoning infrastructure layer** connecting KI-Entwickler, Software-Integratoren, and industrielle Endanwender.
 
 ---
 
@@ -12,7 +12,7 @@ The repository `florentin-one-cloud/mcp` (npm: `@florentin-one/mcp`) currently c
 
 | Dimension | Current State |
 | ----------- | -------------- |
-| **Repository** | `florentin-one-cloud/mcp` on GitHub |
+| **Repository** | `florentin-one-cloud/kette` on GitHub |
 | **NPM Package** | `@florentin-one/mcp` v1.0.2 |
 | **Cloudflare Worker** | `florentin-one-mcp` |
 | **Binary** | `florentin-one-mcp` |
@@ -200,7 +200,7 @@ Rationale:
 
 | Artifact | Current | Proposed |
 | ---------- | --------- | ---------- |
-| GitHub repository | `florentin-one-cloud/mcp` | `florentin-one-cloud/kette` |
+| GitHub repository | `florentin-one-cloud/kette` | `florentin-one-cloud/kette` |
 | NPM package | `@florentin-one/mcp` | `@florentin-one/kette` |
 | Cloudflare Worker | `florentin-one-mcp` | `florentin-one-kette` |
 | Binary command | `florentin-one-mcp` | `florentin-one-kette` |

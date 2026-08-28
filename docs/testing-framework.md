@@ -130,6 +130,7 @@ After copying, replace all `TODO` markers with actual code. The templates compil
 ### test.yml
 
 **Triggers:**
+
 - `pull_request`: `opened`, `synchronize`, `reopened`
 - `push` to `main`
 
@@ -149,13 +150,14 @@ All jobs use `pnpm install --frozen-lockfile` and run tests with `--reporter=jso
 ### deploy.yml
 
 **Triggers:**
+
 - `push` to `main`
 - `workflow_dispatch` (manual)
 - `workflow_run`: `Test` workflow completed on `main`
 
 **Jobs:**
 
-1. **`check-tests`**: Queries `https://api.github.com/repos/florentin-one-cloud/mcp/actions/runs?head_sha={sha}&workflow_id=test.yml` to find the test run conclusion for the current commit.
+1. **`check-tests`**: Queries `https://api.github.com/repos/florentin-one-cloud/kette/actions/runs?head_sha={sha}&workflow_id=test.yml` to find the test run conclusion for the current commit.
    - `success` → proceed.
    - `failure`, `cancelled`, `timed_out`, `skipped` → deployment blocked (`exit 1`).
    - `not_found` → allowed with warning (first push or manual dispatch).
@@ -169,6 +171,7 @@ All jobs use `pnpm install --frozen-lockfile` and run tests with `--reporter=jso
 The `cleanup` job runs `pnpm run test:cleanup` and pipes output through a grep filter. Any line containing "warn" (case-insensitive) is emitted as a GitHub Actions `::warning::` annotation. These appear in the PR's "Files changed" tab as yellow warnings.
 
 **Example annotation:**
+
 ```
 ::warning::[test-cleanup] ORPHANED: src/kette/__tests__/unit/old-module.test.ts:5 — missing import "./deleted-module.js"
 ```
@@ -200,6 +203,7 @@ GITHUB_TOKEN=<your-token> pnpm run test:history
 This fetches the last 20 `test.yml` workflow runs from GitHub, downloads test report artifacts, and aggregates failures by test name. Output is sorted by failure frequency.
 
 **Action:** Investigate the most frequent failures. Common causes:
+
 - Flaky tests with race conditions or timeouts.
 - Tests coupled to implementation details that changed.
 - Environment-dependent tests that fail in CI but pass locally.
@@ -234,7 +238,7 @@ CLOUDFLARE_API_TOKEN=<your-token> CLOUDFLARE_ACCOUNT_ID=<your-account-id> pnpm r
 
 ### Step 6: Check CI pipeline is green on latest main
 
-Navigate to `https://github.com/florentin-one-cloud/mcp/actions/workflows/test.yml` and verify the latest run on `main` is green. Check the `cleanup` job annotations for any orphaned test warnings.
+Navigate to `https://github.com/florentin-one-cloud/kette/actions/workflows/test.yml` and verify the latest run on `main` is green. Check the `cleanup` job annotations for any orphaned test warnings.
 
 ---
 
@@ -381,7 +385,7 @@ Modify `deploy.yml` `check-tests` to query a specific job conclusion instead of 
 # Query specific job conclusion
 JOBS=$(curl -s -H "Authorization: Bearer $GH_TOKEN" \
   -H "Accept: application/vnd.github+json" \
-  "https://api.github.com/repos/florentin-one-cloud/mcp/actions/runs/$RUN_ID/jobs")
+  "https://api.github.com/repos/florentin-one-cloud/kette/actions/runs/$RUN_ID/jobs")
 
 E2E_CONCLUSION=$(echo "$JOBS" | jq -r '.jobs[] | select(.name=="e2e") | .conclusion')
 ```

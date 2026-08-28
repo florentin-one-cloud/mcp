@@ -23,7 +23,7 @@
 - [ ] Task 5: Update CI/CD workflows
   - [ ] SubTask 5.1: Update `workingDirectory` in `.github/workflows/deploy.yml` from `src/florentin-one-mcp` to `src/kette`
   - [ ] SubTask 5.2: Update step name in deploy.yml from "Deploy Florentin One MCP" to "Deploy Kette"
-  - [ ] SubTask 5.3: Update GitHub API URL in deploy.yml from `florentin-one-cloud/mcp` to `florentin-one-cloud/kette` (if repo is renamed)
+  - [ ] SubTask 5.3: Update GitHub API URL in deploy.yml from `florentin-one-cloud/kette` to `florentin-one-cloud/kette` (if repo is renamed)
 
 - [ ] Task 6: Update vitest configuration
   - [ ] SubTask 6.1: Update all `root` and `extends` paths in `vitest.config.ts` from `./src/florentin-one-mcp` to `./src/kette`

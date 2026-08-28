@@ -3,10 +3,10 @@
   "author": "Florentin One (https://florentin-one.de)",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/florentin-one-cloud/mcp.git"
+    "url": "git+https://github.com/florentin-one-cloud/kette.git"
   },
   "bugs": {
-    "url": "https://github.com/florentin-one-cloud/mcp/issues"
+    "url": "https://github.com/florentin-one-cloud/kette/issues"
   },
   "description": "Kette — Florentin One KI-Wertschöpfungskette. Reasoning-Infrastruktur für die lückenlose KI-Wertschöpfungskette.",
   "homepage": "https://florentin-one.de",
