@@ -1,0 +1,47 @@
+# Checklist
+
+- [ ] Source directory renamed from `src/florentin-one-mcp/` to `src/kette/`
+- [ ] `src/kette/package.json` name is `@florentin-one/kette`
+- [ ] `src/kette/package.json` bin entry is `kette`
+- [ ] `src/kette/package.json` description reflects Kette/HTAD branding
+- [ ] `src/kette/package.json` repository.directory is `src/kette`
+- [ ] `src/kette/package.json` keywords include HTAD-relevant terms
+- [ ] Root `package.json` name is `kette`
+- [ ] `src/kette/wrangler.jsonc` name is `kette`
+- [ ] `src/kette/src/agent/server.ts` McpServer name is `kette`
+- [ ] `.github/workflows/deploy.yml` workingDirectory is `src/kette`
+- [ ] `.github/workflows/deploy.yml` step name updated
+- [ ] `vitest.config.ts` all paths reference `./src/kette`
+- [ ] `README.md` all `@florentin-one/mcp` replaced with `@florentin-one/kette`
+- [ ] `README.md` all `florentin-one-mcp` replaced with `kette`
+- [ ] `README.md` endpoint URL updated to `kette.florentin-one.de`
+- [ ] `README.md` directory tree updated
+- [ ] `README.md` MCP client config examples updated
+- [ ] `README.md` Code Mode import example updated
+- [ ] `AGENTS.md` package reference updated to `@florentin-one/kette`
+- [ ] `CONTRIBUTING.md` all directory references updated to `kette`
+- [ ] `CONTRIBUTING.md` package references updated
+- [ ] `.trae/mcp.json` endpoint URL updated to `kette.beta.lstr.one`
+- [ ] `.trae/rules/30-compliance.md` endpoint URL updated
+- [ ] `src/kette/__tests__/e2e/smoke.test.ts` PRODUCTION_URL updated
+- [ ] `src/kette/__tests__/e2e/smoke.test.ts` serverInfo.name assertion updated
+- [ ] `templates/unit.test.ts` header updated
+- [ ] `templates/integration.test.ts` header updated
+- [ ] `templates/e2e.test.ts` header updated
+- [ ] `templates/README.md` references updated
+- [ ] `docs/testing-framework.md` all path references updated
+- [ ] `docs/testing-framework.md` endpoint URL updated
+- [ ] `.trae/skills/mcp-tool-ideation/SKILL.md` references updated
+- [ ] `docs/kette-ki-wertschoepfungskette.md` created with foundational concepts
+- [ ] `docs/kette-strategic-framework.md` created with strategic frameworks
+- [ ] `docs/kette-operational-methodology.md` created with operational methodologies
+- [ ] `docs/kette-use-cases.md` created with DACH domain use cases
+- [ ] `docs/kette-philosophy.md` created with guiding philosophies
+- [ ] `docs/kette-ethics.md` created with formal ethical standards
+- [ ] `README.md` links to all new documentation files
+- [ ] `pnpm install` succeeds with regenerated lockfile
+- [ ] `pnpm run build-all` succeeds
+- [ ] `pnpm run check` passes type checking
+- [ ] `pnpm run test:all` passes all tests
+- [ ] No remaining references to `florentin-one-mcp` in source files (excluding spec documents and reasoning records)
+- [ ] No remaining references to `@florentin-one/mcp` in source files (excluding spec documents and reasoning records)
