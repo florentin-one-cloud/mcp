@@ -1,8 +1,0 @@
-{
-  "mcpServers": {
-    "lstr-reasoning": {
-      "command": "npx",
-      "args": ["-y", "mcp-remote@latest", "https://mcp.beta.lstr.one/mcp?codemode=search_and_execute"]
-    }
-  }
-}
