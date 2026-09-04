@@ -50,3 +50,7 @@ report.*.json
 
 # Wrangler
 .wrangler
+
+# Agents
+.trae
+AGENTS.md
